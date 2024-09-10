@@ -23,6 +23,11 @@ int main()
     int p = n;
     for (size_t i = 2; i <= sqrt(n); i++)
     {
+        if (prime(p) == 1)
+        {
+            sum += p;
+            break;
+        }
         if(prime(i) == 1)
         {
             while (p%i == 0)
