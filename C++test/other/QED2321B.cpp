@@ -18,7 +18,7 @@ int main()
     {
         int x,k;
         cin >> x >> k;
-
+        
     }
-    //uncomplete
+    
 }
