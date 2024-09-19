@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int arr1[10020];
+
 int main()
 {
     int m;
@@ -21,14 +23,20 @@ int main()
                 if (arr[i] == arr[k] + arr[j])
                 {
                     // cout << "tt1:" << arr[i] <<"tt2:"<<arr[k]<<" "<<arr[j]<<endl;
-                    t++;
+                    arr1[i]++;
                 }
             }
         }
     }
+    for (size_t i = 0; i < m+1; i++)
+    {
+        if (arr1[i] != 0)
+        {
+            t++;
+        }
+        
+    }
     cout << t;
-
-//uncompete
 
     return 0;
 }
