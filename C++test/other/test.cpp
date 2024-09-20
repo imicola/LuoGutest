@@ -83,6 +83,8 @@ int main()
         }
     }
     
+    priority_queue<int> pque1;
+    priority_queue<int,vector<int>,greater<int>> pque2;
 
 }
     // vector<vector<int>> dp(5,vector<int> (6,0)); 

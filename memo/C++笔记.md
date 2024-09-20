@@ -1999,6 +1999,14 @@ int main()
 
 
 
+## 8 结构体
+
+
+
+
+
+
+
 
 
 
@@ -2058,7 +2066,9 @@ int main()
     getline(cin,str);
 ```
 
-
+- 比较器函数初识 
+- `less<类型>`表示升序排列\[由小到大][^6]
+- `greater<类型>`表示降序排列[由大到小]
 
 
 
@@ -2310,7 +2320,7 @@ int main()
 
 ### 3 栈
 
-- [ ] LIFO栈（后进先出）
+- [x] LIFO栈（后进先出）
 - [ ] 单调栈
 
 ###  4 队列
@@ -2369,7 +2379,7 @@ int main()
 
 ### 8 动态规划 
 
-- [ ] 递推 
+- [x] 递推 
 - [ ] 线性DP 
 - [ ] 记忆化搜索 
 - [ ] 背包问题 
@@ -2845,6 +2855,109 @@ for (size_t i = 0; i < dp1.size(); i++)
 >
 > dp容器可以起到结构体的作用
 
+---
+
+#### 6.1.2 栈 **[stack](https://zh.cppreference.com/w/cpp/container/stack)**
+
+**头文件：**\<stark>
+
+##### 6.1.2.1 构造方式
+
+`stack<double> stk`[stk是栈名]；
+
+##### 6.1.2.2 进栈与出栈及取栈顶部
+
+- 进栈：`stk.push(x);`[将x放入栈中]
+- 出栈：`stk.pop();`[栈顶出栈]
+- 取栈顶：`stk.top()`[获取栈顶
+
+##### 6.1.1.3 用vector模拟stack
+
+使用`dp.back()`取栈(容器)顶
+
+##### 6.1.1.4 写栈的注意事项
+
+- 不能访问栈的内部元素
+- **下面都是错误用法**
+
+```cpp
+stack<int> stk;
+for(int i = 1;i < stk.size();i++)
+{
+    cout << stk[i]<<endl;
+}
+for(auto ele : stk)
+{
+    cout << stk <<endl;
+}
+```
+
+##### 6.1.2.5 与 *vector* 相比 *stack*的优势是什么？
+
+- stack效率是高于vector的
+
+- stack的内存占用更低
+- 在某些算法实现下(如深度优先搜索)，stack可能是更自然的选择
+
+#### 6.1.3 队列 [queue](https://zh.cppreference.com/w/cpp/container/queue)
+
+- `incloud <queue>`
+
+通过二次封装双端队列，实现==先进先出==(双端获取)的数据结构
+
+##### 6.1.3.1常用方法
+
+| 作用     | 用法              | 示例                  |
+| -------- | ----------------- | --------------------- |
+| 构造     | `queue<类型> que` | `queue<int> que`      |
+| 进队     | `que.push(元素)`  | `que.push(1)`         |
+| 出队     | `.pop()`          | `que.pop()`           |
+| 取队首   | `.front()`        | `int a = que.front()` |
+| 取队尾   | `.banc()`         | `int a = que.back()`  |
+| 查看大小 | `.size()`         | `int a = que.size()`  |
+| 清空     | `.clear()`        | `que.clear()`         |
+| 判空     | `.empty()`        | `que.empty()`         |
+
+##### 6.1.3.2 注意事项
+
+**不能访问内部元素!**示例同6.1.2.3
+
+#### 6.1.4 优先队列(堆) [priority_queue](https://zh.cppreference.com/w/cpp/container/priority_queue)
+
+`include <queue>`
+
+##### 6.1.4.1 构造
+
+`priority_queue<类型,容器,比较器>`
+
+- 类型:要储存的数据类型
+- 容器:储存数据的底层容器,默认为 `vector<T>`,竞赛时保存默认即可
+- 比较器: 比较大小使用的比较器,默认为 `less<T>`,可以自定义
+
+```cpp
+priority_queue<int> pque1;
+priority_queue<int,vector<int>,greater<int>> pque2;
+```
+
+> 自定义比较器尽量不用,容易犯迷糊
+
+##### 6.1.4.2 常用语法
+
+| 作用          | 用法          | 示例                 |
+| ------------- | ------------- | -------------------- |
+| 进堆          | `.push(元素)` | `que.push(1);`       |
+| 出堆          | `.pop()`      | `que.pop();`         |
+| 取堆顶        | `.top()`      | `int a = que.top();` |
+| 查看大小/判空 | 和vector一致  | 略                   |
+
+> [!note]
+>
+> 进出堆复杂度$O(\log n)$,取堆顶$O(1)$
+
+##### 适用场景
+
+
+
 
 
 
@@ -2885,4 +2998,7 @@ for (size_t i = 0; i < dp1.size(); i++)
 [^3]:如果没有特殊说明，本条目下所有 `str`均表示字符串名
 [^4]:没有特殊说明，本条目下所有 `vec`均表示容器名
 [^5]:如果无特殊说明，本条目下所有 `dp`均表示容器名
+[^6]:如果函数内置了比较器(sort,优先队列),那大部分默认使用 `less<int>`
+
+
 
