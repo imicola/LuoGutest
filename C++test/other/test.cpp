@@ -104,16 +104,46 @@ int main()
 
     // cout  << " "<<b;
 
-    string a;
-    map<string , int> mp;
-    for (size_t i = 0; i < 4; i++)
+    // string a;
+    // map<string , int> mp;
+    // mp["aaa"] = 1;
+    // mp["bbb"] = 5;
+    // mp["tsts"] = 3;
+    // for(auto &el:mp)
+    // {
+    //     cout << el.first << " " <<el.second<<endl;
+    // }
+
+    // map<int , int> mp;
+    // mp[6] = 3;
+    // mp[5] = 1;
+    // mp[7] = 3;
+    // mp[9] = 666;
+    // for (size_t i = 0; i < mp.size(); i++)
+    // {
+    //     cout << mp[i] <<endl;
+    // }
+
+
+    map<string ,int> mp;
+    vector<string> vec;
+    vec.push_back("aqa");
+    vec.push_back("aqa");
+    vec.push_back("qaq");
+    vec.push_back("qaq");
+    vec.push_back("wqw");
+    vec.push_back("aqa");
+    vec.push_back("qaq");
+
+    for (size_t i = 0; i < vec.size(); i++)
     {
-        cin >> a;
-        mp[a] = i;
-        
+        mp[vec[i]]++;
+    }
+    for (auto &el : mp)
+    {
+        cout << el.first << " " <<el.second<<endl;
     }
     
-    mp[a];
 
     
 
