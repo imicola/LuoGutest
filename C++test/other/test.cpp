@@ -125,26 +125,28 @@ int main()
     // }
 
 
-    map<string ,int> mp;
-    vector<string> vec;
-    vec.push_back("aqa");
-    vec.push_back("aqa");
-    vec.push_back("qaq");
-    vec.push_back("qaq");
-    vec.push_back("wqw");
-    vec.push_back("aqa");
-    vec.push_back("qaq");
+    // map<string ,int> mp;
+    // vector<string> vec;
+    // vec.push_back("aqa");
+    // vec.push_back("aqa");
+    // vec.push_back("qaq");
+    // vec.push_back("qaq");
+    // vec.push_back("wqw");
+    // vec.push_back("aqa");
+    // vec.push_back("qaq");
 
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        mp[vec[i]]++;
-    }
-    for (auto &el : mp)
-    {
-        cout << el.first << " " <<el.second<<endl;
-    }
-    
-
+    // for (size_t i = 0; i < vec.size(); i++)
+    // {
+    //     mp[vec[i]]++;
+    // }
+    // for (auto &el : mp)
+    // {
+    //     cout << el.first << " " <<el.second<<endl;
+    // }
+    double a = 3.141592;
+    double b = 3.141592;
+    double c = 3.141592;
+    printf("%.3f",a,b,c);
     
 
 }
