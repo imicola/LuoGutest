@@ -64,27 +64,58 @@ int main()
     // }
     
     // return 0;
+    // vector<pair<int,int>> dp1(10);
+    // pair<int,int> p1;
+    // for (size_t i = 0; i < 5; i++)
+    // {
+    //     cin >> p1.first >> p1.second;
+    //     dp1[i] = p1;
+    // }
+    // int k;
+    // cin >> k;
+    // for (size_t i = 0; i < dp1.size(); i++)
+    // {
+    //     if (k == dp1[i].first)
+    //     {
+    //         cout << dp1[i].second;
+    //     }
+    // }
 
+    // set<int> st;
+    // st.insert(1);
+    // st.insert(6);
+    // st.insert(2);
+    // st.insert(3);
+    
+    // for(auto &ele : st)
+    // {
+    //     cout << ele << endl;
+    // }
+    
+    // set<int>::iterator it = st.begin();
+    // advance(it,2);
+    // cout << *it <<endl;
 
-    vector<pair<int,int>> dp1(10);
-    pair<int,int> p1;
-    for (size_t i = 0; i < 5; i++)
+    // string str;
+    // str = "089212";
+    // //int a = stoi(str);
+    // str += "182";
+    // int b = stoi(str);
+
+    // cout  << " "<<b;
+
+    string a;
+    map<string , int> mp;
+    for (size_t i = 0; i < 4; i++)
     {
-        cin >> p1.first >> p1.second;
-        dp1[i] = p1;
-    }
-    int k;
-    cin >> k;
-    for (size_t i = 0; i < dp1.size(); i++)
-    {
-        if (k == dp1[i].first)
-        {
-            cout << dp1[i].second;
-        }
+        cin >> a;
+        mp[a] = i;
+        
     }
     
-    priority_queue<int> pque1;
-    priority_queue<int,vector<int>,greater<int>> pque2;
+    mp[a];
+
+    
 
 }
     // vector<vector<int>> dp(5,vector<int> (6,0)); 
