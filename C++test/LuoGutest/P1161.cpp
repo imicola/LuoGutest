@@ -2,6 +2,7 @@
 using namespace std;
 
 int vis[1000000];
+//谁家数组开这么大???
 
 int main()
 {
@@ -37,5 +38,6 @@ int main()
         t++;
     }
     cout << t;
+    
 
 }

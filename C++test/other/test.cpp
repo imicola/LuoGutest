@@ -143,11 +143,16 @@ int main()
     // {
     //     cout << el.first << " " <<el.second<<endl;
     // }
-    double a = 3.141592;
-    double b = 3.141592;
-    double c = 3.141592;
-    printf("%.3f",a,b,c);
+    // double a = 3.141592;
+    // double b = 3.141592;
+    // double c = 3.141592;
+    // printf("%.3f",a,b,c);
+
+    // pair<int , int> pr;
+    // cin >> pr.first;
+    // cout << pr.first;
     
+    //cout << __cplusplus <<endl;
 
 }
     // vector<vector<int>> dp(5,vector<int> (6,0)); 

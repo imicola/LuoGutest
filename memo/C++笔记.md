@@ -3186,13 +3186,202 @@ for (auto &el : mp)
 
 #### 6.1.7 字符串[string](https://zh.cppreference.com/w/cpp/string)
 
+##### 6.1.7.1 常用方法
 
+- 构造: `string str;`
+- 输入: `cin >> str;`
+- 输出:`cout << str;`
 
+- string 的初值构造 `string str(100,'0')`
 
+- 赋值 `str = "awa";`
 
+- 判断相等 `str1 == str2`
+- 修改字符 `str[0] = "a"`
+- 连接字符串 `str1 + str2;`
+- 字符串尾接 `str1 += "awa";`
 
+- 取子串:
 
+```cpp
+string s1 = "123123123";
+cout << s1.substr(3) <<endl; //从第三位开始输出到末尾
+cout << s1.substr(3,4) <<endl; //从第三位输出,输出4位 
+```
 
+- 查找函数 : `find(字串)`  $\to$ 返回字串起始点的下标[若找不到,则会返回一个 `string::npos`]
+
+##### 6.1.7.2 string 转化
+
+- str $\to$ int : `int x = stoi(str)`
+- str $\to$ long long : `long long x =stoll(str)`
+- str $\to$ float : `stof()`
+- str $\to$ double : `stod()`
+- str $\to$ long double : `stold()`
+
+- int $\to$ str : `string str = to_string(x)`
+
+##### 6.1.7.3 注意事项
+
+- 尾接要用 += [使用 `str = str + "awa"`很慢]
+- `.substr()`方法下,第一个参数传的是字串起点下标,第二个是字串长度
+- `.find()`的实现是暴力枚举,复杂度是$O(n^2)$
+
+#### 6.1.8 二元组 [pair](https://zh.cppreference.com/w/cpp/utility/pair)
+
+**构造**
+
+`pair<int, int> pr;`
+
+##### 6.1.8.1 常用方法
+
+- 赋初值: `pair<int , int> pr = {1,2}`
+- 老式: `pair<int , int> pr2 = make_pair(1,2)`
+- 判同 : `pr == pr2`
+
+- 三元组~~曲线救国~~法:`pair<pair<int,char>,char> p3;`
+- 访问第一个值 `.first`
+- 访问第二个值 `.second`
+
+##### 6.1.8.2 适用范围
+
+**适用于所有需要二元组的场景,效率和自己定义结构体差不多**
+
+#### 6.1.9 列表[list](https://blog.csdn.net/weixin_45031801/article/details/139361653)
+
+**构造**
+`list<类型> lt`
+
+##### 6.1.9.1 优势与适用范围
+
+list容器插入和删除元素的效率较高，时间复杂度为==常数级别==,其底层为**带头双向循环链表**
+
+##### 6.1.9.2 常用方法
+
+- 定义:
+  - 构造空`list()` / 含有n个元素的类型容器`list` / 拷贝某个类型容器的复制品
+  
+  ```cpp
+  list<int> lt1; //构造int类型的空容器
+  list<int> lt2(10,2); //构造含有10个2的int类型容器
+  list<int> lt3(lt2); //拷贝构造int类型的lt2容器的复制品
+  list<int> lt4{ 1,2,3,4,5 };  // 直接使用花括号进行构造---C++11允许
+  ```
+  
+  - 迭代器复制字符内容
+  
+  ```cpp
+  string s("hello world");
+  list<char> lt5(s.begin(),s.end()); //构造string对象某段迭代器区间的内容
+  ```
+
+##### 6.1.9.3 list的遍历及迭代器的操作
+
+- **迭代器**
+- 正向迭代器
+
+```cpp
+int arr[] = {1,1,4,5,1,4}; //构造数组
+list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0])); //copy数组到list
+for(list<int>::iterator it = lt.begin();it != lt.end();++it)
+{
+    cout << *it <<endl;
+}
+```
+
+- 反向遍历器(抽象)[防止你不知道]
+
+```cpp
+int arr[] = {1,1,4,5,1,4};
+list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0]));
+for(list<int>::reverse_iterator it = lt.rbegin();it != lt.rend();++it)
+{
+    cout << *it <<endl;
+}
+```
+
+- **范围for**(好用)
+
+```cpp
+int arr[] = {1,1,4,5,1,4};
+list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0]));
+for (auto &i : lt)
+{
+    cout << i <<endl;
+}
+```
+
+---
+
+- 常见容器操作
+
+  - `.size()`:返回容器中有效元素的个数
+
+  - `.resize()`:调整容器的有效元素大小(size)
+  - `.empty()`:判断容器是否为空
+  - `.clear()`:用于清空容器,清空后容器的size为0, 但是头结点(哨兵位)不会被清除
+
+> - **`.resize(a,b)`**有两个参数:
+>
+>   - a:将list大小变为(a)
+>   - b:若list新大小大于原大小,则新增的大小用b填充
+>
+
+##### 6.1.9.4 list容器的常见访问操作
+
+- `.front()`:访问list头元素[返回list的第一个元素]
+- `.back()`:访问list尾元素[返回list的最后一个元素]
+
+##### 6.1.9.5 list 容器的常见修改操作
+
+| 函数(接口)名称  | 函数(接口)说明                        |
+| --------------- | ------------------------------------- |
+| `.push_front()` | 在list首元素前插入元素                |
+| `.pop_front()`  | 删除list首元素                        |
+| `.push_back()`  | 在list尾部插入元素                    |
+| `.pop_back()`   | 删除list最后一个元素                  |
+| `.insert()`     | 在`list<int>::iterator it` 前插入元素 |
+| `.erase()`      | 在`list<int>::iterator it` 前插入元素 |
+| `.swap()`       | 交换两个元素                          |
+
+> [!important]
+>
+> - 有关**insert()**的操作:
+>
+> - insert共有三种形式：
+>
+>   - insert(iterator, value);
+>   - insert(iterator, num, value);
+>   - insert(iterator, iterator1, iterator2); 
+>
+> - > instert的所有操作都由迭代器位置确定,不存在lt[2]这类的中括号表操作
+>
+> - 对`insert(iterator, value);`
+>
+> ```cpp
+> //创立一个数组
+> int arr[] = {1,1,4,5,1,4};
+> list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0]));
+> cout << "befor" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> //创立一个迭代器指向lt的头元素
+> list<int>::iterator it = lt.begin();
+> //迭代器向后移动2位,指向4
+> advance(it,2);
+> //在4的迭代器前,插入元素3
+> lt.insert(it,3);
+> cout << "after" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> return 0;
+> ```
+>
+> 
 
 
 
