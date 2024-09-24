@@ -16,9 +16,9 @@ int main()
         cout << i <<endl;
     }
     //创立一个迭代器指向lt的头元素
-    list<int>::iterator it = lt.begin();
+    list<int>::iterator it = lt.begin() ++;
     //迭代器向后移动2位,指向4
-    advance(it,2);
+    
     //建立新的list或(vector);
     vector<int> lt2 = {1,9,1,9,8,1,0};
     //确定迭代器位置
