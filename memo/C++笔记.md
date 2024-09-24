@@ -2287,6 +2287,25 @@ int main()
 - `top()`: 获取栈顶元素，但是不会移除它
 - `size()`: 获取栈的长度，即栈中元素的数量
 
+## 9 宏常量定义小寄巧
+
+> ~~打勾的就是好用的~~
+>
+> - [x] `#define endl "\n"`
+> - [ ] `#define int long long`
+>
+> > [!WARNING]
+> >
+> > 使用这个的时候 `int main()`要改为 `signed main()`
+>
+> - [ ] `#define double long double`
+
+
+
+
+
+
+
 
 
 # 算法
@@ -3346,7 +3365,7 @@ for (auto &i : lt)
 
 > [!important]
 >
-> - 有关**insert()**的操作:
+> - 有关**insert()**的操作:[^7]
 >
 > - insert共有三种形式：
 >
@@ -3356,7 +3375,7 @@ for (auto &i : lt)
 >
 > - > instert的所有操作都由迭代器位置确定,不存在lt[2]这类的中括号表操作
 >
-> - 对`insert(iterator, value);`
+> - 对`insert(iterator, value);`(会返回一个新迭代器指向插入的元素)
 >
 > ```cpp
 > //创立一个数组
@@ -3372,16 +3391,94 @@ for (auto &i : lt)
 > //迭代器向后移动2位,指向4
 > advance(it,2);
 > //在4的迭代器前,插入元素3
-> lt.insert(it,3);
+> auto itnew = lt.insert(it,3);
 > cout << "after" << endl;
 > for (auto &i : lt)
 > {
 >     cout << i <<endl;
 > }
+> cout << "new iterator = " << *itnew <<endl;
 > return 0;
 > ```
 >
-> 
+> ![image-20240924115429685](./attachments/image-20240924115429685.png)
+>
+> - 对 `insert(iterator, num, value);`(会返回一个新迭代器指向插入的第一个元素)
+>
+> ```cpp
+> //创立一个数组
+> int arr[] = {1,1,4,5,1,4};
+> list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0]));
+> cout << "befor" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> //创立一个迭代器指向lt的头元素
+> list<int>::iterator it = lt.begin();
+> //迭代器向后移动2位,指向4
+> advance(it,2);
+> //在4的迭代器前,插入元素3个3
+> auto itnew = lt.insert(it,3,3);
+> cout << "after" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> //新迭代器的位置在第一个3
+> cout << "new iterator = " << *itnew <<endl;
+> return 0;
+> ```
+>
+> ![image-20240924121128741](./attachments/image-20240924121128741.png)
+>
+> - 对 `insert(iterator, iterator1, iterator2); `
+>
+> ```cpp
+> //创立一个数组
+> int arr[] = {1,1,4,5,1,4};
+> list<int> lt(arr,arr+sizeof(arr)/sizeof(arr[0]));
+> cout << "befor" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> //创立一个迭代器指向lt的头元素
+> list<int>::iterator it = lt.begin();
+> //迭代器向后移动2位,指向4
+> advance(it,2);
+> //建立新的list或(vector);
+> vector<int> lt2 = {1,9,1,9,8,1,0};
+> //确定迭代器位置
+> auto it1 = lt2.begin();
+> auto it2 = lt2.end();
+> //在4的迭代器前,插入迭代器it1 - it2 这之间的数
+> //会返回插入的数的第一个元素的迭代器
+> auto itnew  = lt.insert(it,it1,it2);
+> cout << "after" << endl;
+> for (auto &i : lt)
+> {
+>     cout << i <<endl;
+> }
+> cout << "new iterator = " << *itnew;
+> return 0;
+> ```
+>
+> ![image-20240924124322171](./attachments/image-20240924124322171.png)
+>
+> - **`.erase()`**用法和 **`.insert()`**差不多,只是从添加元素变为删除元素==删除的为迭代器==指向的元素或==两个迭代器之间(包括本身)==的元素
+
+##### 6.1.9.6 list容器常用的操作
+
+| **函数声明**    | **接口说明**                   |
+| --------------- | ------------------------------ |
+| ***splice***    | **将元素从列表转移到其它列表** |
+| ***remove***    | **删除具有特定值的元素**       |
+| ***remove_if*** | **删除满足条件的元素**         |
+| ***unique***    | **删除重复值**                 |
+| ***sort***(慢)  | **容器中的元素排序**           |
+| ***merge***     | **合并排序列表**               |
+| ***reverse***   | **反转元素的顺序**             |
 
 
 
@@ -3424,6 +3521,7 @@ for (auto &i : lt)
 [^4]:没有特殊说明，本条目下所有 `vec`均表示容器名
 [^5]:如果无特殊说明，本条目下所有 `dp`均表示容器名
 [^6]:如果函数内置了比较器(sort,优先队列),那大部分默认使用 `less<int>`
+[^7]:  `.insert()`成员函数对vector容器也适用,但插入元素可能倒置vector容器重新分配内存导致STL
 
 
 
