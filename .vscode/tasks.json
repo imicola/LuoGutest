@@ -12,6 +12,8 @@
                 "-o",
                 //"${fileDirname}\\${fileBasenameNoExtension}.exe"
                 "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
+                //黑窗中文乱码改编码
+                "-fexec-charset=GBK"
             ],
             "options": {
                 "cwd": "${fileDirname}"

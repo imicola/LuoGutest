@@ -3468,7 +3468,7 @@ for (auto &i : lt)
 >
 > - **`.erase()`**用法和 **`.insert()`**差不多,只是从添加元素变为删除元素==删除的为迭代器==指向的元素或==两个迭代器之间(包括本身)==的元素
 
-##### 6.1.9.6 list容器常用的操作
+##### 6.1.9.6 ==list容器常用的操作==
 
 | **函数声明**    | **接口说明**                   |
 | --------------- | ------------------------------ |
@@ -3480,11 +3480,72 @@ for (auto &i : lt)
 | ***merge***     | **合并排序列表**               |
 | ***reverse***   | **反转元素的顺序**             |
 
+- `.splice()`一共有四种形式
+  - ***splice(iterator_pos, otherList) :*** 将otherList中的所有元素移动到iterator_pos指向元素之前
 
+```cpp
+list<int> ls1 ={1,2,3,4,5};
+list<int> ls2 ={10,20,30,40,50};
+ls2.splice(ls1.begin(),ls2); //和ls1.splice(ls1.begin(),ls2); 等价
 
+for(auto &p : ls1)
+{
+    cout << p << " ";
+}
+//输出 10 20 30 40 50 1 2 3 4 5
+//此时ls2的情况: 空
+```
 
+- ***splice(iterator_pos, otherList, iter1):*** 从 otherList转移 iter1 指向的元素到当前list。元素被插入到 iterator_pos指向的元素之前。
 
+```cpp
+list<int> ls3 ={10,20,30};
+list<int> ls4 ={3,5,7,8};
+auto it = ls3.begin();
+advance(it,1);
+ls3.splice(it,ls4,ls4.begin());
+for(auto &p : ls3)
+{
+    cout << p << " ";
+}    
+cout <<endl;
+//ls4
+for(auto &p : ls4)
+{
+    cout << p << " ";
+}
+//输出:
+//10 3 20 30
+//5 7 8
+```
 
+- ***splice(iterator_pos, otherList, iter_start, iter_end) :*** 从 otherList转移范围 [iter_start, iter_end) 中的元素到 当前列表。元素被插入到 iterator_pos指向的元素之前。
+
+```cpp
+list<int> ls5 ={1,2,3,4,5};
+list<int> ls6 ={10,20,30,40,50};
+auto it2 = ls6.begin();
+advance(it2,2); 
+auto it3 = ls5.begin();
+auto it4 = ls5.end();
+advance(it3,1); 
+advance(it4,-2); 
+ls6.splice(it2,ls5,it3,it4);
+for(auto &p : ls6)
+{
+    cout << p << " ";
+}
+cout << endl;
+//ls5
+for(auto &p : ls5)
+{
+    cout << p << " ";
+}
+cout << endl;
+//输出: 
+// 10 20 2 3 30 40 50 
+// 1 4 5
+```
 
 
 
