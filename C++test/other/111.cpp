@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int a;
+
 int main()
 {
-
-    printf("Edison said: \"A strong man will struggle with the storms of fate.\"");
-
+    int a = 1234;
+    printf("0X%X",a);
     return 0;
 }
