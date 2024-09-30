@@ -3553,7 +3553,122 @@ cout << endl;
 
 ### 6.2 迭代器(遍历器)
 
+- 概念：迭代器是一种检查容器内元素并==遍历元素==的数据类型，通常**用于对C++中各种容器内元素的访问**，但不同的容器有不同的迭代器，初学者可以将迭代器理解为**指针**。
+- **迭代器可以干嘛？**
 
+```cpp
+int main()
+{
+    vector<int> arr;
+    for (size_t i = 0; i < 10; i++)
+    {
+        arr.push_back(i);
+    }
+    for(vector<int>::iterator it = arr.begin(); it != arr.end();it++)
+    {
+        cout << *it <<endl;
+    }
+
+    return 0;
+}
+```
+
+> 我们观察上面这个程序，这是它的输出结果
+
+![image-20240929202555552](./attachments/image-20240929202555552.png)
+
+> 不难发现，这个数组被遍历输出了
+>
+> - `for(vector<int>::iterator it = arr.begin(); it != arr.end();it++)`这一行
+> - `vector<int>::iterator it = arr.begin();` $\to$ 创立了一个迭代器，`vector<int>::iterator`表明创立了一个vector迭代器 `it`是迭代器名称 `arr.begin()`是数组的头迭代器
+> - 迭代器之间也可以用比较运算符 `==`or `!=`
+> - 迭代器也可以使用自增运算 $\to$ `it++`
+
+#### 常用容器的迭代器
+
+- ==**vector ——随机访问迭代器**==
+- **deque——随机访问迭代器**
+- ==**list —— 双向迭代器**==
+- **set / multiset——双向迭代器**
+- **map / multimap——双向迭代器**
+- **stack——不支持迭代器**
+- **queue——不支持迭代器**
+
+**下面主要讲解随机访问迭代器 双向迭代器**
+
+- **双向迭代器**
+
+```cpp
+void text()
+{
+	list<int> lst;
+	for (int i = 0; i < 10; ++i)
+	{
+		lst.push_back(i);
+	}
+	list<int>::iterator it;//创建list的迭代器
+	cout << "遍历lst并打印: ";
+	for (it = lst.begin(); it != lst.end(); ++it)//用 != 比较两个迭代器
+	{
+		cout << *it << " ";
+	}
+	//此时it=lst.end(),这个位置是最后一个元素的下一个位置，没有存储数据
+	--it;//等价于it--，回到上一个位置
+	//it -= 1; //报错,虽然都是-1，但这种方式是随机迭代器才有的功能
+	cout << "\nlst的最后一个元素为：" << *it << endl;
+}
+```
+
+- **随机迭代器**
+
+```cpp
+void text()
+{
+    vector<int> v;
+    for (int i = 0; i < 10; ++i)
+    {
+        v.push_back(i);
+    }
+    vector<int>::iterator it;
+    for (it = v.begin(); it != v.end(); ++it) //用 != 比较两个迭代器
+    {
+        cout << *it << " ";
+    }
+    cout << endl;
+    for (it = v.begin(); it < v.end(); ++it) //用 < 比较两个迭代器
+    {
+        cout << *it << " ";
+    }
+    cout << endl;
+    it = v.begin();//让迭代器重新指向首个元素的位置
+    while (it < v.end())//间隔一个输出
+    { 
+        cout << *it << " ";
+        it += 2; // 用 += 移动迭代器
+    }
+    cout << endl;
+
+    it = v.begin();
+    cout << it[5] << endl; //用[]访问
+}
+```
+
+> [!important]
+>
+> - 对vector数组迭代器来说，
+
+#### 迭代器的辅助函数
+
+STL 中有用于操作迭代器的三个函数模板，它们是：
+
+- `advance(it, n)；`使迭代器 it 向前或向后移动 n 个元素。
+- distance(it1, it2)；计算两个迭代器之间的距离，即迭代器 it1 经过多少次 + + 操作后和迭代器 it2相等。如果调用时 it1 已经指向 it2 的后面，则这个函数会陷入死循环。
+- `iter_swap(it1, it2)；`用于交换两个迭代器 it1、it2 指向的值。
+  要使用上述模板，需要包含头文件
+
+```cpp
+#include<algorithm>
+```
 
 
 
@@ -3582,7 +3697,7 @@ cout << endl;
 [^4]:没有特殊说明，本条目下所有 `vec`均表示容器名
 [^5]:如果无特殊说明，本条目下所有 `dp`均表示容器名
 [^6]:如果函数内置了比较器(sort,优先队列),那大部分默认使用 `less<int>`
-[^7]:  `.insert()`成员函数对vector容器也适用,但插入元素可能倒置vector容器重新分配内存导致STL
+[^7]:`.insert()`成员函数对vector容器也适用,但插入元素可能倒置vector容器重新分配内存导致STL
 
 
 
