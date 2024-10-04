@@ -3,9 +3,7 @@ using namespace std;
 
 int main()
 {
-    int arr1[] = {1,2,3};
-    int arr2[] = {1,2,3};
-    
-    
-    
+    double m = 46.0;
+    cout <<fixed<<setprecision(2) << m <<endl;
+    printf("%.2f",m);
 }
