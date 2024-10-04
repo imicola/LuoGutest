@@ -153,6 +153,10 @@ int main()
     // cout << pr.first;
     
     //cout << __cplusplus <<endl;
+    int arr1[] ={1,2,3,4,5};
+    cout << &arr1;
+    cout << arr1;
+
 
 }
     // vector<vector<int>> dp(5,vector<int> (6,0)); 
