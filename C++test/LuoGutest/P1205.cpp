@@ -2,6 +2,7 @@
 using namespace std;
 
 int n;
+char begin0[11][11];
 char end0[11][11];
 char temp1[11][11];
 char temp0[11][11];
@@ -17,7 +18,7 @@ void get_block()
     {
         for (size_t j = 0; j < n; j++)
         {
-            cin >> temp0[i][j];
+            cin >> begin0[i][j];
         }
     }
     for (size_t i = 0; i < n; i++)
@@ -25,6 +26,17 @@ void get_block()
         for (size_t j = 0; j < n; j++)
         {
             cin >> end0[i][j];
+        }
+    }
+}
+
+void restar()
+{
+    for (size_t i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            temp0[i][j] = begin0[i][j];
         }
     }
 }
@@ -80,16 +92,19 @@ void trans(int x)
 {
     if(x == 0)
     {
+            restar();
             fan90();
     }
     else if(x == 1)
     {
+            restar();
             fan90();
             bianhuan();
             fan90();
     }        
     else if(x == 2)
     {
+            restar();
             fan90();
             bianhuan();
             fan90();
@@ -98,16 +113,19 @@ void trans(int x)
     }
     else if(x == 3)
     {
+        restar();
         fanshe();
     }
     else if(x == 4) 
     {   
+        restar();
         fanshe();
         bianhuan();
         fan90();
     }        
     else if(x == 5) 
     {
+        restar();
         fanshe();
         bianhuan();
         fan90();
@@ -116,6 +134,7 @@ void trans(int x)
     }        
     else if(x == 6) 
     {
+        restar();
         fanshe();
         bianhuan();
         fan90();
@@ -126,6 +145,7 @@ void trans(int x)
     }        
     else if(x == 7) 
     {
+        restar();
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -136,6 +156,7 @@ void trans(int x)
     }
     else if(x == 8) 
     {
+        restar();
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -154,7 +175,7 @@ int main()
     int x = 0;
     for(; x < 9;x++)
     {   
-        trans(x); 
+        trans(x);
         for (size_t j = 0; j < n; j++)
         {
             for (size_t k = 0; k < n; k++)
