@@ -1,23 +1,37 @@
-#include <bits\stdc++.h>
+#include <iostream> 
 using namespace std;
-
-vector<int> brr;
-int san(int temp);
-int i = 0;
-
-int main(void){
-    int arr[3]={0,0,46};
-    int d;
-    for(i = 0  ;i <= 2;i++)
-    {
-        d = arr[2-i] ;       
-        arr[i] = san(d);
-        cout << "1"  << (char)(arr[i]);
-    }
-    return 0;
-}
-int san(int temp)
+int main()
 {
-    brr.push_back(temp);
-    return brr.back();
+	long long t;
+	cin>>t;
+	long long a=t/3600,b=(t/60)%60,c=t%60;
+	if(a<10&&b<10&&c<10)
+	{
+		cout<<0<<a<<":"<<0<<b<<":"<<0<<c<<endl;
+	}
+	else if(b<10&&c<10)
+	{
+		cout<<a<<":"<<0<<b<<":"<<0<<c<<endl;
+	}
+	else if (a<10&&c<10)
+    {
+        cout<<0<<a<<":"<<b<<":"<<0<<c<<endl;
+    }
+    else if (a<10)
+    {
+        cout<<0<<a<<":"<<b<<":"<<c<<endl;
+    }
+    else if (b<10)
+    {
+        cout<<a<<":"<<0<<b<<":"<<c<<endl;
+    }
+    else if (c<10)
+    {
+        cout<<a<<":"<<b<<":"<<0<<c<<endl;
+    }
+    else
+    {
+        cout<<a<<":"<<b<<":"<<c<<endl;
+    }
+	return 0;
 }
