@@ -2070,6 +2070,7 @@ int main()
 - 比较器函数初识 
 - `less<类型>`表示升序排列\[由小到大][^6]
 - `greater<类型>`表示降序排列[由大到小]
+- **string**也是可以比大小的，会按照字典序来比较大小
 
 
 
@@ -3867,7 +3868,179 @@ void dfs(int m, int sum, int startx){
 
 ## 9 素数筛
 
+### 9.1 一般线性筛
 
+- 通过不断试除来判断某一数字$k$有无因数
+- 时间复杂度为$O(N^2)$
+
+> ```cpp
+> bool prime(long long i)
+> {
+>     if (i == 2) return 1;
+>     else if (i == 1) return 0;
+>     for (size_t k = 2; k * k <= i ; k++)
+>     {
+>         if (i%k == 0)
+>         {
+>             return 0;
+>         }
+>     }
+>     return 1;
+> }
+> 
+> int main()
+> {
+>     long long n;
+>     cin >> n;
+>     for (size_t i = 2; i <= n; i++)
+>     {
+>         if (prime(i))
+>         {
+>             cout << i <<endl;
+>         }
+>     }
+>     
+>     return 0;
+> }
+> ```
+
+### 9.2 埃拉托斯特尼筛法
+
+- **核心思路是先标记素数，然后把素数的所有倍数全标记为非素数**
+
+```cpp
+vector<int> prime;
+vector<bool> IsPrime(1e7);
+
+void Eratosthenes(long long n)
+{
+    IsPrime[0] = IsPrime[1] = 0; //前两项不为素数，记作0
+    for (size_t i = 2; i <= n; i++) //先全部记作1
+    {
+        IsPrime[i] = 1;
+    }
+    //memset(IsPrime,1,sizeof(IsPrime)); //似乎使用memset的时间复杂度也是O(N)
+    for (size_t i = 2; i <= n; i++)
+    {
+        //素数筛选
+        //从第三项开始，如果这个数被标记为1，就把它记作素数，放入数组 
+        //同时从 i*i 项开始，每次将 i 的倍数标记为非素数
+        if (IsPrime[i])
+        {
+            prime.push_back(i);
+            if ((long long)i * i > n) continue; //超过n的不计
+            for (size_t j = i*i ; j <= n; j += i)
+            {
+                IsPrime[j] = 0;
+            }
+        }
+    }
+}
+
+int main()
+{
+    long long n;
+    cin >> n;
+    Eratosthenes(n);
+    for (auto &&i : prime) cout << i <<endl;
+    return 0;
+}
+```
+
+- 我们可以只筛选到$\sqrt{N}$来降低操作次数
+
+```cpp
+#include <bits/stdc++.h>
+#define endl "\n"
+using namespace std;
+
+vector<int> prime;
+vector<bool> IsPrime(1e7);
+
+void Eratosthenes(long long n)
+{
+    IsPrime[0] = IsPrime[1] = 0; //前两项不为素数，记作0
+    for (size_t i = 2; i <= n; i++) //先全部记作1
+    {
+        IsPrime[i] = 1;
+    }
+    //memset(IsPrime,1,sizeof(IsPrime)); //似乎使用memset的时间复杂度也是O(N)
+    for (size_t i = 2; i*i <= n; i++)
+    {
+        //素数筛选
+        //从 i*i 项开始，每次将 i 的倍数标记为非素数
+        if (IsPrime[i])
+        {
+            for (size_t j = i*i ; j <= n; j += i)
+            {
+                IsPrime[j] = 0;
+            }
+        }
+    }
+    //计入数组
+    for (size_t i = 2; i <= n; i++)
+    {
+        if (IsPrime[i])
+        {
+            prime.push_back(i);
+        }
+    }
+}
+
+int main()
+{
+    long long n;
+    cin >> n;
+    Eratosthenes(n);
+    for (auto &&i : prime) cout << i <<endl;
+    return 0;
+}
+```
+
+- 我们也可以改写0/1来实现非初始化bool数组
+
+```cpp
+#include <bits/stdc++.h>
+#define endl "\n"
+using namespace std;
+
+vector<int> prime;
+vector<bool> IsPrime(1e7);
+
+void Eratosthenes(long long n)
+{
+    IsPrime[0] = IsPrime[1] = 0; //前两项不为素数，记作0
+    for (size_t i = 2; i*i <= n; i++)
+    {
+        //素数筛选
+        //从 i*i 项开始，每次将 i 的倍数标记为非素数
+        if (!IsPrime[i])
+        {
+            for (size_t j = i*i ; j <= n; j += i)
+            {
+                IsPrime[j] = 1;
+            }
+        }
+    }
+    //计入数组
+    for (size_t i = 2; i <= n; i++)
+    {
+        if (!IsPrime[i])
+        {
+            prime.push_back(i);
+        }
+    }
+}
+
+int main()
+{
+    long long n;
+    cin >> n;
+    Eratosthenes(n);
+    for (auto &&i : prime) cout << i <<endl;
+    return 0;
+}
+```
 
 
 
@@ -3923,6 +4096,14 @@ void dfs(int m, int sum, int startx){
 [^5]:如果无特殊说明，本条目下所有 `dp`均表示容器名
 [^6]:如果函数内置了比较器(sort,优先队列),那大部分默认使用 `less<int>`
 [^7]:`.insert()`成员函数对vector容器也适用,但插入元素可能倒置vector容器重新分配内存导致STL
+
+
+
+
+
+
+
+
 
 
 
