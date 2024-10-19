@@ -2302,7 +2302,17 @@ int main()
 >
 > - [ ] `#define double long double`
 
+## 10 数组前导零与后导零的删除
 
+- 有的时候我们会用vis记录某一数据的增量和变化，到最后进行增量的排序
+- 但是这个时候vis里没有在数据范围里的数据就是 0 这给我们sort数组带来极大的困惑
+
+```cpp
+while(*arr.begin() == 0) arr.erase(arr.begin);
+while(*(arr.end()-1) == 0) arr.erase(arr.end()-1);
+```
+
+- 我们可以使用这样的代码删除数组中的前后导零
 
 
 
