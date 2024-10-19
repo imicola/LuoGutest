@@ -3868,7 +3868,7 @@ void dfs(int m, int sum, int startx){
 
 ## 9 素数筛
 
-### 9.1 一般线性筛
+### 9.1 一般双重筛
 
 - 通过不断试除来判断某一数字$k$有无因数
 - 时间复杂度为$O(N^2)$
@@ -3907,6 +3907,12 @@ void dfs(int m, int sum, int startx){
 ### 9.2 埃拉托斯特尼筛法
 
 - **核心思路是先标记素数，然后把素数的所有倍数全标记为非素数**
+
+- **时间复杂度是$O(n\log{\log{n}})$**
+
+- 对于任意一个大于$1$的正整数n,那么它的$x$倍就是合数($x > 1$)。利用这个结论，我们可以避免很多次不必要的检测。
+
+  如果我们从小到大考虑每个数，然后同时把当前这个数的所有（比自己大的）倍数记为合数，那么运行结束的时候没有被标记的数就是素数了。
 
 ```cpp
 vector<int> prime;
@@ -4038,6 +4044,50 @@ int main()
     cin >> n;
     Eratosthenes(n);
     for (auto &&i : prime) cout << i <<endl;
+    return 0;
+}
+```
+
+### 9.3 欧拉筛法
+
+- **时间复杂度$O(n)$**
+- 埃氏筛法仍有优化空间，它会将一个合数重复多次标记。我们可以用改进的筛法欧拉筛来计算
+
+```cpp
+#include <bits/stdc++.h>
+#define endl "\n"
+using namespace std;
+
+vector<int> prime;
+vector<bool> not_prime(1e7);
+
+void Euler(long long &n)
+{
+    for (size_t i = 2; i <= n; i++)
+    {
+        //如果该数标记为 0 即 非(非素数),计入素数数组
+        if (!not_prime[i])
+        {
+            prime.push_back(i);
+        }
+        // 换言之，i 之前被 prime[j] 筛过了
+        // 由于 prime 里面质数是从小到大的，所以 i 乘上其他的质数的结果一定会被
+        // prime[j] 的倍数筛掉，就不需要在这里先筛一次，所以这里直接 break掉
+        for (auto &&j : prime)
+        {
+            if(i*j > n) break;
+            not_prime[i*j] = 1;
+            if(i%j == 0) break;
+        }
+    }
+}
+
+int main()
+{
+    long long n;
+    cin >> n;
+    Euler(n);
+    for (auto &&i : prime) cout << i << endl;
     return 0;
 }
 ```
