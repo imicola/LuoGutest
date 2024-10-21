@@ -3,12 +3,13 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe 生成活动文件",
-            "command": "D:\\apps\\MinGW\\mingw64\\bin\\g++.exe",
+            "command": "g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 //"D:\\Code film\\C++\\C++test\\duo_wen_jian_test\\fun.cpp",
+                "-std=c++23",
                 "-o",
                 //"${fileDirname}\\${fileBasenameNoExtension}.exe"
                 "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
