@@ -3361,6 +3361,7 @@ cout << s1.substr(3,4) <<endl; //从第三位输出,输出4位
 ```
 
 - 查找函数 : `find(字串)`  $\to$ 返回字串起始点的下标[若找不到,则会返回一个 `string::npos`]
+- 对上面一条：==返回的是下标，是size_t类型的数字!==
 
 ##### 6.1.7.2 string 转化
 
@@ -3492,7 +3493,7 @@ for (auto &i : lt)
 | `.push_back()`  | 在list尾部插入元素                    |
 | `.pop_back()`   | 删除list最后一个元素                  |
 | `.insert()`     | 在`list<int>::iterator it` 前插入元素 |
-| `.erase()`      | 在`list<int>::iterator it` 前插入元素 |
+| `.erase()`      | 在`list<int>::iterator it` 前删除元素 |
 | `.swap()`       | 交换两个元素                          |
 
 > [!important]
