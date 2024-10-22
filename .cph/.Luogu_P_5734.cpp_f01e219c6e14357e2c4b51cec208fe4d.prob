@@ -1,1 +1,0 @@
-{"name":"Luogu_P5734","url":"https://www.luogu.com.cn/problem/P5734","memoryLimit":128000,"timeLimit":1000,"tests":[{"id":1729564588620,"input":"4\nILove\n1 Luogu\n2 5 5\n3 3 guGugu\n4 gu","output":"ILoveLuogu\nLuogu\nLuoguGugugu\n3"}],"group":"luogu","srcPath":"d:\\Code film\\C++\\main\\LuoGutest\\Luogu_P_5734.cpp"}

@@ -6,9 +6,9 @@ int main()
 {
     int n;
     cin >> n;
-    for (size_t i = 1; i <= n; i++)
+    for (size_t i = 0; i < n; i++)
     {
-        for (size_t j = 0; j < i; j++)
+        for (size_t j = 0; j < n; j++)
         {
             cout << "*";
         }

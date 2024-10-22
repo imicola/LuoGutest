@@ -10,5 +10,8 @@
 //         "editor.quickSuggestions": true
 //         },
 "C_Cpp.errorSquiggles": "enabled",
-"cph.general.saveLocation": "D:\\Code film\\C++\\.cph"
+"cph.general.saveLocation": "D:\\Code film\\C++\\.cph",
+"files.associations": {
+    "iostream": "cpp"
+}
 }
