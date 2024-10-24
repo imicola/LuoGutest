@@ -32,13 +32,13 @@ void Eratosthenes(long long n)
 
 int main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0); //关闭同步流
     long long n;
     cin >> n;
-    clock_t st = clock();
+    clock_t st = clock(); //记秒
     Eratosthenes(n);
     for (auto &&i : prime) cout << i <<endl;
-    clock_t ed = clock();
-    cout << "times: " << ed - st <<"ms"; 
+    clock_t ed = clock(); //记秒
+    cout << "times: " << ed - st <<"ms"; // 输出秒数 
     return 0;
 }

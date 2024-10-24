@@ -2,32 +2,31 @@
 #define endl "\n"
 using namespace std;
 
-vector<bool> isno_prime(1e7);
-vector<int> oprime;
-
-void prime(int n)
+bool prime(long long i)
 {
-    for (size_t i = 2; i <= n; i++)
+    if (i == 2) return 1;
+    else if (i == 1) return 0;
+    for (size_t k = 2; k * k <= i ; k++)
     {
-        if (!isno_prime[i])
+        if (i%k == 0)
         {
-            oprime.push_back(i);
-        }
-        for (auto &&j : oprime)
-        {
-            if(i*j > n) break;
-            isno_prime[i*j] = 1;
-            if(i%j == 0) break;
+            return 0;
         }
     }
+    return 1;
 }
+
 int main()
 {
-    prime(100);
-    for (auto &&i : oprime)
+    long long n;
+    cin >> n;
+    for (size_t i = 2; i <= n; i++)
     {
-        cout << i << " ";
+        if (prime(i))
+        {
+            cout << i <<endl;
+        }
     }
-    
+
     return 0;
 }

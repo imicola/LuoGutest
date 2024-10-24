@@ -10,7 +10,6 @@ bool largepanduan(string &a ,string &b)
     //这意味着如果字符串a在字典顺序上大于或等于字符串b，a >= b将返回1 ；否则返回 0
     return a >= b;
 }
-
 //假设string a > string b ,做高精度减法
 string largemin(string a ,string b)
 {
@@ -81,7 +80,6 @@ string gcdlarge(string a , string b)
     }
     return a;
 }
-
 
 int main()
 {

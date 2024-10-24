@@ -18,6 +18,5 @@ int main()
         cout << endl;
         p++;
     }
-    
     return 0;
 }
