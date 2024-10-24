@@ -42,7 +42,7 @@ int main()
     Euler(n);
     for (auto &&i : prime)
     {
-        cout << i << endl;
+        printf("%lld,",i);
     }
     
     return 0;

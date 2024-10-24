@@ -9,5 +9,8 @@
 //         "[c]": {
 //         "editor.quickSuggestions": true
 //         },
-"C_Cpp.errorSquiggles": "enabled"
+"C_Cpp.errorSquiggles": "enabled",
+"files.associations": {
+    "iostream": "cpp"
+}
 }
