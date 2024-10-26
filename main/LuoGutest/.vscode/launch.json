@@ -63,7 +63,9 @@
             "request": "launch",
             "program": "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
             //"program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [],
+            "args": [
+                //"-fexec-charset=GBK"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

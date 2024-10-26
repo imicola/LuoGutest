@@ -13,8 +13,11 @@
             "compilerPath": "D:/apps/MinGW/mingw64/bin/gcc.exe",
             "cStandard": "c23",
             "cppStandard": "c++23",
-            "intelliSenseMode": "windows-gcc-x64"
-        }
-    ],
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [
+                "-O2"
+            ]
+            }
+        ],
     "version": 4
 }
