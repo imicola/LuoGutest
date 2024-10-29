@@ -16,7 +16,7 @@ int        ans = 0, n;
 stack<int> sta;
 // vector<int> arr;
 // a 用于记录输入状态  sta表示一个栈
-void       stasolve(int nextIn, stack<int> sta)
+void stasolve(int nextIn, stack<int> sta)
 {
     if (sta.empty() && nextIn > n) {
         ans++;

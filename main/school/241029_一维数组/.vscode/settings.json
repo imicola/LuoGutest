@@ -1,0 +1,13 @@
+{
+    
+"cmake.configureOnOpen": true,
+"editor.minimap.enabled": true,
+"C_Cpp.autocomplete": "default",
+// "[cpp]": {
+//         "editor.quickSuggestions": true
+//         },
+//         "[c]": {
+//         "editor.quickSuggestions": true
+//         },
+"C_Cpp.errorSquiggles": "enabled"
+}

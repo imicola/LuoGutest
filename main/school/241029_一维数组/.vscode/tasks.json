@@ -1,0 +1,33 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                //"D:\\Code film\\C++\\C++test\\duo_wen_jian_test\\fun.cpp",
+                "-std=c++23",
+                "-o",
+                //"${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
+                //黑窗中文乱码改编码
+                "-fexec-charset=GBK"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}

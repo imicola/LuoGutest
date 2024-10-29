@@ -28,14 +28,11 @@ int main()
     dx += 2;
     arr[2][2] = 1;
     tra(cx, dx);
-    for (size_t i = 2; i <= ax; i++)
-    {
-        for (size_t j = 2; j <= bx; j++)
-        {
+    for (size_t i = 2; i <= ax; i++) {
+        for (size_t j = 2; j <= bx; j++) {
             if (i == 2 && j == 2)
                 continue;
-            if (arrx[i][j] == 0)
-            {
+            if (arrx[i][j] == 0) {
                 arr[i][j] = arr[i - 1][j] + arr[i][j - 1];
             }
         }
