@@ -12,21 +12,22 @@ int main()
     {
         int k = 0;
         cin >> k;
-        if (k == 1 )
+        if (k == 1)
         {
             string s1;
             cin >> s1;
             s += s1;
-            cout << s <<endl;
+            cout << s << endl;
         }
         else if (k == 2)
         {
-            int a,b;
+            int a, b;
             cin >> a >> b;
             string temp;
-            for(auto it = s.begin()+a;it != s.begin()+a+b;it++) temp += *it;
+            for (auto it = s.begin() + a; it != s.begin() + a + b; it++)
+                temp += *it;
             s = temp;
-            cout << s <<endl;
+            cout << s << endl;
         }
         else if (k == 3)
         {
@@ -36,8 +37,8 @@ int main()
             auto it = s.begin() + a;
             auto it2 = s2.begin();
             auto it3 = s2.end();
-            s.insert(it,it2,it3);
-            cout << s <<endl;
+            s.insert(it, it2, it3);
+            cout << s << endl;
         }
         else if (k == 4)
         {
@@ -46,14 +47,14 @@ int main()
             auto ldx = s.find(s0);
             if (ldx != string::npos)
             {
-                cout << ldx <<endl;
+                cout << ldx << endl;
             }
             else
             {
-                cout << -1 <<endl;
+                cout << -1 << endl;
             }
         }
     }
-    
+
     return 0;
 }

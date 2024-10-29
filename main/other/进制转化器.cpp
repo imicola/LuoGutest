@@ -8,7 +8,6 @@ int main()
     cin >> p ;
     cout << "要转化的进制(<=36)" << endl;
     cin >> q;
-
     vector<char> out;
     while (p != 0)
     {
@@ -24,9 +23,6 @@ int main()
         out.push_back(k);
         p /= q;
     }
-    for(vector<char>::iterator it = out.end()-1;it != out.begin() - 1;it--) 
-    {
-        cout << *it;
-    }
+    for(vector<char>::iterator it = out.end()-1;it != out.begin() - 1;it--) cout << *it;
     return 0;
 }

@@ -4,12 +4,10 @@ using namespace std;
 
 int main()
 {
-    int a,i = 0;
-    int arr[100000];
-    while (cin >> a)
-    {
-        arr[i++] = a;
+    int a, b, c;
+    cout << 1;
+    while (1) {
+        cout << 2;
     }
-    
     return 0;
 }

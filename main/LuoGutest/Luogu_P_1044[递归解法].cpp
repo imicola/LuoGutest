@@ -12,36 +12,33 @@ P1044递归写法:
 #define endl "\n"
 using namespace std;
 
-int ans = 0,n;
+int        ans = 0, n;
 stack<int> sta;
 // vector<int> arr;
-// a 用于记录输入状态  sta表示一个栈 
-void stasolve(int nextIn , stack<int> sta)
+// a 用于记录输入状态  sta表示一个栈
+void       stasolve(int nextIn, stack<int> sta)
 {
-    if( sta.empty() && nextIn > n)
-    {
+    if (sta.empty() && nextIn > n) {
         ans++;
         return;
     }
-    if (nextIn <= n)
-    {
+    if (nextIn <= n) {
         sta.push(nextIn);
-        stasolve(nextIn+1,sta);
-        sta.pop(); //回溯[就是没考虑到这个]
+        stasolve(nextIn + 1, sta);
+        sta.pop();   // 回溯[就是没考虑到这个]
     }
-    if(!sta.empty())
-    {
+    if (!sta.empty()) {
         int top = sta.top();
         sta.pop();
-        stasolve(nextIn,sta);
-        sta.push(top); //回溯
+        stasolve(nextIn, sta);
+        sta.push(top);   // 回溯
     }
 }
 
 int main()
 {
     cin >> n;
-    stasolve(1,sta);
+    stasolve(1, sta);
     cout << ans;
     return 0;
 }

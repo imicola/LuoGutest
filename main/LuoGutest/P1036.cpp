@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n,k,ans;
+int n, k, ans;
 vector<int> arr(25);
 
 bool isprime(int a)
@@ -10,9 +10,9 @@ bool isprime(int a)
     {
         return 1;
     }
-    for (size_t i = 2; i <= a/i; i++)
+    for (size_t i = 2; i <= a / i; i++)
     {
-        if (a%i == 0)
+        if (a % i == 0)
         {
             return 0;
         }
@@ -20,7 +20,7 @@ bool isprime(int a)
     return 1;
 }
 
-void dfs(int m ,int sum ,int startx )
+void dfs(int m, int sum, int startx)
 {
     if (m == k)
     {
@@ -32,7 +32,7 @@ void dfs(int m ,int sum ,int startx )
     }
     for (size_t i = startx; i < n; i++)
     {
-        dfs(m+1,sum + arr[i],i+1);
+        dfs(m + 1, sum + arr[i], i + 1);
     }
     return;
 }
@@ -44,7 +44,7 @@ int main()
     {
         cin >> arr[i];
     }
-    dfs(0,0,0);
+    dfs(0, 0, 0);
     cout << ans;
     return 0;
 }
