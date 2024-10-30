@@ -2287,6 +2287,29 @@ int main()
 }
 ```
 
+- ==**cmp的编写规则**==
+
+- 1. cmp函数的返回值是bool值
+  2. cmp传入的参数为(待排序的第一个类型& a，待排序的第二个类型& b)
+  3. cmp里 `return a > b`指降序排序 (从大到小)
+- 例给无法排序的map排序
+
+```cpp
+bool cmp(pair<int, int>& a, pair<int, int>& b){
+    return a.first > b.first;
+}
+
+int main()
+{
+   	map<int,int> arr;
+	vector<pair<int, int>> temp(arr.begin(),arr.end());
+}
+```
+
+
+
+
+
 ## 5 __gcd求最大公约数函数
 
 **格式：**`__gcd(a,b)`返回值为a，b的最大公因数
