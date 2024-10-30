@@ -14,11 +14,10 @@ int main()
         cin >> a2[i];
     }
     merge(a1.begin(), a1.end(), a2.begin(), a2.end(), a3.begin());
-    sort(a3.begin(), a3.end());
+    //sort(a3.begin(), a3.end());
     for (auto&& i : a3) {
         cout << i << " ";
     }
-
     return 0;
 }
 // 很好的STL练习题单，使我vector越界
