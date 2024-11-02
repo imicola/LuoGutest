@@ -2940,7 +2940,6 @@ int main()
     {
         cout << a3[i];
     }
-    
     return 0;
 }
 ```
@@ -2948,6 +2947,72 @@ int main()
 - 更好用的字符串 **string**类型的高精度
 
 ```cpp
+string largeadd(string& a, string& b)
+{
+    if (a <= b) swap(a, b);
+    int p = 0;
+    for (size_t i = 0; i < b.size(); i++) {
+        int ai = a[a.size() - i - 1] - '0';
+        int bi = b[b.size() - i - 1] - '0';
+        int sum = ai + bi + p;
+        if (sum >= 10) {
+            p = 1;
+            sum -= 10;
+        } else p = 0;
+        a[a.size() - 1 - i] = sum + '0';
+    }
+    for (size_t i = b.size(); i < a.size(); i++) {
+        int ai = a[a.size() - i - 1] - '0';
+        if (ai == '9' && p == 1) {
+            a[a.size() - i - 1] = '0';
+        } else {
+            a[a.size() - i - 1] = ai + p + '0';
+            p = 0;
+        }
+    }
+    if (p == 1) a.insert(a.begin(), '1');
+    return a;
+}
+```
+
+### 5.2 高精度减法
+
+- 与加法类似，主要是注意借位与进位的不同
+- 负数的处理
+
+```cpp
+string largemin(string a, string b)
+{
+    int flag = 0;
+    if (b >= a) {
+        swap(a, b);
+        flag = 1;
+    }
+    int p = 0;
+    for (size_t i = 0; i < b.size(); i++) {
+        int ai = a[a.size() - 1 - i] - '0';
+        int bi = b[b.size() - 1 - i] - '0';
+        int diff = ai - bi - p;
+        if (diff < 0) {
+            p = 1;
+            diff += 10;
+        } else p = 0;
+        a[a.size() - i - 1] = diff + '0';
+    }
+    for (size_t i = b.size(); i < a.size(); i++) {
+        int ai = a[a.size() - i - 1] - '0';
+        if (ai == 0 && p == 1) {
+            a[a.size() - i - 1] = '9';
+        } else {
+            a[a.size() - i - 1] = ai - p + '0';
+            p = 0;
+        }
+    }
+    while (*a.begin() == '0' && a.size() > 1)
+        a.erase(a.begin());
+    if (flag) a.insert(a.begin(), '-');
+    return a;
+}
 ```
 
 

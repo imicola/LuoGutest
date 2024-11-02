@@ -4,6 +4,9 @@ using namespace std;
 
 string largeadd(string a, string b)
 {
+    if (a < b) {
+        swap(a, b);
+    }
     string x;
     int flag = 0;
     auto ita = a.end() - 1;
