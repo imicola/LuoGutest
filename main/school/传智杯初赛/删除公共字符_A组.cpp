@@ -15,8 +15,10 @@ int main()
                 s1[i] = '|';
             }
         }
-        if (s1[i] == '|') continue;
-        else cout << s1[i];
+        if (s1[i] == '|')
+            continue;
+        else
+            cout << s1[i];
     }
 
     return 0;
