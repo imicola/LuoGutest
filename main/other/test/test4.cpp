@@ -29,7 +29,7 @@ int main()
             cout << -1;
             return 0;
         }
-        for (size_t j = 0; prime[j] < a[i] && j < 169 ; j++) {
+        for (size_t j = 0; prime[j] < a[i] && j < 169; j++) {
             if (a[i] % prime[j] == 0) {
                 a2[j]++;
             }

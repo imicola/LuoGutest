@@ -6,14 +6,14 @@ int main()
 {
     string s1;
     string s2;
-    int    flag = 0;
-    int    out  = 0;
+    int flag = 0;
+    int out = 0;
     cin >> s1;
     getline(cin, s2);
     s2 = "\n";
     getline(cin, s2);
     // 双方均转化为小写
-    auto it  = s1.begin();
+    auto it = s1.begin();
     auto it2 = s2.begin();
     while (it != s1.end()) {
         if (*it < 'a') *it = (char)(*it + 'a' - 'A');
@@ -26,8 +26,9 @@ int main()
     //.find + ' '判断整词存在；
     if (s2.find(s1) == string::npos) {
         cout << -1;
-    } else {
-        int  ldx = s2.find(s1);
+    }
+    else {
+        int ldx = s2.find(s1);
         auto itx = s2.begin() + ldx;
         while (1) {
             ldx = s2.find(s1);
@@ -45,7 +46,8 @@ int main()
         }
         if (flag == 0) {
             cout << -1;
-        } else {
+        }
+        else {
             cout << flag << " " << out;
         }
     }

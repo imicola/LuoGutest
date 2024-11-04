@@ -14,7 +14,7 @@ int main()
         t[s]++;
     }
     int ans = 0;
-    for (auto&& i : t) {
+    for (auto &&i : t) {
         if (i.second != 0) ans++;
     }
     cout << ans << endl;
