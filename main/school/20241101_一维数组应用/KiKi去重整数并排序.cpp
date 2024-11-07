@@ -12,7 +12,7 @@ int main()
         cin >> temp;
         st.insert(temp);
     }
-    for (auto&& i : st) {
+    for (auto &&i : st) {
         cout << i << " ";
     }
     return 0;
