@@ -60,7 +60,7 @@ int main()
             cout << "NIE";
         }
         P:
-        cout <<endl;
+        cout << endl;
     }
 
     return 0;

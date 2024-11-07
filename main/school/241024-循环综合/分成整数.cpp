@@ -6,8 +6,7 @@ using namespace std;
 bool ishave(int i)
 {
     //判断该数是否含有 3 或 7
-    if(i%10 == 3 || i%10 == 7 || (i/10)%10 == 3 || (i/10)%10 == 7 || i/100 == 3)
-    {
+    if (i % 10 == 3 || i % 10 == 7 || (i / 10) % 10 == 3 || (i / 10) % 10 == 7 || i / 100 == 3) {
         return 1;
     }
     return 0;
@@ -19,23 +18,19 @@ int main()
     int flag = 0;
     cin >> n;
     //遍历所有可能的组合
-    for (size_t i = 1; i < n; i++)
-    {
+    for (size_t i = 1; i < n; i++) {
         //如果该数含有 3 或 7，则跳过
-        if(ishave(i)) continue;
-        for (size_t j = i+1 ; j < n; j++)
-        {
+        if (ishave(i)) continue;
+        for (size_t j = i + 1; j < n; j++) {
             //如果该数含有 3 或 7，则跳过
             if (ishave(j)) continue;
-            for (size_t k = j+1; k < n; k++)
-            {
+            for (size_t k = j + 1; k < n; k++) {
                 //如果该数含有 3 或 7，则跳过
-                if(ishave(k)) continue;
+                if (ishave(k)) continue;
                 //如果三个数的和等于 n，则计数器加 1
-                if(k + j + i == n)
-                {
+                if (k + j + i == n) {
                     flag++;
-                   //cout << i << j << k<<endl;
+                    //cout << i << j << k<<endl;
                 }
             }
         }

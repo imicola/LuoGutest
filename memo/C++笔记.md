@@ -3027,6 +3027,71 @@ string largemin(string a, string b)
 }
 ```
 
+### 5.3 高精度乘法
+
+> [!tip]
+>
+> 对于乘法来说，高精度的最佳计算思维就是将两个数拆分，用一个数的个十百位依次去乘以另一个数
+>
+> 拿我们常用的，主要的步骤有以下几点：
+>
+> 1. **字符串化数字，倒置字符串**
+> 2. **两位相乘，计算结果与储存位数**
+> 3. **数组变字符串**
+
+```cpp
+//#pragma GCC optimize(2)
+#include <bits/stdc++.h>
+#define endl '\n'
+using namespace std;
+
+string largemuiti(string a, string b)
+{
+    if (a == "0" || b == "0") return "0";
+    int len1 = a.size();
+    int len2 = b.size();
+    vector<int> result(len1 + len2, 0);
+    for (int i = len1 - 1; i >= 0; i--) {
+        for (int j = len2 - 1; j >= 0; j--) {
+            int mult = (a[i] - '0') * (b[j] - '0');
+            int sum = result[i + j + 1] + mult;
+            result[i + j + 1] = sum % 10;
+            result[i + j] += sum / 10;
+        }
+    } 
+    string res = "";
+    for (size_t i = 0; i < result.size(); i++) {
+        if (!(result[i] == 0 && res.empty())) {
+            res += to_string(result[i]);
+        }
+    }
+    return res;
+}
+
+/* 
+    1 5  --> a
+  * 2 1  --> b
+-------
+    1 5  --> i == 0
+  3 0 |  --> i == 1
+  | | |
+  v v v
+-------
+  3 1 5 --> result --> res
+*/
+
+int main()
+{
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    cout << largemuiti("123", "234");
+    return 0;
+}
+```
+
+
+
+
+
 
 
 ## 6 STL
