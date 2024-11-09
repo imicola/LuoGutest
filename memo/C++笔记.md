@@ -3634,6 +3634,8 @@ for (auto &el : mp)
 - 空map会返回一个默认值
 - 不能使用遍历器找下标
 
+> unordered_map无序map 也称哈希表，我们可以随意的建立映射关系，时间复杂度是O(1)
+
 #### 6.1.7 字符串[string](https://zh.cppreference.com/w/cpp/string)
 
 ##### 6.1.7.1 常用方法
