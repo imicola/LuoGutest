@@ -2456,7 +2456,7 @@ int main()
 
 ## 10 DP动态规划[uncompete]
 
-- 背包DP
+- **背包DP**
 
 
 
@@ -2506,6 +2506,15 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 > - `state = 3`（011）：第一个和第二个元素在组 `a`，第三个在组 `b`
 > - ...
 > - `state = 7`（111）：所有元素都在组 `a`
+
+## 哈希表
+
+哈希表的实现可以由三种数据结构实现
+
+> **set map unordered_map**
+>
+> - ![image-20241113211859348](./attachments/image-20241113211859348.png)
+> - <img src="./attachments/image-20241113212112847.png" alt="image-20241113212112847" style="zoom: 80%;" />
 
 
 

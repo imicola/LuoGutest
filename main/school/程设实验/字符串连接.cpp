@@ -2,11 +2,14 @@
 #include <bits/stdc++.h>
 #define endl '\n'
 using namespace std;
+typedef long long LL;
 
 int main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    cout << "NO";
+    string s1,s2;
+    cin >> s1 >> s2;
+    cout << s1 + s2;
     return 0;
-    
 }
+//确实没用strcat(

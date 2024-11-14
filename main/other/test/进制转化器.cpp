@@ -3,26 +3,30 @@ using namespace std;
 
 int main()
 {
-    int p,q;
-    cout << "要转化的数" <<endl;
-    cin >> p ;
+    int p, q;
+    cout << "要转化的数" << endl;
+    cin >> p;
     cout << "要转化的进制(<=36)" << endl;
     cin >> q;
-    vector<char> out;
-    while (p != 0)
-    {
-        int temp = p%q;
-        if (temp >= 10)
-        {
-            char t = temp + 55; 
-            out.push_back(t);
+    vector<char> out(1e7);
+    int kp = 0;
+    while (p != 0) {
+        int temp = p % q;
+        if (temp >= 10) {
+            char t = temp + 55;
+            out[kp] = t;
+            kp++;
             p /= q;
             continue;
         }
         char k = temp + '0';
-        out.push_back(k);
+        out[kp] = k;
+        kp++;
         p /= q;
     }
-    for(vector<char>::iterator it = out.end()-1;it != out.begin() - 1;it--) cout << *it;
+    for (size_t i = 0; i < kp; i++) {
+        cout << out[i];
+    }
+
     return 0;
 }
