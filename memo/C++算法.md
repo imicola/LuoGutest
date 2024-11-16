@@ -62,6 +62,12 @@
 
 - **判断一个除法除出来的数是不是整数推荐使用取模法** `if((a*c)%b == 0) cout << "is intnum"` (~~血泪教训见下~~) 
 - ![image-20241110211602525](./attachments/image-20241110211602525.png)
+- 神奇函数：在C和 C+++中，**toupper** 函数用于将小写字母转换为其对应的大写字母。这个函数定义在<cctype.h>或<ctype.h〉头文件中。
+- 当某一个数据经常更新(比如说判断max值)我们可以将：
+  - `if(i > max0) max0 = i` 改为 `max0 = max(max0,i)`
+  - 同理 ：`if(i < min0) min0 = i`改为 `min0 = min(min0,i)`
+
+- 
 
 
 ---
@@ -2507,7 +2513,7 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 > - ...
 > - `state = 7`（111）：所有元素都在组 `a`
 
-## 哈希表
+## 12 哈希表
 
 哈希表的实现可以由三种数据结构实现
 
@@ -2516,6 +2522,34 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 > - ![image-20241113211859348](./attachments/image-20241113211859348.png)
 > - <img src="./attachments/image-20241113212112847.png" alt="image-20241113212112847" style="zoom: 80%;" />
 
+> **哈希表算法是一种以空间换时间的算法，可以在判断数据是否重复出现 or 数据去重方面有优异性能**
+>
+> > 例题：leetcode NO.1两数之和
+>
+> 给定一个整数数组 `nums` 和一个整数目标值 `target`，请你在该数组中找出 **和为目标值** *`target`* 的那 **两个** 整数，并返回它们的数组下标。
+>
+> 你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。
+>
+> 你可以按任意顺序返回答案。
+
+哈希代码示例：
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+        for (int i = 1; i <= nums.size(); i++) {
+            mp[nums[i - 1]] += i;
+            if (mp[target - nums[i]] != 0) {
+                return {i, mp[target-nums[i]]-1};
+            }
+        }
+        return {};
+    }
+};
+
+```
 
 
 
@@ -2523,8 +2557,201 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 
 
 
+## 13 前缀和
+
+### 13.1 一维数组的前缀和
+
+- 对数列 A [1,2,3,4,5] ,求数列B,使$B_i = \sum_{k=0}^{i}A_k$
+
+> **思路：** 因为B[0] = A[0]  且有递推式 $B_i = B_{i-1}+A_i$构造递推式
+>
+> ```cpp
+> int main()
+> {
+>     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+>     vector<int> A = {1, 2, 3, 4, 5, 6};
+>     vector<int> B(A.size());
+>     B[0] = A[0];
+>     for (size_t i = 1; i < A.size(); i++) {
+>         B[i] = B[i - 1] + A[i];
+>     }
+>     for (auto &&i : B) cout << i << " ";
+>     //输出: 1 3 6 10 15 21
+>     return 0;
+> }
+> ```
+>
+> > 于传统代码相比，将时间复杂度从$O(n^2)$降低到$O(n)$且空间复杂度仍然是$O(n)$
+
+### 13.2 二维数组的前缀和
+
+对一个二维数组A:
+$$
+A=
+\left[
+\begin{matrix}
+1 & 2 & 3 &4\\
+5 & 6 & 7 &8 \\
+9 & 10 &11 &12  \\
+\end{matrix}
+\right]
+$$
+二维数组前缀和定义：存在二维数组S，有：
+$$
+S_{i,j} = \sum_{k_1=0}^{i}\sum_{k_2=0}^{j}A_{k_1,k_2}
+$$
+类比一维的情形，$S_{i,j}$应该可以基于$S_{i-1,j}$或 $S_{i,j-1}$ 计算，从而避免重复计算前面若干项的和。但是，如果直接将$S_{i-1,j}$和 $S_{i,j-1}$ 相加，再加上 $A_{i,j}$，会导致重复计算 $S_{i-1,j-1}$ 这一重叠部分的前缀和，所以还需要再将这部分减掉。这就是 [容斥原理](https://oi-wiki.org/math/combinatorics/inclusion-exclusion-principle/)。由此得到如下递推关系：
+$$
+S_{i,j} = A_{i,j} + S_{i-1,j} + S_{i,j-1} - S_{i-1,j-1}
+$$
+**简单代码实现:**
+
+```cpp
+nt main()
+{
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    //在构建A的时候可以将A整体向右下移一个单位防止负数下标的出现
+    vector<vector<int>> A = {
+        {0, 0, 0, 0, 0},
+        {0, 1, 2, 3, 4},
+        {0, 5, 6, 7, 8},
+        {0, 9, 10, 11, 12},
+    };
+    vector<vector<int>> S(A.size(), vector<int>(A[0].size()));
+    S[1][1] = A[1][1];
+    for (size_t i = 1; i < A.size(); i++) {
+        for (size_t j = 1; j < A[0].size(); j++) {
+            if (i == j && i == 1) continue;
+            S[i][j] = A[i][j] + S[i - 1][j] + S[i][j - 1] - S[i - 1][j - 1];
+        }
+    }
+    for (auto &&i : S) {
+        for (auto &&j : i) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    /*输出：
+    0 0 0 0 0
+    0 1 3 6 10
+    0 6 14 24 36
+    0 15 33 54 78
+    */
+    return 0;
+}
+```
+
+> 例：[洛谷 P1387 最大正方形](https://www.luogu.com.cn/problem/P1387)
+>
+> # 最大正方形
+>
+> ## 题目描述
+>
+> 在一个 $n\times m$ 的只包含 $0$ 和 $1$ 的矩阵里找出一个不包含 $0$ 的最大正方形，输出边长。
+>
+> ## 输入格式
+>
+> 输入文件第一行为两个整数 $n,m(1\leq n,m\leq 100)$，接下来 $n$ 行，每行 $m$ 个数字，用空格隔开，$0$ 或 $1$。
+>
+> ## 输出格式
+>
+> 一个整数，最大正方形的边长。
+>
+> ## 样例 #1
+>
+> ### 样例输入 #1
+>
+> ```
+> 4 4
+> 0 1 1 1
+> 1 1 1 0
+> 0 1 1 0
+> 1 1 0 1
+> ```
+>
+> ### 样例输出 #1
+>
+> ```
+> 2
+> ```
+
+> 解决思路：
+>
+> 1. 先使用二维前缀和数组将输入数组$A$的$A_{1,1}\to A_{i,j}$的和表示出来
+>
+> 2. 设立边长$l$从1开始找最小正方形，其过程如下：
+>
+>    1. 设立$i,j$作为假设正方形的右下角点,找的正方形为以$l$为边长，底点为$(i,j)$的一个正方形
+>
+>    2. 显然$i,j$均从$l$开始，到`m,n`结束
+>
+>    3. `b[i][j] - b[i - l][j] - b[i][j - l] + b[i - l][j - l] == l * l`作为判断标准(why)
+>
+>       - `b[i][j]`是从$(1,1) \to (i,j)$的前项和，我们需要求 $(i-l,j-l) \to (i,j)$ 的和
+>
+>       - <img src="./attachments/image-20241114225912436.png" alt="image-20241114225912436" style="zoom:50%;" />
+>
+>          												**图一**
+>
+>       - <img src="./attachments/image-20241114225445686.png" alt="image-20241114225445686" style="zoom:50%;" />
+>
+>         ​												**图二**
+>
+>       - 不难发现：我们想求的是黄色部分的前缀和并判断其是否等于$l^2$
+>
+>       - 我们可以发现求黄色部分就是将$b(i,j)$减去图一蓝色的部分，可以减去两矩形的面积$b(i-l,j),b(i,j-l)$,但显然会多减去图二绿色部分的区域，所以我们需要利用容斥定理加上$b(i-l,j-l)$的面积
+>
+>       - 所以我们便得到了黄色部分的递推表达式:
+>
+>       - $$
+>         locans = b_{i,j} - b_{i-l,j}-b_{i,j-l}+b_{i-l，j-l}
+>         $$
+>
+>       - 现在判断$locans$与$l^2$的关系即可
+>
+>       - 完成一次查找之后就可以让 $l$ 增加,显然 $l \in [1,\min(n,m)]$
 
 
+
+**示例代码：**
+
+```cpp
+#include <algorithm>
+#include <iostream>
+using namespace std;
+int a[103][103];
+int b[103][103];  // 前缀和数组，相当于上文的 sum[]
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+
+  for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+      cin >> a[i][j];
+      b[i][j] =
+          b[i][j - 1] + b[i - 1][j] - b[i - 1][j - 1] + a[i][j];  // 求前缀和
+    }
+  }
+
+  int ans = 0;
+
+  int l = 1;
+  while (l <= min(n, m)) {  // 判断条件
+    for (int i = l; i <= n; i++) {
+      for (int j = l; j <= m; j++) {
+        if (b[i][j] - b[i - l][j] - b[i][j - l] + b[i - l][j - l] == l * l) {
+          ans = max(ans, l);  // 在这里统计答案
+        }
+      }
+    }
+    l++;
+  }
+
+  cout << ans << endl;
+  return 0;
+}
+```
 
 
 

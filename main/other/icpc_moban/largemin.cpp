@@ -6,7 +6,7 @@ using namespace std;
 string largemin(string a, string b)
 {
     int flag = 0;
-    if (b >= a) {
+    if (b.size() >= a.size() && b >= a) {
         swap(a, b);
         flag = 1;
     }
@@ -18,20 +18,22 @@ string largemin(string a, string b)
         if (diff < 0) {
             p = 1;
             diff += 10;
-        } else p = 0;
+        }
+        else
+            p = 0;
         a[a.size() - i - 1] = diff + '0';
     }
     for (size_t i = b.size(); i < a.size(); i++) {
         int ai = a[a.size() - i - 1] - '0';
         if (ai == 0 && p == 1) {
             a[a.size() - i - 1] = '9';
-        } else {
+        }
+        else {
             a[a.size() - i - 1] = ai - p + '0';
             p = 0;
         }
     }
-    while (*a.begin() == '0' && a.size() > 1)
-        a.erase(a.begin());
+    while (*a.begin() == '0' && a.size() > 1) a.erase(a.begin());
     if (flag) a.insert(a.begin(), '-');
     return a;
 }

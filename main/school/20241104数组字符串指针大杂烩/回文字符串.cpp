@@ -11,7 +11,6 @@ int main()
     auto itb = s.begin();
     auto ite = s.end() - 1;
     while (ite > itb) {
-        // cout << *itb << " " << *ite << endl;
         if (*itb != *ite) {
             cout << "No!";
             return 0;
