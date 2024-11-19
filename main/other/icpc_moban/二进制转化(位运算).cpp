@@ -14,5 +14,6 @@ int main()
         arr.erase(arr.begin());
     for(auto &&i : arr)
         cout << i;
+        
     return 0;
 }

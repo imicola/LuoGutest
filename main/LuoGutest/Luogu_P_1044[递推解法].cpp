@@ -19,10 +19,8 @@ int main()
     cin >> n;
     // 在这里 i 表示上文的 n ; j 表示上文的 k;
     // 因为f[0] , f[1] , f[2] 均已明确 i 从 3 开始算;
-    for (size_t i = 3; i <= n; i++)
-    {
-        for (size_t j = 1; j <= i; j++)
-        {
+    for (size_t i = 3; i <= n; i++) {
+        for (size_t j = 1; j <= i; j++) {
             f[i] += f[j - 1] * f[i - j];
         }
     }

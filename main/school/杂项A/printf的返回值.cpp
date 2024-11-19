@@ -6,8 +6,8 @@ typedef long long LL;
 
 int main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    int a;
-    cin >> a;
+    // ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    printf("Hello world!");
+    cout << endl << 12;
     return 0;
 }

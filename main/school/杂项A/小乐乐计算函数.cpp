@@ -7,6 +7,7 @@ typedef long long LL;
 double f(int a, int b, int c)
 {
     double m = (max(max(a + b, b), c)) / (max(max(a, b + c), c) + max(max(a, b), b + c) * 1.0);
+    return m;
 }
 
 int main()
