@@ -5,7 +5,7 @@ using namespace std;
 
 bool cmp(string s1, string s2)
 {
-    if(stoll(s1 + s2) > stoll(s2 + s1))
+    if(stoi(s1 + s2) > stoi(s2 + s1))
     {
         return 1;
     }

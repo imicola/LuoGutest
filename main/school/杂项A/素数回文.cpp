@@ -29,7 +29,7 @@ int main()
         result += s[i];
     }
     // cout << result;
-    LL resultn = stoll(result);
+    LL resultn = stoi(result);
     if (isprime(resultn) == 0) cout << "noprime";
     else
         cout << "prime";
