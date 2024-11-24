@@ -41,8 +41,5 @@ int main()
         cout << s << endl;
         result.pop();
     }
-    
-    
-    
     return 0;
 }

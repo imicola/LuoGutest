@@ -1,15 +1,8 @@
+
+
+
+
 [toc]
-
-
-
-
----
-
-
-
-
-
-
 
 # C++练习笔记
 
@@ -441,7 +434,6 @@ while(*(arr.end()-1) == 0) arr.erase(arr.end()-1);
     }
     ```
 
-
 ## 12 时间函数帮你计算运算时间
 
 ```cpp
@@ -449,6 +441,33 @@ clock_t st = clock();
 //代码......
 clock_t ed = clock();
 cout << "time: " << ed - st <<" ms"<<endl; 
+```
+
+## 13 一组数的各种数计算
+
+- 对一组数据而言，对其分布有影响的数据类型有: $\to$ **平均数** ， **中位数**
+
+### 平均数：
+
+```cpp
+int sum = 0;
+for(int i = 0; i < arr.size() ; i++){
+    sum += arr[i];
+}
+double tnum = (sum/n*1.0);
+```
+
+### 中位数：
+
+```cpp
+vector<int> arr(n);
+double cent = 0;
+sort(arr.begin(),arr.end());
+if(arr.size()%2 == 1) cent = arr[n/2 + 1];
+else cent = (arr[n/2 + 1] + arr[n/2]*1.0)/2; 
+//数组从0开始技术的时候，要注意下标减一
+if(arr.size()%2 == 1) cent = arr[n/2 + 1 - 1];
+else cent = (arr[n/2 + 1 - 1] + arr[n/2 - 1]*1.0)/2; 
 ```
 
 
@@ -871,7 +890,7 @@ int main()
 ```cpp
 string largeadd(string& a, string& b)
 {
-    if (a <= b) swap(a, b);
+    if (a.size() <= b.size()) swap(a, b);
     int p = 0;
     for (size_t i = 0; i < b.size(); i++) {
         int ai = a[a.size() - i - 1] - '0';
@@ -906,7 +925,7 @@ string largeadd(string& a, string& b)
 string largemin(string a, string b)
 {
     int flag = 0;
-    if (b >= a) {
+    if (b.size() >= a.size()&& b >= a) {
         swap(a, b);
         flag = 1;
     }
@@ -1379,9 +1398,9 @@ for (set<int>::iterator it = st.begin() ; it != st.end();++it )
 
 ```cpp
 for(auto &ele : st)
-    {
-        cout << ele << endl;
-    }
+{
+    cout << ele << endl;
+}
 ```
 
 ##### 6.1.5.3适用范围
@@ -2753,7 +2772,7 @@ nt main()
 >
 >       - <img src="./attachments/image-20241114225912436.png" alt="image-20241114225912436" style="zoom:50%;" />
 >
->          												**图一**
+>          										 											**图一**
 >
 >       - <img src="./attachments/image-20241114225445686.png" alt="image-20241114225445686" style="zoom:50%;" />
 >
@@ -2817,15 +2836,51 @@ int main() {
 
 > [!tip]
 >
-> 
+> 上面进行的操作便是在前缀和中寻找某一区域的和的操作，利用这个思想，我们可以寻找任意大小的区域和，可以从容斥定理入手，进行区域和的计算
+
+#### 树上前缀和
+
+- **一维数组树上前缀和**
+
+  1. 在求解一维数组之前我们要进行一次前缀和操作
+  2. 对数组$A$的$[l,r]$区间，其区间和如下：
+
+  $$
+  sum[l,r]=S[r]−S[l−1]
+  $$
+
+  ==时间复杂度==：构造前缀和数组$O(n)$,查询区间和$O(1)$
+
+  - 二维数组树上前缀和
+
+    1. 与一维数组树上前缀和一样，二维树上前缀和也需要提前做好前缀和工作
+    2. 快速求任意子矩阵的和
+
+    $$
+    \text{sum}([x_1, y_1], [x_2, y_2]) = S[x_2][y_2] - S[x_1-1][y_2] - S[x_2][y_1-1] + S[x_1-1][y_1-1]
+    $$
+
+    > 其中：
+    >
+    > - $S[x2][y2]$：从 \[1,1]到\[$x_2,y_2$]的矩形和；
+    > - $S[x_2][y_2]$：从 $[1,1]$ 到 $[x_2,y_2]$ 的矩形和；
+    > - $−S[x_1−1][y_2]$ ：减去上方多余的矩形；
+    > - $−S[x2][y1−1]$  : 减去左侧多余的矩形；
+    > - $+S[x1−1][y1−1]$：加回左上角重复减去的部分。
+
+    > [!tip]
+    >
+    > 要注意的是在减去左边和上边的矩形的时候，下标都为$S[x_1 - 1][y_2]$和 $S[x_2][y_1-1]$
 
 ### 差分
 
 - 指找数组范围内某一两项的差
-- 定义：**$diff[i] = a_i - a_{i-1}$**
-- 差分和原数组的关系：
+- 定义：**$diff[i] = a_i - a_{i-1}$** 特别的：$i = 1$时，$diff[1] = a_1$
+- 差分和原数组的关系 ==性质==：
   - **我们将差分数组做一次前项和得到的即为原数组**
   - 显然：**我们对前缀和数组做一次差分得到的就是原数组**
+
+
 
 
 

@@ -1,0 +1,34 @@
+{
+    
+"cmake.configureOnOpen": true,
+"editor.minimap.enabled": true,
+"C_Cpp.autocomplete": "default",
+// "[cpp]": {
+//         "editor.quickSuggestions": true
+//         },
+//         "[c]": {
+//         "editor.quickSuggestions": true
+//         },
+"C_Cpp.errorSquiggles": "enabled",
+"files.associations": {
+    "*.tcc": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "format": "cpp",
+    "generator": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "stacktrace": "cpp",
+    "text_encoding": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp"
+}
+}
