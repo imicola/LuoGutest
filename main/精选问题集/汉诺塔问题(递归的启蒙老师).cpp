@@ -1,4 +1,4 @@
-//#pragma GCC optimize(3)
+#pragma GCC optimize(3)
 #include <bits/stdc++.h>
 #define endl '\n'
 #define size_t int
@@ -50,10 +50,13 @@ void f(int n, char be, char temp, char end)
 
 int main()
 {
-    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    clock_t be = clock();
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int n;
     char a, b, c;
     cin >> n >> a >> b >> c;
     f(n, a, b, c);
+    clock_t ed = clock();
+    cout << endl << (ed - be) << "ms" << endl;
     return 0;
 }

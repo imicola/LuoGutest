@@ -20,6 +20,7 @@
             "name": "编译并执行",
             "type": "cppvsdbg",
             "request": "launch",
+            // "program": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
             "program": "cmd",
             "args": [
                 "/C",

@@ -18,26 +18,28 @@ int main()
             b = stoi(a);
             a = b1;
             cin >> c;
-        } else {
+        }
+        else {
             cin >> b >> c;
         }
         if (a == "a") {
-            b1       = a;
+            b1 = a;
             int temp = b + c;
-            s[k++]   = to_string(b) + "+" + to_string(c) + "=" + to_string(b + c);
-        } else if (a == "b") {
-            b1       = a;
+            s[k++] = to_string(b) + "+" + to_string(c) + "=" + to_string(b + c);
+        }
+        else if (a == "b") {
+            b1 = a;
             int temp = b + c;
-            s[k++]   = to_string(b) + "-" + to_string(c) + "=" + to_string(b - c);
-        } else if (a == "c") {
-            b1       = a;
+            s[k++] = to_string(b) + "-" + to_string(c) + "=" + to_string(b - c);
+        }
+        else if (a == "c") {
+            b1 = a;
             int temp = b + c;
-            s[k++]   = to_string(b) + "*" + to_string(c) + "=" + to_string(b * c);
+            s[k++] = to_string(b) + "*" + to_string(c) + "=" + to_string(b * c);
         }
     }
     for (size_t i = 0; i < n; i++) {
-        cout << s[i] << endl
-             << s[i].size() << endl;
+        cout << s[i] << endl << s[i].size() << endl;
     }
     return 0;
 }

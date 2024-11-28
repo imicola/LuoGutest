@@ -1,3 +1,5 @@
+[TOC]
+
 #   C++
 
 C++语言是一门广泛被使用的语言，学习C语言，可以使我们更加深入的了解到编程语言的运行方式和底层逻辑，下面，让我们从零开始，学习C++
@@ -2013,6 +2015,12 @@ int main()
 
 
 
+### 7.6 数组指针
+
+
+
+
+
 
 
 
@@ -2089,9 +2097,309 @@ int main()
 }
 ```
 
-### 8.3 
+###  8.3 数组结构体[原创]
 
+- 结构体可以用数组表示，数组当然也可以放在结构体中
 
+  `int a[n]`类型
+
+  ```cpp
+  struct test1
+  {
+      string s;
+      int a[9];
+  };
+  
+  signed main()
+  {
+      //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+      int t = 1;
+      cin >> t;
+      test1 st[t];
+      for (size_t i = 0; i < t; i++) {
+          cin >> st[i].s;
+          for (size_t j = 0; j < 9; j++) {
+              cin >> st[i].a[j];
+          }
+      }
+      return 0;
+  }
+  ```
+
+  ==注意==上述 `int a[n]`中的 n 为一个确定常数
+
+  
+
+  `vector<int>`类型
+
+  ```cpp
+  struct test1
+  {
+      string s;
+      vector<int> a;
+  };
+  
+  signed main()
+  {
+      //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+      int t = 1;
+      cin >> t;
+      test1 st[t];
+      for (size_t i = 0; i < t; i++) {
+          cin >> st[i].s;
+          for (size_t j = 0; j < 3; j++) {
+              int p;
+              cin >> p;
+              st[i].a.push_back(p);
+          }
+      }
+      for (auto &&i : st) {
+          cout << i.s << " ";
+          for (auto &&j : i.a) {
+              cout << j << " ";
+          }
+          cout << endl;
+      }
+      return 0;
+  }
+  ```
+
+  > [!important]
+  >
+  > **在上述构造方法中都没有对结构体里的数组进行初始化，下面是初始化的方法**
+  >
+  > > 对 `int a[n]`而言：
+  > >
+  > > - 直接 结构体里`int a[n] = {0};`即可
+  > >
+  > > 对 `vectior<int>`而言：
+  > >
+  > > - 采取显式调用即可
+  > >
+  > > ```cpp
+  > > vector<int> a = vector<int>(n,0);
+  > > ```
+  > >
+  > > - 其中$n$为常数
+
+  
+
+### 8.4结构体的构造函数
+
+> > ### **结构体构造函数的形式与用法**
+> >
+> > 在 C++ 中，结构体（`struct`）的构造函数和类（`class`）的构造函数没有本质区别。构造函数是特殊的成员函数，用于在创建对象时初始化成员变量。构造函数的名称必须与结构体的名称相同。
+> >
+> > ------
+> >
+> > ### **构造函数的形式**
+> >
+> > #### **1. 默认构造函数**
+> >
+> > 不带参数的构造函数，用于初始化成员变量为默认值。
+> >
+> > ```cpp
+> > #include <iostream>
+> > #include <string>
+> > 
+> > struct Person {
+> >  std::string name;
+> >  int age;
+> > 
+> >  // 默认构造函数
+> >  Person() : name("unknown"), age(0) {}  // 使用初始化列表
+> > };
+> > 
+> > int main() {
+> >  Person p;  // 自动调用默认构造函数
+> >  std::cout << "Name: " << p.name << ", Age: " << p.age << "\n";
+> >  return 0;
+> > }
+> > ```
+> >
+> > ------
+> >
+> > #### **2. 带参数的构造函数**
+> >
+> > 构造函数可以接受参数，用于动态初始化成员变量。
+> >
+> > ```cpp
+> > #include <iostream>
+> > #include <string>
+> > 
+> > struct Person {
+> >  std::string name;
+> >  int age;
+> > 
+> >  // 带参数的构造函数
+> >  Person(const std::string& n, int a) : name(n), age(a) {}
+> > };
+> > 
+> > int main() {
+> >  Person p("Alice", 25);  // 调用带参数的构造函数
+> >  std::cout << "Name: " << p.name << ", Age: " << p.age << "\n";
+> >  return 0;
+> > }
+> > ```
+> >
+> > ------
+> >
+> > #### **3. 构造函数重载**
+> >
+> > 通过不同的参数列表定义多个构造函数，满足不同的初始化需求。
+> >
+> > ```cpp
+> > #include <iostream>
+> > #include <string>
+> > 
+> > struct Person {
+> >  std::string name;
+> >  int age;
+> > 
+> >  // 默认构造函数
+> >  Person() : name("unknown"), age(0) {}
+> > 
+> >  // 带参数的构造函数
+> >  Person(const std::string& n, int a) : name(n), age(a) {}
+> > 
+> >  // 只初始化名字
+> >  Person(const std::string& n) : name(n), age(18) {}  // 默认年龄为18
+> > };
+> > 
+> > int main() {
+> >  Person p1;                      // 默认构造
+> >  Person p2("Bob", 30);           // 带参数
+> >  Person p3("Charlie");           // 只提供名字
+> > 
+> >  std::cout << p1.name << ", " << p1.age << "\n";
+> >  std::cout << p2.name << ", " << p2.age << "\n";
+> >  std::cout << p3.name << ", " << p3.age << "\n";
+> > 
+> >  return 0;
+> > }
+> > ```
+> >
+> > #### **输出**
+> >
+> > ```
+> > unknown, 0
+> > Bob, 30
+> > Charlie, 18
+> > ```
+> >
+> > ------
+> >
+> > #### **4. 使用初始化列表**
+> >
+> > 初始化列表用于直接初始化成员变量，避免在构造函数体内赋值。
+> >
+> > ```cpp
+> > #include <iostream>
+> > #include <string>
+> > 
+> > struct Person {
+> >  std::string name;
+> >  int age;
+> > 
+> >  // 使用初始化列表
+> >  Person(const std::string& n, int a) : name(n), age(a) {}
+> > };
+> > 
+> > int main() {
+> >  Person p("Diana", 22);  // 初始化时直接调用
+> >  std::cout << "Name: " << p.name << ", Age: " << p.age << "\n";
+> >  return 0;
+> > }
+> > ```
+> >
+> > ##### **初始化列表的优点**：
+> >
+> > 1. 提高效率：避免默认构造后再赋值。
+> > 2. 支持 `const` 和引用类型的初始化。
+> >
+> > ------
+> >
+> > ### **特殊形式**
+> >
+> > #### **1. 委托构造函数**（C++11 起支持）
+> >
+> > 一个构造函数可以委托给另一个构造函数以复用初始化逻辑。
+> >
+> > ```cpp
+> > #include <iostream>
+> > #include <string>
+> > 
+> > struct Person {
+> >     std::string name;
+> >     int age;
+> > 
+> >     // 默认构造函数
+> >     Person() : Person("unknown", 0) {}  // 委托到另一个构造函数
+> > 
+> >     // 带参数的构造函数
+> >     Person(const std::string& n, int a) : name(n), age(a) {}
+> > };
+> > 
+> > int main() {
+> >     Person p1;              // 默认构造
+> >     Person p2("Eve", 28);   // 带参数构造
+> > 
+> >     std::cout << p1.name << ", " << p1.age << "\n";
+> >     std::cout << p2.name << ", " << p2.age << "\n";
+> > 
+> >     return 0;
+> > }
+> > ```
+> >
+> > ------
+> >
+> > #### **2. 删除的构造函数**（C++11 起支持）
+> >
+> > 可以显式删除某些构造函数，防止被意外调用。
+> >
+> > ```cpp
+> > #include <iostream>
+> > 
+> > struct Person {
+> >     int age;
+> > 
+> >     // 禁止隐式转换或默认构造
+> >     Person() = delete;  // 删除默认构造函数
+> >     Person(int a) : age(a) {}
+> > };
+> > 
+> > int main() {
+> >     // Person p1;  // 编译错误：默认构造函数被删除
+> >     Person p2(30);  // 必须传入参数
+> >     std::cout << "Age: " << p2.age << "\n";
+> >     return 0;
+> > }
+> > ```
+> >
+> > ------
+> >
+> > ### **构造函数的应用场景**
+> >
+> > 1. 初始化成员变量
+> >    - 为结构体或类的成员变量赋初始值，避免对象处于未定义状态。
+> > 2. 动态控制初始化
+> >    - 可以根据参数灵活地初始化不同状态的对象。
+> > 3. 封装复杂逻辑
+> >    - 在构造函数中封装一些初始化逻辑，简化外部代码。
+> > 4. 提高代码安全性
+> >    - 使用委托构造或删除某些构造函数可以避免意外使用。
+> >
+> > ------
+> >
+> > ### **总结**
+> >
+> > - 构造函数是结构体中用来初始化成员变量的核心工具。
+> > - 通过**默认构造**、**参数化构造**、**初始化列表**等形式，可以满足多样化的初始化需求。
+> > - 推荐使用 **初始化列表**，特别是在初始化复杂类型（如 `std::vector`、引用、`const` 变量）时，效率更高。
+>
+> > **虽然一般构造都用的是显式调用就是了（**
+
+## 9 类
 
 
 
