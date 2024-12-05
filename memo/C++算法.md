@@ -805,7 +805,78 @@ int main()
 >
 > - **这题的题解找个时间我再写**
 
+### **分数背包问题 (Fractional Knapsack Problem)**
 
+- > 代表题目：洛谷P2240[部分背包问题][https://www.luogu.com.cn/problem/P2240] 
+  >
+  > 部分背包问题，本质甚至不是动态规划，而是贪心,这个题名出的非常具有迷惑性
+  >
+  > - 特点：
+  >
+  >   1. 有一个容量为$T$ 的背包
+  >   2. 有$N$组物品，每组物品分别有以下两个特性：
+  >      1. 价值：这堆物品所代表的价值
+  >      2. 重量：这堆物品的重量
+  >   3. 与经典的0/1背包不同的是，分数背包允许将物品划分为重量为 1 的单位物品
+  >
+  >   ==策略：先计算每一堆物品的单位价值，再根据单位价值装填背包。==
+
+  > 对P2240代码如下：
+  >
+  > ```cpp
+  > //#pragma GCC optimize(3)
+  > #include <bits/stdc++.h>
+  > //#define int LL
+  > #define endl '\n'
+  > #define size_t int
+  > #define all(v) v.begin(), v.end()
+  > using namespace std;
+  > typedef long long LL;
+  > typedef vector<int> vint;
+  > typedef vector<vint> vvint;
+  > typedef vector<string> vstr;
+  > typedef pair<int, int> pii;
+  > typedef vector<pii> vpii;
+  > 
+  > bool cmp(pair<double, int> a, pair<double, int> b)
+  > {
+  >     if (a.first == b.first) return a.second > b.second;
+  >     return a.first > b.first;
+  > }
+  > signed main()
+  > {
+  >     //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+  >     int n, t;
+  >     cin >> n >> t;
+  >     vector<pair<double, int>> coin(n);
+  >     for (auto &&[val, wei] : coin) {
+  >         double m, v;
+  >         cin >> m >> v;
+  >         val = (v / m);
+  >         wei = m;
+  >     }
+  >     sort(all(coin), cmp);
+  >     double ans = 0;
+  >     for (size_t i = 0; i < n; i++) {
+  >         if (t >= coin[i].second) {
+  >             ans += coin[i].second * coin[i].first;
+  >             t -= coin[i].second;
+  >         }
+  >         else {
+  >             ans += coin[i].first * t;
+  >             break;
+  >         }
+  >     }
+  >     printf("%.2f", ans);
+  >     return 0;
+  > }
+  > ```
+  >
+  > > 不难发现这其实是一种贪心而非背包问题
+
+  
+
+  
 
 ##  4 桶排序
 
@@ -2084,6 +2155,17 @@ STL 中有用于操作迭代器的三个函数模板，它们是：
 #include<algorithm>
 ```
 
+#### 3 STL函数
+
+- `sort(iterator_begin,iterator_end,cmp)` 快速排序
+- `find`：顺序查找。`find(iterator_begin, iterator_end, value)`，其中 `value` 为需要查找的值。
+- `reverse`：翻转数组、字符串。`reverse(iterator_begin, iterator_end())` 或 `reverse(a + begin, a + end)`。
+- `unique`：去除容器中相邻的重复元素。`unique(ForwardIterator first, ForwardIterator last)`，返回值为指向 **去重后** 容器结尾的迭代器，原容器大小不变。与 `sort` 结合使用可以实现完整容器去重。
+
+
+
+
+
 
 
 
@@ -2266,7 +2348,58 @@ void dfs(int m, int sum, int startx){
 > ```
 >
 
+### 使用DFS实现全排列
 
+- DFS的核心思路是一路往下寻找，不撞南墙不回头==说明当DFS到达边界情况时，就完成了一次搜索==
+- 使用DFS时就要考虑完成一次**“搜索”**所需要的条件和边界情况
+
+> **使用DFS实现全排列**
+>
+> - 思考第一步：全排列的一次情况的边界条件
+>   - 我们不妨对DFS传入一个参数 `step` 表示完成一次全排列的步骤
+>   - 当`step` 到 n 的时候，一次全排列的一种情况便结束了：
+>   - 在当前情况下，我们需要做的事情是：
+>     -  输出全排列的一次情况
+> - Q1：如何输出一次全排列情况？
+>   - A:用result数组存
+> - 思考第二步：全排列的实现
+>   - 我们可以使用一 个 path 来保留加入到result数组
+>   - path 数组在一次查找过程中先将其标记，再进入下一个DFS函数查找，再取消标记，即一次回溯操作
+
+```cpp
+vector<bool> path;
+vint result;
+int t = 1;
+
+void quan(int step)
+{
+    if (step == t + 1) {
+        for (size_t i = 1; i <= t; i++) {
+            cout << result[i] << " ";
+        }
+        cout << endl;
+    }
+    for (size_t i = 1; i <= t; i++) {
+        if (path[i] == 0) {
+            path[i] = 1;
+            result[step] = i;
+            quan(step + 1);
+            path[i] = 0;
+        }
+    }
+    return;
+}
+
+signed main()
+{
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin >> t;
+    path = vector<bool>(t + 10);
+    result = vint(t + 10);
+    quan(1);
+    return 0;
+}
+```
 
 
 
@@ -2570,9 +2703,7 @@ for (size_t i = 1; i < m; i++) {
 }
 ```
 
-
-
-
+- 
 
 
 
@@ -2936,6 +3067,10 @@ for(int i = 1; i <= diff.size() ; i++){
 
 
 
+
+
+
+
 # 注释
 
 [^1]: 除法进行整除运算的时候会将小数部分去除，相当于结果向下取整
@@ -2957,6 +3092,7 @@ for(int i = 1; i <= diff.size() ; i++){
 [^4]:没有特殊说明，本条目下所有 `vec`均表示容器名
 [^5]:如果无特殊说明，本条目下所有 `dp`均表示容器名
 [^6]:如果函数内置了比较器(sort,优先队列),那大部分默认使用 `less<int>`
+
 [^7]:`.insert()`成员函数对vector容器也适用,但插入元素可能倒置vector容器重新分配内存导致STL
 
 
