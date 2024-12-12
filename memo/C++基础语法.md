@@ -2437,6 +2437,180 @@ int main()
 >
 > > **虽然一般构造都用的是显式调用就是了（**
 
+
+
+### 链表
+
+- 什么是链表：
+  - 链表是一种用于存储数据的数据结构，通过如链条一般的指针来连接元素。它的特点是插入与删除数据十分方便，但寻找与读取数据的表现欠佳。
+- 链表的优势：对数据的处理：插入，删除  ——> $O(1)$ 但也因为这样，寻找、读取数据的效率不如数组高，在随机访问数据中的操作次数是 $O(n)$
+
+> ==与数组相反的是，数组在随机访问数据下时间复杂度为$O(1)$，但插入删除数据为$O(n)$==
+
+#### 单向链表与双向链表的创建
+
+- **单向链表**：单向链表包括两大数据类型，即数据域和指针域
+
+- ```cpp
+  struct Node
+  {
+      int value;
+      Node *next; // 定义了一个指向该结构体(链表单位)的一个指针
+      Node(int val) : vlaue(val), next(nullptr){} 
+  };
+  ```
+
+  > [!tip]
+  >
+  > 这个结构体函数做了什么？
+  >
+  > - 初始化了一个新创建的结点，这个结点传入的参数默认赋值给了value，同时将结构体指针域默认赋值为了nullptr,表示其暂时不指向任何其他结点
+
+  <img src="./attachments/image-20241210140028580.png" alt="image-20241210140028580"  />
+
+- **双向链表**
+
+- **双向链表：也同样是数据域+指针域，但不同的是，指针域有左右(或上下)之分，用来链接上一个结点，当前结点，下一个结点**
+
+  ```cpp
+  struct Node {
+    int value;
+    Node *left;
+    Node *right;
+    Node(int val) : value(val) , left(nullptr) , right(nullptr){}
+  };
+  ```
+
+  ![image-20241210140414450](./attachments/image-20241210140414450.png)
+
+#### 向链表里写入与删去数据
+
+**流程大致如下**
+
+- 初始化待插入的数据 `node`；
+- 将 `node` 的 `next` 指针指向 `p` 的下一个结点；
+- 将 `p` 的 `next` 指针指向 `node`。
+
+但在这之前，我们要创建一个链表头
+
+- `Node *head = nullptr`
+
+我们的操作都会在这个头链表上开始
+
+##### 在头部插入数据
+
+时间复杂度O(1)
+
+```cpp
+void insert_head_node(Node *newnode, Node *&head)
+{
+    newnode->next = head;
+    head = newnode;
+}
+```
+
+##### 在某一个pos值上插入元素
+
+```cpp
+void insert_pos_node(Node *newnode, int pos, Node *&head)
+{
+    if (pos == 0) {
+        newnode->next = head;
+        head = newnode;
+        return;
+    }
+    Node *current = head;
+    int currentposition = 0;
+    while (current != nullptr && currentposition < pos - 1) {
+        current = current->next;
+        currentposition++;
+    }
+    newnode->next = current->next;
+    current->next = newnode;
+}
+```
+
+
+
+
+##### **在尾部插入元素**
+
+在单向链表尾部插入元素，时间复杂的$O(n)$
+
+```cpp
+void insert_end_node(Node *Newnode, Node *&p)
+{
+    // Node *Newnode = new Node(i);
+    if (p == nullptr) {
+        p = Newnode;
+        return;
+    }
+    Node *current = p;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+    current->next = Newnode;
+}
+```
+
+
+##### 删除某一结点
+
+- **删除某一特定值的结点**
+
+```cpp
+void delnode(int i, Node *&p)
+{
+    //链表为空
+    if (p == nullptr) return;
+    //头结点为目标值
+    while (p != nullptr && p->val == i) {
+        Node *temp = p;
+        p = p->next;
+        delete temp;
+        t--;
+    }
+    //中间或尾部结点为目标
+    Node *current = p;
+    while (current != nullptr && current->next != nullptr) {
+        if (current->next->val == i) {
+            Node *temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+            t--;
+        }
+        else {
+            current = current->next;
+        }
+    }
+}
+```
+
+- 删除某一位置的结点
+
+```cpp
+void posdel(int pos, Node *&head)
+{
+    if (head == nullptr || pos < 0) return;
+    if (pos == 0) {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+    Node *current = head;
+    for (int i = 0; i < pos && current != nullptr; i++) {
+        current = current->next;
+    }
+    if (current == nullptr || current->next == nullptr) return;
+    Node *temp = current->next;
+    current->next = current->next->next;
+    delete temp;
+}
+```
+
+
+
 ## 9 类
 
 

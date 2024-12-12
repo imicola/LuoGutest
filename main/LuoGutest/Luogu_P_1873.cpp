@@ -1,6 +1,6 @@
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
-//#define int LL
+#define int LL
 #define endl '\n'
 #define size_t int
 #define all(v) v.begin(), v.end()
@@ -37,6 +37,9 @@ signed main()
             mid = (l + r) / 2;
         }
         if (ans == m) {
+            break;
+        }
+        if (mid == l || mid == r) {
             break;
         }
         ans = 0;
