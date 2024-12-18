@@ -2613,6 +2613,38 @@ void posdel(int pos, Node *&head)
 
 ## 9 类
 
+- 在面向对象编程（**OOP**）中，对象就是类的实例，也就是变量
+
+```cpp
+class Class_Name
+{
+public:
+    string str;
+    int adds;
+    void add_age(int add_s)
+    {
+        //.....//
+    } // 内联函数
+    void getval();
+private:
+    int age;
+};
+```
+
+> 对内联函数，也可以使用 inline 来在类的外部写
+>
+> ```cpp
+> inline 
+> ```
+>
+> 
+
+
+
+
+
+
+
 
 
 

@@ -9,5 +9,6 @@
 //         "[c]": {
 //         "editor.quickSuggestions": true
 //         },
-"C_Cpp.errorSquiggles": "enabled"
+"C_Cpp.errorSquiggles": "enabled",
+"C_Cpp.default.compilerPath": "D:\\apps\\MinGW\\mingw64\\bin\\g++.exe"
 }
