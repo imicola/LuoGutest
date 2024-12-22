@@ -1,10 +1,13 @@
 # LuoGutest
 ## About me
+- 软工专业大一在读
+- 目前在学习C++与算法竞赛  
+
 [![wakatime](https://wakatime.com/badge/user/ba4bba30-8757-4fe7-839c-495d3f55bb94.svg)](https://wakatime.com/@ba4bba30-8757-4fe7-839c-495d3f55bb94)
 
-![cf 个人主页](https://img.shields.io/badge/codeforces-imicola-yellow?link=https://codeforces.com/profile/imicola)
-![洛谷 个人主页](https://img.shields.io/badge/洛谷-imicola-blue?link=https://https://www.luogu.com.cn/user/1422275)
-![牛客 个人主页](https://img.shields.io/badge/牛客-imicola-blue?link=https://ac.nowcoder.com/acm/contest/profile/693475085)
+[![cf 个人主页](https://img.shields.io/badge/codeforces-imicola-yellow)](https://codeforces.com/profile/imicola)
+[![洛谷 个人主页](https://img.shields.io/badge/洛谷-imicola-blue)](https://www.luogu.com.cn/user/1422275)
+[![牛客 个人主页](https://img.shields.io/badge/牛客-imicola-blue)](https://ac.nowcoder.com/acm/contest/profile/693475085)
 
 ## About repository
 **用于记录C++与算法竞赛学习的仓库**
@@ -40,4 +43,12 @@ git clone https://github.com/imicola/LuoGutest.git
 ### 使用语言
 <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=imicola&theme=transparent&hide_border=true&layout=donut-vertical&langs_count=6" />
 
-###
+### github贡献
+<div align="center">
+  <img  src="https://github-readme-streak-stats.herokuapp.com?user=imicola&theme=onedark&date_format=M%20j%5B%2C%20Y%5D" />
+</div>
+
+---
+
+### 写在最后
+如果你觉得笔记对你有帮助的话欢迎点个stra谢谢喵，当然如果你发现任何问题也可以提出issue，我会尽快修正
