@@ -2153,14 +2153,55 @@ STL 中有用于操作迭代器的三个函数模板，它们是：
 #include<algorithm>
 ```
 
-#### 3 STL函数
+### 6.3 STL函数
+
+#### 对容器操作类
 
 - `sort(iterator_begin,iterator_end,cmp)` 快速排序
+
 - `find`：顺序查找。`find(iterator_begin, iterator_end, value)`，其中 `value` 为需要查找的值。
+
 - `reverse`：翻转数组、字符串。`reverse(iterator_begin, iterator_end())` 或 `reverse(a + begin, a + end)`。
+
 - `unique`：去除容器中相邻的重复元素。`unique(ForwardIterator first, ForwardIterator last)`，返回值为指向 **去重后** 容器结尾的迭代器，原容器大小不变。与 `sort` 结合使用可以实现完整容器去重。
 
+- `move`:  可以高效赋值容器，当你确定某一个容器在后面不需要被使用时可以使用 `move`来降低时间复杂度，尤其是对`vector<pair<int,int>>` 这类复杂容器而言
 
+  - ```cpp
+    for(auto &&i : f){
+        set<int> temp = dp;
+        for(auto &&j : dp){
+            temp.emplace(i+j);
+        }
+        dp = move(temp);
+    }
+    ```
+
+  > **这是一个求一个数组取任意个数个数字相加的板子，其中使用到 move(temp) 就起到了降低时间复杂度的作用**
+
+#### 对容器改动类
+
+- `().emplace() ` ` ().emplace_back()` 
+
+  - `emplace` 是 C++11 引入的标准容器函数，用于直接在容器中**构造对象**，而不是先创建对象再插入。它适用于几乎所有 STL 容器（如 `vector`, `set`, `map`, `deque` 等），提供了比 `insert` 更高效的方式。
+
+  - 例子：我们可以直接在 `set<pair<int,int>>` 后插入 (x,y)
+
+  - ```cpp
+    set<pair<int,int>> st;
+    //传统办法
+    st.insert(make_pair(x,y));
+    //emplace办法
+    st.emplace(x,y);
+    ```
+
+  - 对 `vector`而言，`emplace_back()` 几乎可以完全代替 `push_back()`  而`emplace` 则能代替 `insert`
+
+  - ```cpp
+    vector<pair<int,int>> v
+    v.push_back(make_pair(x,y)) == v.emplace_back(x,y);
+    v.insert(v.begin(), make_paie(x,y)) == v.emplace(v.begin(),x,y)
+    ```
 
 
 
@@ -2395,6 +2436,216 @@ signed main()
     path = vector<bool>(t + 10);
     result = vint(t + 10);
     quan(1);
+    return 0;
+}
+```
+
+### [板子] 一组数据取任意个数据进行操作
+
+**例1：在数组[1,2,3,4,5] 中取任意个数，求这些取出来的数相加的结果**
+
+#### 方法一：DFS爆搜
+
+```cpp
+//#pragma GCC optimize(3)
+#include <bits/stdc++.h>
+//#define int LL
+#define endl '\n'
+#define size_t int
+#define all(v) v.begin(), v.end()
+using namespace std;
+typedef long long LL;
+typedef vector<int> vint;
+typedef vector<vint> vvint;
+typedef vector<string> vstr;
+typedef pair<int, int> pii;
+typedef vector<pii> vpii;
+
+vint res;
+void dfs(int n, int sum, int T, vint k)
+{
+    if (n >= T) return;
+    sum += k[n];
+    res.emplace_back(sum);
+    for (size_t i = n + 1; i < T; i++) {
+        dfs(i, sum, T, k);
+    }
+}
+
+signed main()
+{
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    int T = 1;
+    cin >> T;
+    vint k(T);
+    for (auto &&i : k) {
+        cin >> i;
+    }
+    for (size_t i = 0; i < T; i++) {
+        dfs(i, 0, T, k);
+    }
+    cout << 0 << " ";
+    for (auto &&i : res) {
+        cout << i << " ";
+    }
+    return 0;
+}
+```
+
+> 其结果表现为：
+>
+> - 0 1 3 6 10 15 11 7 12 8 4 8 13 9 5 10 6 2 5 9 14 10 6 11 7 3 7 12 8 4 9 5 
+> - 充分体现了人类看不懂栈帧的特点
+
+#### 法二：DP
+
+```cpp
+//#pragma GCC optimize(3)
+#include <bits/stdc++.h>
+//#define int LL
+#define endl '\n'
+#define size_t int
+#define all(v) v.begin(), v.end()
+using namespace std;
+typedef long long LL;
+typedef vector<int> vint;
+typedef vector<vint> vvint;
+typedef vector<string> vstr;
+typedef pair<int, int> pii;
+typedef vector<pii> vpii;
+
+signed main()
+{
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    int T;
+    cin >> T;
+    vint food(T);
+    for(auto && i : food){
+        cin >> i;
+    }
+    vint dp;
+    dp.emplace_back(0); // 初始状态
+    for (auto &&i : food) {
+        vint temp = dp;
+        for (auto &&j : dp) {
+            temp.emplace_back(i + j);
+        }
+        dp = move(temp);
+    }
+    for (auto &&i : dp)
+    {
+        cout << i << " ";
+    }
+    return 0;
+}
+```
+
+> 输出如下：
+>
+> 0 1 2 3 3 4 5 6 4 5 6 7 7 8 9 10 5 6 7 8 8 9 10 11 9 10 11 12 12 13 14 15
+>
+> - 已验证，两个程序的结果除了顺序完全一致
+
+
+
+**例2: [P2036](https://www.luogu.com.cn/problem/P2036) [COCI2008-2009 #2] PERKET**
+
+#### 例二 法一：DFS
+
+```cpp
+//#pragma GCC optimize(3)
+#include <bits/stdc++.h>
+#define int LL
+#define endl '\n'
+#define size_t int
+#define all(v) v.begin(), v.end()
+using namespace std;
+typedef long long LL;
+typedef vector<int> vint;
+typedef vector<vint> vvint;
+typedef vector<string> vstr;
+typedef pair<int, int> pii;
+typedef vector<pii> vpii;
+
+int T;
+vpii food;
+// vint result;
+int ans = 1e6;
+
+void dfs(int n, int sum_s, int sum_k)
+{
+    if (n == T) {
+        sum_s *= food[n - 1].first;
+        sum_k += food[n - 1].second;
+        ans = min(ans, abs(sum_s - sum_k));
+        return;
+    }
+    sum_s *= food[n].first;
+    sum_k += food[n].second;
+    ans = min(ans, abs(sum_s - sum_k));
+    for (size_t k = 0; k < T; k++) {
+        for (size_t i = n; i < T; i++) {
+            dfs(i + 1, sum_s, sum_k);
+        }
+        sum_s = 1;
+        sum_k = 0;
+    }
+}
+
+signed main()
+{
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin >> T;
+    food = vpii(T);
+    // result = vint(T, 0);
+    for (auto &&[s, k] : food) {
+        cin >> s >> k;
+    }
+    dfs(0, 1, 0);
+    cout << ans;
+    return 0;
+}
+// 比我命还暴力这个算法
+// 这题绝对能用DP写，待我研究一下
+```
+
+#### 例二 法二 ： DP
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef pair<ll, ll> pii;
+
+signed main()
+{
+    int T = 1;
+    cin >> T;
+    vector<pii> food(T);
+    for (auto &&[s, k] : food) {
+        cin >> s >> k;
+    }
+    // 使用集合记录所有可能的 (酸度, 苦度) 组合
+    set<pii> dp;
+    dp.emplace(1, 0); // 初始状态
+    for(auto &[s, b] : food){
+        set<pii> temp = dp;
+        for(auto &[acid, bitter] : dp){
+            temp.emplace(acid * s, bitter + b);
+        }
+        dp = move(temp);
+    }
+    // gtp写的，确实很精巧，用set记录了每个可能的情况
+    // 因为初始状况是(1,0),就相当于每一次内层循环的第一次都是只选当前组的食物
+    // 每一次都会把dp数组过完一遍，相当于在之前的所有情况下加一个 选择当前食物的情况
+    ll result = LLONG_MAX;
+    for(auto &[acid, bitter] : dp){
+        if(acid != 1 || bitter != 0){
+            result = min(result, abs(acid - bitter));
+        }
+    }
+    cout << result;
     return 0;
 }
 ```
