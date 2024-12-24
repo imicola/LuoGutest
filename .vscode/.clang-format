@@ -141,7 +141,7 @@ BraceWrapping:
   BeforeWhile:     false
   IndentBraces:    false
   SplitEmptyFunction: true
-  SplitEmptyRecord: true
+  SplitEmptyRecord: false
   SplitEmptyNamespace: true
 # 二元操作符前是否换行, 建议为None
 BreakBeforeBinaryOperators: None
@@ -181,7 +181,7 @@ ContinuationIndentWidth: 4
 # C++11的统一初始化列表大括号风格, 建议true
 Cpp11BracedListStyle: true
 # 提取行结束符并标准化, 建议false, 不要进行分析及自动运用, 而是强制使用UseCRLF设定来做
-DeriveLineEnding: true
+DeriveLineEnding: false
 # 是否开启文件分析, 根据文件中的*/&使用情况更新clang-format设定, 在无法决定时, 使用PointerAlignment代替, 不建议开启
 DerivePointerAlignment: false
 DisableFormat:   false
@@ -196,7 +196,7 @@ ExperimentalAutoDetectBinPacking: false
 # - BinPack: 两个参数一行
 # - CurrentLine: 所有参数放置于一行, 如果放不下, 就一个参数一行
 # - NextLine: 同CurrentLine有点像, 唯一不同就是如果放不行, 将剩余参数放置于下一行(即不自动一参一行)
-PackConstructorInitializers: Never
+PackConstructorInitializers: CurrentLine
 BasedOnStyle:    ''
 # 废弃配置
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
