@@ -25,7 +25,7 @@ signed main()
     }
     if ((count / (t * 1.0)) >= 0.6) {
         for (size_t i = 0; i < t; i++) {
-            cout << sqrt(v[i] * 1.0) * 10 << ": "[i == t - 1];
+            cout << (int)sqrt(v[i] * 1.0) * 10 << ": "[i == t - 1];
         }
     }
     else {

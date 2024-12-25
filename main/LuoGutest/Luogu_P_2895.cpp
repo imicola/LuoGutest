@@ -46,7 +46,7 @@ signed main()
         for (size_t i = 1; i < 5; i++) {
             int x2 = x1 + stockx[i];
             int y2 = y1 + stocky[i];
-            if (y2 > 0 && x2 > 0) {
+            if (y2 > 0 && x2 > 0 && path[y2][x2] == 0) {
                 if (mapp[y2][x2] > path[y1][x1] + 1) {
                     qu.emplace(y2, x2);
                     path[y2][x2] = path[y1][x1] + 1;
