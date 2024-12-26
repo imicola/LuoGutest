@@ -12,13 +12,18 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
+bool is_huiwen(const string &s)
+{
+    string sc = s;
+    reverse(all(sc));
+    return (sc == s);
+}
+
 signed main()
 {
     //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     string s;
     cin >> s;
-    string copy_s = s;
-    reverse(all(s));
-    cout << (s == copy_s ? "yes" : "no");
+    cout << (is_huiwen(s) ? "yes" : "no");
     return 0;
 }
