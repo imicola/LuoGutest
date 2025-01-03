@@ -3478,13 +3478,13 @@ int josephus(int n, int k)
 {
     int s = 0;
     for (int i = 2; i <= n; i++) s = (s + k) % i;
-    return s;
+    return s + 1;
 }
 ```
 
 > 上述算法时间复杂度$O(n)$,空间复杂度$O(1)$,但对 $k = 2$的情况我们可以有特殊解法使时间复杂度降低到$O(\log n)$ : 引用自[Wikipedia](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98#%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E8%A7%A3%E6%B3%95)
 >
-> 答案的最漂亮的形式，与![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的二进制表示有关：把![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的第一位移动到最后，便得到![{\displaystyle f(n)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/c1c49fad1eccc4e9af1e4f23f32efdc3ac4da973)。如果![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的二进制表示为![{\displaystyle n=b_{0}b_{1}b_{2}b_{3}\dots b_{m}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/79f8fbd8071e6850d1981f23a8b1e73aac0eb208)，则![{\displaystyle f(n)=b_{1}b_{2}b_{3}\dots b_{m}b_{0}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/babd7a5d8f31075beb5d019da54850a2ce741434)。这可以通过把![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)表示为![{\displaystyle 2^{m}+l}](https://wikimedia.org/api/rest_v1/media/math/render/svg/d5d47762830148c6b6f105d00392799cdf85b82f)来证明
+> (从1开始标号)答案的最漂亮的形式，与![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的二进制表示有关：把![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的第一位移动到最后，便得到![{\displaystyle f(n)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/c1c49fad1eccc4e9af1e4f23f32efdc3ac4da973)。如果![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)的二进制表示为![{\displaystyle n=b_{0}b_{1}b_{2}b_{3}\dots b_{m}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/79f8fbd8071e6850d1981f23a8b1e73aac0eb208)，则![{\displaystyle f(n)=b_{1}b_{2}b_{3}\dots b_{m}b_{0}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/babd7a5d8f31075beb5d019da54850a2ce741434)。这可以通过把![{\displaystyle n}](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)表示为![{\displaystyle 2^{m}+l}](https://wikimedia.org/api/rest_v1/media/math/render/svg/d5d47762830148c6b6f105d00392799cdf85b82f)来证明
 
 ```cpp
 int yuesefu(int n)
@@ -3495,8 +3495,8 @@ int yuesefu(int n)
         highestBit <<= 1; // 将最高位左移
     }
     // 移动后的结果
-    return (n - (highestBit >> 1)) << 1;
- // return (n -  highestBit / 2) * 2
+    return (n - (highestBit >> 1)) << 1 + 1;
+ // return (n -  highestBit / 2) * 2 + 1
 }
 ```
 
