@@ -2978,9 +2978,9 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 
 - state表示了一个被**压缩的状态** $\to$ 用long long 表示一个被分类的状态
 
-> A： 实际上是表示了$2^{n}$种状态 1LL << n 等效于 $2^n$ 
+> A：实际上是表示了$2^{n}$种状态 1LL << n 等效于 $2^n$ 
 >
-> B:  二进制位一共有n位，i 从零到 n 解 state二进制位
+> B：二进制位一共有n位，i 从零到 n 解 state二进制位
 >
 > - 对于每个元素 `k[i]`，根据 `state` 的二进制位判断该元素属于组 `a` 还是组 `b`
 >
@@ -3016,7 +3016,7 @@ for(LL state = 0; state < 1LL << n; state ++){           ---> A
 >
 > 你可以按任意顺序返回答案。
 
-哈希代码示例：
+哈希代码示例：< leetcode.1 > 
 
 ```cpp
 class Solution {
@@ -3175,11 +3175,11 @@ int main()
 >
 >       - <img src="./attachments/image-20241114225912436.png" alt="image-20241114225912436" style="zoom:50%;" />
 >
->          										 											**图一**
+>          										 										​									         **图一**
 >
 >       - <img src="./attachments/image-20241114225445686.png" alt="image-20241114225445686" style="zoom:50%;" />
 >
->         ​												**图二**
+>         ​							       		**图二**
 >
 >       - 不难发现：我们想求的是黄色部分的前缀和并判断其是否等于$l^2$
 >
