@@ -25,11 +25,7 @@ git clone https://github.com/imicola/LuoGutest.git
 git clone https://github.com/imicola/LuoGutest.git
 ```
 
-### 提交贡献
-~~蒟蒻没多少提交求放过QAQ~~
-
-
 ---
 
 ### 写在最后
-如果你觉得笔记对你有帮助的话欢迎点个stra谢谢喵，当然如果你发现任何问题也可以提出issue，我会尽快修正
+如果你觉得笔记对你有帮助的话欢迎点个star谢谢喵，当然如果你发现任何问题也可以提出issue，我会尽快修正
