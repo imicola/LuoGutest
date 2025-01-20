@@ -248,6 +248,8 @@ bool cmp(const <Type T> &a , const <Type T> &b ){
 
 实现:
 
+- **欧几里得算法**
+
 ```cpp
 int main() 
 {
@@ -267,6 +269,10 @@ int main()
     return 0;
 }
 ```
+
+- 还存在一种[扩展欧几里得算法](###扩展欧几里得算法(*Extended Euclidean Algorithm*))，用于求出方程$\gcd(a,b)$与方程$ax + by = gcd \left({a,b}\right) $的一组$(x_0，y_0)$
+
+
 
 ##   6 字符与字符串
 
@@ -3785,6 +3791,116 @@ signed main()
 
 
 
+
+## 20 线性丢潘图方程(*Diophantine equation*)
+
+> 线性丢番图方程（Diophantine equation）通常指的是形如 $ax+by=c$的方程，其中 $a,b,c$ 是整数，而我们感兴趣的是找到整数解 $x,y$。
+
+> 孩子们，牛客周赛77第三题会这个秒杀了（怪不得那群人可以20min ak，全是板子题）
+
+**$x,y$ 存在解的情况下，$a,b$ 满足以下条件**
+
+- **c 必须是 a 和 b 的最大公约数 (gcd) 的倍数**
+
+> 具体而言，当 $c\mod({\gcd(a,b)}) = 0$ 时存在$x,y$ 使上述方程存在整数解
+
+- 扩展：
+
+- **若上述条件满足，则存在无穷多组解 $(x,y)$ ,一旦找到一组特殊的解$(x_0,y_0)$，则所有解都可以被表示出来，其表示方式如下**
+
+  $ x = x_0 + k\left(\frac{b}{g}\right)$ 
+
+  $ y = y_0 - k\left(\frac{a}{g}\right) $
+
+**其中$g = \gcd(a,b) $**
+
+其具体作用为，在确定线性丢潘图方程有解的情况，可以使用扩展欧几里得算法找出其中一个特解$(x_0,y_0)$ , 然后找出所有解的通项
+
+### 扩展欧几里得算法(*Extended Euclidean Algorithm*)
+
+扩展欧几里得算法是基于经典的欧几里得算法，用于计算两个整数 a和 b的最大公约数，同时还能够找到一组整数系数 x和 y，使得以下等式成立：
+
+$ax+by=\gcd⁡(a,b)$
+
+**实现：**
+
+- **初始化**：设置初始值 $r_0=a, r_1=b$，同时设置系数 $s_0=1, s_1=0 $和$ t_0=0, t_1=1$
+- 执行辗转相除直到余数为0 (求*gcd*过程).对于每次迭代 $i$ :
+  - 计算商$q_i = \lfloor{r_i-2/r_i-1}\rfloor$和余数$r_i = r_{i-2} - q_ir_{i-1}$
+  -  更新系数$s_i = s_{i-2}-q_is_{i-1}$和$t_i = t_{i-2}-q_it_{i-1}$
+- 结束条件：当某个余数 $r_n=0=0$ 时，前一个非零余数 $r_{n−1}$就是 $a$ 和 $b$ 的最大公约数，而对应的 $s_{n−1}$ 和 $t_{n−1}$即为满足等式的系数  $x$和 $y$。
+
+```cpp
+int exgcd(int a, int b, int &x, int &y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a; // 返回gcd(a, b)
+    }
+    int r = exgcd(b, a % b, x, y);
+    int t = y;
+    y = x - (a / b) * y;
+    x = t;
+    return r;
+}
+```
+
+> 上述代码中传入参数x,y最后会变为一组特解，返回的r是a，b的最大公因数
+
+
+
+### 找出丢潘图方程通项代码模板
+
+- 如下：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 扩展欧几里得算法
+int exgcd(int a, int b, int &x, int &y)
+{
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a; // 返回gcd(a, b)
+    }
+    int r = exgcd(b, a % b, x, y);
+    int t = y;
+    y = x - (a / b) * y;
+    x = t;
+    return r;
+}
+
+int main()
+{
+    int a, b, c;
+    cout << "请输入线性丢番图方程(ax+by=c)的系数a, b和常数c : " << endl;
+    cin >> a >> b >> c;
+    int g = __gcd(a, b); // 计算gcd(a, b)
+    if (c % g != 0) {
+        cout << "方程无整数解." << endl;
+        return 0;
+    }
+    // 使用扩展欧几里得算法找到一个特解
+    int x0, y0;
+    exgcd(a / g, b / g, x0, y0);
+    x0 *= c / g;
+    y0 *= c / g;
+    cout << "一个特解为: x = " << x0 << ", y = " << y0 << endl;
+    // 输出一般解
+    cout << "一般解的形式为:" << endl;
+    cout << "x = " << x0 << " + " << b / g << " * k" << endl;
+    cout << "y = " << y0 << " - " << a / g << " * k" << endl;
+    cout << "其中k为任意整数." << endl;
+    return 0;
+}
+```
+
+> [!tip]
+>
+> - 由于 $g$ 已经是 $a$ 和 $b$ 的最大公约数，因此 $\frac{a}{g}$ 和 $\frac{b}{g}$ 互质（即它们的最大公约数为1）。这样做的目的是为了简化问题，使得新的系数 $\frac{a}{g}$ 和 $\frac{b}{g}$ 成为互质的整数，从而可以使用扩展欧几里得算法来求解简化后的方程。
+> - 因为有了简化过程，所以结果出来时要乘上 $\frac{c}{g}$来回复正常解
 
 
 
