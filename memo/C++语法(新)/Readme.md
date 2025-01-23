@@ -43,12 +43,6 @@ git fetch upstream
    ```bash
    git merge upstream/main  # 如果主分支名为main；若为master则替换为upstream/master
    ```
-   这一步会将上游仓库的最新更改合并到你的本地仓库中。
+这一步会将上游仓库的最新更改合并到你的本地仓库中。
 
-5. **推送更新到你的fork**  
-   如果你也想让你 fork 的仓库也保持最新，那么还需要将这些更新推送到你的 fork 中：
-   ```bash
-   git push origin main  # 或者 git push origin master
-   ```
-
-通过定期重复步骤 2 到 4，你可以确保你的本地仓库与原始仓库保持同步。如果你有贡献给原始项目的计划，保持同步是很重要的，这样可以避免后续 pull request 发生冲突。
+通过定期重复步骤 2 到 4，你可以确保你的本地仓库与原始仓库保持同步。
