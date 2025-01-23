@@ -2011,23 +2011,23 @@ cout << endl;
 **成员函数：**
 
 ```cpp
-push_back()//在队列的尾部插入元素。
-emplace_front()//与push_front()的作用一样 
-push_front()//在队列的头部插入元素。
-emplace_back()//与push_back()的作用一样 
-pop_back()//删除队列尾部的元素。
-pop_front()//删除队列头部的元素。
-back()//返回队列尾部元素的引用。
-front()//返回队列头部元素的引用。
-clear()//清空队列中的所有元素。
-empty()//判断队列是否为空。
-size()//返回队列中元素的个数。
-begin()//返回头位置的迭代器
-end()//返回尾+1位置的迭代器
-rbegin()//返回逆头位置的迭代器 
-rend()//返回逆尾-1位置的迭代器 
-insert()//在指定位置插入元素 
-erase()//在指定位置删除元素 
+push_back() //在队列的尾部插入元素。
+emplace_front() //与push_front()的作用一样 
+push_front() //在队列的头部插入元素。
+emplace_back() //与push_back()的作用一样 
+pop_back() //删除队列尾部的元素。
+pop_front() //删除队列头部的元素。
+back() //返回队列尾部元素的引用。
+front() //返回队列头部元素的引用。
+clear() //清空队列中的所有元素。
+empty() //判断队列是否为空。
+size() //返回队列中元素的个数。
+begin() //返回头位置的迭代器
+end() //返回尾+1位置的迭代器
+rbegin() //返回逆头位置的迭代器 
+rend() //返回逆尾-1位置的迭代器 
+insert() //在指定位置插入元素 
+erase() //在指定位置删除元素 
 ```
 
 - **deque可以通过forrage / iterator / 下标 遍历**
@@ -2198,11 +2198,11 @@ STL 中有用于操作迭代器的三个函数模板，它们是：
 
   - 对 `vector`而言，`emplace_back()` 几乎可以完全代替 `push_back()`  而`emplace` 则能代替 `insert`
 
-  - ```cpp
+```cpp
     vector<pair<int,int>> v
     v.push_back(make_pair(x,y)) == v.emplace_back(x,y);
     v.insert(v.begin(), make_paie(x,y)) == v.emplace(v.begin(),x,y)
-    ```
+```
 
 
 
