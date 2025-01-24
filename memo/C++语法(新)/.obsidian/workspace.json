@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "39e3aa7d8a5d83fd",
+        "id": "0d7f77f13bffca98",
         "type": "tabs",
         "children": [
           {
-            "id": "0a174ffa75121f4a",
+            "id": "d06b13e03ddaafa1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Readme.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Readme"
+              "title": "新标签页"
             }
           }
         ]
@@ -77,7 +73,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 377.5
+    "width": 257.5
   },
   "right": {
     "id": "5a4f729412e8deee",
@@ -165,7 +161,7 @@
       "markdown-importer:打开 Markdown 格式转换器": true
     }
   },
-  "active": "0a174ffa75121f4a",
+  "active": "d06b13e03ddaafa1",
   "lastOpenFiles": [
     "Readme.md",
     "DP 动态规划/背包DP.md",
