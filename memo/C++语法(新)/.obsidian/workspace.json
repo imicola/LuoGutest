@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "0d7f77f13bffca98",
+        "id": "594ae3b65e562ef8",
         "type": "tabs",
         "children": [
           {
-            "id": "d06b13e03ddaafa1",
+            "id": "c220aba9c2601974",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.3"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.3"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
             }
           }
         ]
@@ -164,7 +162,7 @@
       "markdown-importer:打开 Markdown 格式转换器": true
     }
   },
-  "active": "d06b13e03ddaafa1",
+  "active": "c220aba9c2601974",
   "lastOpenFiles": [
     "Readme.md",
     "DP 动态规划/背包DP.md",
