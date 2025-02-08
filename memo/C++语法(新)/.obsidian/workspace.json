@@ -11,10 +11,12 @@
             "id": "d06b13e03ddaafa1",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.3"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.3"
             }
           }
         ]
@@ -36,7 +38,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabeticalReverse"
+                "sortOrder": "alphabeticalReverse",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
