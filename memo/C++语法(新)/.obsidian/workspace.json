@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "594ae3b65e562ef8",
+        "id": "5832eadab781f779",
         "type": "tabs",
         "children": [
           {
-            "id": "c220aba9c2601974",
+            "id": "0524fc3ed5ecc28a",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "BFS 广度优先搜索.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "BFS 广度优先搜索"
             }
           }
         ]
@@ -162,8 +166,11 @@
       "markdown-importer:打开 Markdown 格式转换器": true
     }
   },
-  "active": "c220aba9c2601974",
+  "active": "0524fc3ed5ecc28a",
   "lastOpenFiles": [
+    "未命名.md",
+    "BFS 广度优先搜索.md",
+    "Boyer-Moore 投票算法.md",
     "Readme.md",
     "DP 动态规划/背包DP.md",
     "最长回文子序列.md",
@@ -171,12 +178,10 @@
     "杂项练习笔记1.md",
     "线性丢番图方程.md",
     "约瑟夫问题.md",
-    "Boyer-Moore 投票算法.md",
     "单调栈.md",
     "未命名",
     "attachments/Pasted image 20250123220101.png",
     "attachments/Pasted image 20250123220024.png",
-    "BFS 广度优先搜索.md",
     "前缀和与差分.md",
     "attachments/Pasted image 20250123215327.png",
     "attachments/Pasted image 20250123215240.png",
@@ -197,7 +202,6 @@
     "深度优先搜索 DFS.md",
     "扩展欧几里得算法.md",
     "快速幂.md",
-    "高精度.md",
     "attachments/Pasted image 20250123211721.png",
     "attachments/Pasted image 20250123210417.png",
     "attachments/Pasted image 20250123210256.png",

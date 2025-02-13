@@ -12,9 +12,24 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
-int solve()
+void solve()
 {
-    
+    vint a(6);
+    for (size_t i = 1; i <= 5; i++) {
+        if (i != 3) cin >> a[i];
+    }
+    int res = 0;
+    for (size_t j = -200; j <= 200; j++) {
+        a[3] = j;
+        int ans = 0;
+        for (size_t i = 1; i + 2 <= 5; i++) {
+            if (a[i] + a[i + 1] == a[i + 2]) {
+                ans++;
+            }
+        }
+        res = max(res, ans);
+    }
+    cout << res << endl;
 }
 
 signed main()

@@ -12,10 +12,21 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
-int solve()
+void solve()
 {
-    
+    string s;
+    cin >> s;
+    int cnt = s.size();
+    for (size_t i = 0; i < s.size() - 1; i++) {
+        if (s[i] == s[i + 1]) {
+            cnt = 1;
+        }
+    }
+    cout << cnt << endl;
 }
+// addca -> 1
+// nbbjkds -> 1
+// ptojj -> 1
 
 signed main()
 {
