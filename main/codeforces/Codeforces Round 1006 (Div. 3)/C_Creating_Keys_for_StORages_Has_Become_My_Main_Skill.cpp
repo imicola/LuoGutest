@@ -12,14 +12,6 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
-int get_2_low0(int n)
-{
-    int mask = (~n) & -(~n);
-    int res = __builtin_ctz(mask);
-    if (pow(2, res) > n) return -1;
-    return res;
-}
-
 void solve()
 {
     int n, x;
@@ -28,41 +20,32 @@ void solve()
         cout << x << endl;
         return;
     }
-    int maxx = pow(2, get_2_low0(x)) - 1;
-    if (get_2_low0(x) == -1) {
-        int temp = 0 , temp2 = 0;
-        for (size_t i = 0; i < n - 1  && i <= x; i++) {
+    int k = -1;
+    int p = 0;
+    for (size_t i = 0; i < n - 1; i++) {
+        p |= i;
+        if ((x | p) == x) {
             cout << i << " ";
-            temp |= i;
-            temp2 = i;
         }
-        if(temp2 == n - 1){
-            cout << endl;
+        else {
+            k = i;
+            break;
+        }
+    }
+    if (k == -1) {
+        if ((p | (n - 1)) != x) {
+            cout << x << endl;
             return;
         }
-        else
-        {
-            if(temp2 == n - 2 && ((temp2 + 1)|temp) == x){
-                cout << temp2 + 1;
-                cout << endl;
-                return;
-            }
-            for (size_t i = 0; i < n - temp2 - 2; i++)
-            {
-                cout << 0 << " ";
-            }
-            cout << x << endl;
+        else {
+            cout << n - 1 << endl;
+            return;
         }
     }
-    else {
-        for (size_t i = 0; i <= maxx && i < n; i++) {
-            cout << i << " ";
-        }
-        for (size_t i = 0; i < n - maxx - 2; i++) {
-            cout << 0 << " ";
-        }
-        cout << x << endl;
+    for (size_t i = 0; i < n - k - 1; i++) {
+        cout << 0 << " ";
     }
+    cout << x << endl;
     return;
 }
 
