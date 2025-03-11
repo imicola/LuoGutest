@@ -26,18 +26,6 @@ string largemuiti(string a, string b)
     return res;
 }
 
-/* 
-    1 5  --> a
-  * 2 1  --> b
--------
-    1 5  --> i == 0
-  3 0 |  --> i == 1
-  | | |
-  v v v
--------
-  3 1 5 --> result --> res
-*/
-
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
