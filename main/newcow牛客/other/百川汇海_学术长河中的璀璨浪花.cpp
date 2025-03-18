@@ -14,25 +14,33 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int n, x;
-    cin >> n >> x;
-    vint a(n);
+    int n;
+    cin >> n;
+    vint a(n + 1);
     int sum = 0;
-    for (auto &&i : a) {
-        cin >> i;
-        sum += i;
+    for (size_t i = 1; i <= n; i++) {
+        cin >> a[i];
     }
-    if (n * x == sum)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    int ans = 0;
+    for (size_t i = 1; i <= n; i++) {
+        if (i == 1 || i == n) {
+            ans += a[i] * n;
+            continue;
+        }
+        int p = ((i - 1) * (n - i + 1) + (n - i + 1));
+        ans += p * a[i];
+    }
+    cout << ans;
 }
 
+// 5 8 9 8 5
+// 6 10 12 12 10 6
+// 7 12 15
 signed main()
 {
     //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while (T--) {
         solve();
     }

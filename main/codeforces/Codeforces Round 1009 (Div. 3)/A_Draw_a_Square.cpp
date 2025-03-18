@@ -14,16 +14,11 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int n, x;
-    cin >> n >> x;
-    vint a(n);
-    int sum = 0;
-    for (auto &&i : a) {
-        cin >> i;
-        sum += i;
-    }
-    if (n * x == sum)
+    int a,b,c,d;
+    cin >> a >> b >> c >> d;
+    if(a == b && b == c && c == d){
         cout << "YES" << endl;
+    }
     else
         cout << "NO" << endl;
 }

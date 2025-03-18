@@ -14,18 +14,24 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int n, x;
-    cin >> n >> x;
-    vint a(n);
-    int sum = 0;
-    for (auto &&i : a) {
-        cin >> i;
-        sum += i;
+    int n;
+    cin >> n;
+    priority_queue<int, vector<int>, greater<int>> p;
+    for (size_t i = 0; i < n; i++) {
+        int temp = 0;
+        cin >> temp;
+        p.push(temp);
     }
-    if (n * x == sum)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    while (p.size() != 1)
+    {
+        int x1 = p.top();
+        p.pop();
+        int x2 = p.top();
+        p.pop();
+        int x3 = x1 + x2 - 1;
+        p.push(x3);
+    }
+    cout << p.top() <<endl;
 }
 
 signed main()

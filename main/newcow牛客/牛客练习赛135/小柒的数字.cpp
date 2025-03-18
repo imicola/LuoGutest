@@ -14,18 +14,9 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int n, x;
-    cin >> n >> x;
-    vint a(n);
-    int sum = 0;
-    for (auto &&i : a) {
-        cin >> i;
-        sum += i;
-    }
-    if (n * x == sum)
-        cout << "YES" << endl;
-    else
-        cout << "NO" << endl;
+    int x, y, n;
+    cin >> x >> y >> n;
+    cout << (n > x ? x - 1 : n) << endl;
 }
 
 signed main()
