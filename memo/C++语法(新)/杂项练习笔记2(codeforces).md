@@ -1,4 +1,4 @@
-#杂项练习 
+#杂项练习 #codeforces
 
 ### 同时取模两数相等的总个数
 - 对两个数 $x_1,x_2$ ，从 0 到 $n$ 的所有数字中，存在 $p$ 使得 $p \mod x_1 = p \mod x_2$ 的所有 $p$ 的个数 $k$ 有  
@@ -18,4 +18,4 @@ $$
 ```
 > [Educational Codeforces Round 175 (Rated for Div. 2)](https://codeforces.com/contest/2070) A
 
-###
+

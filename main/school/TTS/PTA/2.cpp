@@ -12,6 +12,16 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
+bool comp(vint a, vint b)
+{
+    for (size_t i = 0; i < a.size(); i++) {
+        if (a[i] != b[i]) {
+            return a[i] < b[i];
+        }
+    }
+    return 0;
+}
+
 vint ans;
 vvint res;
 int maxcnt = 0;
@@ -56,12 +66,6 @@ void solve()
         dfs(vv, i, 0, ans);
         ans.clear();
     }
-    // for (auto &&i : res) {
-    //     for (auto &&i2 : i) {
-    //         cout << i2 << " ";
-    //     }
-    //     cout << endl;
-    // }
     if (res.size() == 1) {
         cout << res[0].size() << endl;
         for (size_t i = 0; i < res[0].size(); i++) {
@@ -73,30 +77,14 @@ void solve()
         }
         return;
     }
-    unordered_set<int> out;
-    for (size_t i = 0; i < res[0].size(); i++) {
-        for (size_t j = 0; j < res.size(); j++) {
-            for (size_t k = j + 1; k < res.size(); k++) {
-                if (res[j][i] > res[k][i] && out.find(j) == out.end()) {
-                    out.insert(j);
-                    break;
-                }
-            }
-        }
-    }
     cout << res[0].size() << endl;
-    for (size_t i = 0; i < res.size(); i++) {
-        if (out.find(i) == out.end()) {
-            vint ress = res[i];
-            for (size_t i = 0; i < ress.size(); i++) {
-                if (i == ress.size() - 1) {
-                    cout << ress[i];
-                    continue;
-                }
-                cout << ress[i] << " ";
-            }
+    ranges::stable_sort(res, [](vint a, vint b) { return comp(a, b); });
+    for (size_t i = 0; i < res[0].size(); i++) {
+        if (i == res[0].size() - 1) {
+            cout << res[0][i];
             return;
         }
+        cout << res[0][i] << " ";
     }
 }
 signed main()

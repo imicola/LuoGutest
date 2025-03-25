@@ -1,3 +1,5 @@
+#语法
+
 1. range::find(v,'1');
 	- 在容器 v 内查找传入的第二个参数，返回值是第一个找到的参数的迭代器，如果没找到，则返回`v.end()`
 2. range::minmax(v)
@@ -42,3 +44,40 @@ int main() {
 }
 ```
 - 在这个例子中调用了Person::age将容器内的元素转化为age进行比较
+
+5. views::take / views::drop
+	- 这是view命名空间下的函数，作用是取前n个(take) 去前n个(drop)
+	- 语法规则：`auto vi_1 = v | view::take(n)`
+		- 其中：v 是容器 ， n 是取的值， vi_1是一个视图
+		- 视图可以采用范围for的迭代方式，如果要对视图进行操作，可以使用两种解决方案：
+			1. 使用.begin() + index操作视图
+			2. 使用 to\<vector\>操作 
+				- `vector<int> v = vw | ranges::to<vector>();`
+
+```cpp
+int main()
+{
+	vector<int> a = {1,2,3,4,5};
+	auto a1 = a | views::take(2);
+	for(auto && i : a1)
+	{
+		cout << i << " ";
+	}
+	// 输出 1 2
+	cout << endl;
+	auto a2 = a | views::drop(2);
+	for(auto && i : a2)
+	{
+		cout < i << " ";
+	}
+	// 输出 3 4 5 6
+	cout << endl;
+	auto vi = a2 | ranges::to<vector>();
+	for(auto && i : a2)
+	{
+		cout << i << " ";
+	}
+	//输出同 a2
+}
+```
+
