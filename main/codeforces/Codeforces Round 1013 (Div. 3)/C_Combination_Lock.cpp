@@ -1,6 +1,6 @@
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
-#define int LL
+//#define int LL
 #define endl '\n'
 #define size_t int
 #define all(v) v.begin(), v.end()
@@ -14,11 +14,26 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    
+    int n;
+    cin >> n;
+    if (n % 2 == 0) {
+        cout << -1 << endl;
+        return;
+    }
+    int cnt = 0;
+    for (size_t i = 0; i < n; i++) {
+        cout << ((i + cnt + 1) % (n) == 0 ? n : (i + cnt + 1) % (n)) << " ";
+        cnt++;
+    }
+    cout << endl;
 }
+
+// 1234567
+// 1356
+
 signed main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     int T = 1;
     cin >> T;
     while (T--) {
