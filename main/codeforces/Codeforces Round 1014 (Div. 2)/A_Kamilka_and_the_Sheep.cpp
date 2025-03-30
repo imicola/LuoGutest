@@ -14,18 +14,23 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int x;
-    cin >> x;
-    cout << (((x & (x - 1)) == 0 || (x & (x + 1)) == 0) ? -1 : (1 << (31 - __builtin_clz(x))) - 1) << endl;
+    int n;
+    cin >> n;
+    vint v(n);
+    for (auto &&i : v) {
+        cin >> i;
+    }
+    auto [minn, maxx] = ranges::minmax(v);
+    int d = maxx - minn;
+    cout << d << endl;
 }
 signed main()
 {
-    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int T = 1;
     cin >> T;
     while (T--) {
         solve();
     }
-
     return 0;
 }
