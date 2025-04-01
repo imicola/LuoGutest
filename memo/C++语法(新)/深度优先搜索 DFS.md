@@ -145,7 +145,6 @@ signed main()
 **例1：在数组\[1,2,3,4,5] 中取任意个数，求这些取出来的数相加的结果**
 
 #### 方法一：DFS爆搜
-
 ```cpp
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
@@ -242,7 +241,7 @@ signed main()
 >
 > 0 1 2 3 3 4 5 6 4 5 6 7 7 8 9 10 5 6 7 8 8 9 10 11 9 10 11 12 12 13 14 15
 > - 已验证，两个程序的结果除了顺序完全一致
-**例2: [P2036](https://www.luogu.com.cn/problem/P2036) 、\[COCI2008-2009 #2] PERKET**
+**例2: [P2036](https://www.luogu.com.cn/problem/P2036) \[COCI2008-2009 #2] PERKET**
 #### 例二 法一：DFS
 ```cpp
 //#pragma GCC optimize(3)

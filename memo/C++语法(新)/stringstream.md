@@ -1,3 +1,4 @@
+#语法 #字符串 
 C++针对字符串的读写有一套专门的方法，即stringstream
 **语法规则：**
 - `stringstream ss(str)`
