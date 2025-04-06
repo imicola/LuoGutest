@@ -14,29 +14,30 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int l = 0, r = INT_MAX, ans = 0;
-    while (l <= r) {
-        int mid = (l + r) / 2;
-        auto check = [&]() -> bool {
-            /* 检查函数 */
-        };
-        if (check()) {
-            ans = r;
-            r = mid - 1;
-        }
-        else {
-            l = mid + 1;
-        }
+    int n;
+    cin >> n;
+    vint v(n + 1, 0);
+    vint rsum(n + 1, 0);
+    for (size_t i = 1; i <= n; i++) {
+        cin >> v[i];
     }
+    rsum[n] = v[n];
+    for (int i = n - 1; i >= 1; i--) {
+        rsum[i] = rsum[i + 1] + v[i];
+    }
+    int ans = 0;
+    for (size_t i = 1; i <= n - 1; i++) {
+        ans += v[i] * rsum[i + 1];
+    }
+    cout << ans;
 }
 signed main()
 {
-    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while (T--) {
         solve();
     }
-
     return 0;
 }
