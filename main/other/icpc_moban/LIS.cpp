@@ -12,6 +12,21 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
+
+//更为简洁的求LIS算法
+int Lis(vint v)
+{
+    vint res;
+    for (auto &&i : v) {
+        auto it = lower_bound(all(res), i);
+        if (it == res.end())
+            res.emplace_back(i);
+        else
+            *it = i;
+    }
+    return res.size();
+}
+
 signed main()
 {
     //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
@@ -39,7 +54,7 @@ signed main()
         len = max(len, r + 1);
         last_num[r + 1] = v[i];
     }
-    cout << len << endl;
+    cout << Lis(v) << endl;
     last_num.erase(last_num.begin());
     for (auto &&i : last_num) {
         cout << i << " ";
