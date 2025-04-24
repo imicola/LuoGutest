@@ -14,25 +14,23 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
     vint v(n);
-    for (auto &&i : v) {
-        cin >> i;
-        i--;
-    }
-    set<int> x;
-    for (int i = 0; i < n; i++) {
-        int d;
-        cin >> d;
-        d--;
-        while (!x.contains(d)) {
-            x.insert(d);
-            d = v[d];
+    vint ress;
+    for (size_t i = 0; i < n; i++) {
+        cin >> v[i];
+        if (v[i] <= k) {
+            ress.emplace_back(i);
         }
-        cout << x.size() << " ";
     }
-    cout << endl;
+    int cnt1 = 0;
+    priority_queue<int> qu;
+    for (size_t i = 0; i < n; i++) {
+        if (v[i]) {
+            
+        }
+    }
 }
 signed main()
 {

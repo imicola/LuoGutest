@@ -16,23 +16,16 @@ void solve()
 {
     int n;
     cin >> n;
-    vint v(n);
-    for (auto &&i : v) {
-        cin >> i;
-        i--;
+    string s;
+    cin >> s;
+    string s1 = "0" + s;
+    int cnt01 = 0, cnt10 = 0;
+    bool ok = 0;
+    for (size_t i = 0; i + 1 < s1.size(); i++) {
+        if (s1[i] != s1[i + 1] && s1[i] == '0') cnt01++;
+        if (s1[i] != s1[i + 1] && s1[i] == '1') cnt10++;
     }
-    set<int> x;
-    for (int i = 0; i < n; i++) {
-        int d;
-        cin >> d;
-        d--;
-        while (!x.contains(d)) {
-            x.insert(d);
-            d = v[d];
-        }
-        cout << x.size() << " ";
-    }
-    cout << endl;
+    cout << n + cnt01 + cnt10 - (cnt01 + cnt10 > 1 ? (cnt01 >= 2 || cnt01 >= 2 ? 2 : 1) : 0) << endl;
 }
 signed main()
 {

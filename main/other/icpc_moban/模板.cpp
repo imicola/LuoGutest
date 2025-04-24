@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 #define int LL
 #define endl '\n'
-#define size_t int
+// #define size_t int
 #define all(v) v.begin(), v.end()
 using namespace std;
 typedef long long LL;

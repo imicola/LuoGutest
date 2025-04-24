@@ -16,21 +16,25 @@ void solve()
 {
     int n;
     cin >> n;
-    vint v(n);
-    for (auto &&i : v) {
-        cin >> i;
-        i--;
-    }
-    set<int> x;
-    for (int i = 0; i < n; i++) {
-        int d;
-        cin >> d;
-        d--;
-        while (!x.contains(d)) {
-            x.insert(d);
-            d = v[d];
+    string s;
+    cin >> s;
+    ranges::reverse(s);
+    int l = 1, r = n;
+    vint ans;
+    for (auto &&i : s) {
+        if (i == '<') {
+            ans.emplace_back(l);
+            l++;
         }
-        cout << x.size() << " ";
+        else {
+            ans.emplace_back(r);
+            r--;
+        }
+    }
+    ans.emplace_back(l);
+    ranges::reverse(ans);
+    for (auto &&i : ans) {
+        cout << i << " ";
     }
     cout << endl;
 }

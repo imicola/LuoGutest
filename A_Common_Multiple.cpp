@@ -19,20 +19,12 @@ void solve()
     vint v(n);
     for (auto &&i : v) {
         cin >> i;
-        i--;
     }
-    set<int> x;
-    for (int i = 0; i < n; i++) {
-        int d;
-        cin >> d;
-        d--;
-        while (!x.contains(d)) {
-            x.insert(d);
-            d = v[d];
-        }
-        cout << x.size() << " ";
+    set<int> se;
+    for (auto &&i : v) {
+        se.insert(i);
     }
-    cout << endl;
+    cout << se.size() << endl;
 }
 signed main()
 {

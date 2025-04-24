@@ -12,29 +12,35 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
+
+// TODO:写题解
+
 void solve()
 {
     int n, m;
     cin >> n >> m;
-    vint v(m);
-    for (auto &&i : v) {
-        cin >> i;
+    vector<int> v(n + 1, 0);
+    for (int i = 0; i < m; i++) {
+        int a;
+        cin >> a;
+        if (a > n) a = n;
+        v[a]++;
     }
-    int ans  = 0;
-    ranges::sort(v);
-    for (size_t i = 0; i < m; i++) {
-        int _i = n - v[i];
-        int cnt = 0;
-        for (size_t j = i + 1; j < m; j++) {
-            if (v[j] >= _i) {
-                cnt = m - j + 1;
-                break;
-            }
-        }
-        ans += (min(v[i], n - 1) + _i) * cnt * 2;
+    vector<int> rsum(n + 2, 0);
+    rsum[n] = v[n];
+    for (int k = n - 1; k >= 1; k--) {
+        rsum[k] = rsum[k + 1] + v[k];
+    }
+    int ans = 0;
+    for (int k = 1; k <= n - 1; k++) {
+        int Ck = rsum[k];
+        int Cnk = rsum[n - k];
+        int Cmax = rsum[max(k, n - k)];
+        ans += Ck * Cnk - Cmax;
     }
     cout << ans << endl;
 }
+
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);

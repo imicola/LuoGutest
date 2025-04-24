@@ -19,20 +19,21 @@ void solve()
     vint v(n);
     for (auto &&i : v) {
         cin >> i;
-        i--;
     }
-    set<int> x;
-    for (int i = 0; i < n; i++) {
-        int d;
-        cin >> d;
-        d--;
-        while (!x.contains(d)) {
-            x.insert(d);
-            d = v[d];
+    int ans = accumulate(all(v), 0);
+    vint cur = v; //构造差序对数组
+    for (size_t i = 1; i < n; i++) {
+        int m = cur.size();
+        int sum = 0;
+        vector<int> nxt(m - 1); // 下一个差序对数组
+        for (size_t k = 0; k + 1 < m; k++) {
+            nxt[k] = cur[k + 1] - cur[k];
+            sum += nxt[k];
         }
-        cout << x.size() << " ";
+        ans = max(ans, abs(sum));
+        cur.swap(nxt);
     }
-    cout << endl;
+    cout << ans << endl;
 }
 signed main()
 {

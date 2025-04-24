@@ -12,42 +12,58 @@ typedef vector<string> vstr;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
 
-const int N = 1e7;
 class DSU
 {
 private:
+    const int N = 1e7;
     vector<int> parent = vector<int>(N);
     vector<int> ranks = vector<int>(N);
+    vector<int> sz = vector<int>(N); // 新增：记录每个集合的大小
 
 public:
+    // 初始化
     void init()
     {
-        for (size_t i = 0; i < N; i++) {
+        for (int i = 0; i < N; ++i) {
             parent[i] = i;
             ranks[i] = 1;
+            sz[i] = 1; // 每个元素初始时各自成集合，大小为1
         }
     }
+    // 查找（带路径压缩）
     int dsufind(int x)
     {
-        if (parent[x] != x) parent[x] = dsufind(parent[x]);
+        if (parent[x] != x) {
+            parent[x] = dsufind(parent[x]);
+        }
         return parent[x];
     }
+    // 合并（按秩合并 + 更新集合大小）
     void union_set(int x, int y)
     {
-        int rootx = x;
-        int rooty = y;
+        int rootx = dsufind(x);
+        int rooty = dsufind(y);
         if (rootx != rooty) {
             if (ranks[rootx] > ranks[rooty]) {
                 parent[rooty] = rootx;
+                sz[rootx] += sz[rooty];
             }
             else if (ranks[rootx] < ranks[rooty]) {
                 parent[rootx] = rooty;
+                sz[rooty] += sz[rootx];
             }
             else {
                 parent[rootx] = rooty;
-                ranks[rootx]++;
+                ranks[rooty]++;
+                sz[rooty] += sz[rootx];
             }
         }
+    }
+    // 获取某元素所在集合的大小
+    int getSize(int x)
+    {
+        int root = dsufind(x);
+        return sz[root];
     }
 };
 
