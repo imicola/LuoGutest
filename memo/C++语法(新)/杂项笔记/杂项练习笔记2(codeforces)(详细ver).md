@@ -154,7 +154,7 @@ lower_bound(all(b),-14,[](int k1,int k2){
 我们的答案就是找到么某个点使得其前缀加后缀最大
 
 ### 并查集策略
-来自[ECR117 d2 C](https://codeforces.com/problemset/problem/2086/C
+来自[ECR117 d2 C](https://codeforces.com/problemset/problem/2086/C)
 
 > - 你有一个长度为 $n$ 的 **排列数组** $p$，也就是说它包含了从 $1$ 到 $n$ 的所有整数，且不重复。
 > - 接下来你会收到 $n$ 个 **查询**，每个查询会把数组中某个位置的元素替换成 $0$(每个位置只会被替换一次)
