@@ -241,6 +241,132 @@ void solve()
 }
 ```
 
+### 标答很简洁但是我写很多的难绷题目
+> 来自[CR1022 d2 C](https://codeforces.com/problemset/problem/2108/C)
+
+题目大意:
+- 你有一个数组A，你可以选择一个数字放下标识
+	- 这个标识可以左右移动
+	- 当标识经过一个没有被标识经过的数时候就会将这个数加入到数组B中
+- 我们需要数组B按单调递减排序且B含有A的所有元素
+- 求最少需要放几个标识
+
+我的思路：
+- 先将数组A排序为数组B，再根据B的顺序去找A中的元素
+- 其中找到第一个元素向左右扩散直到遇见上升数(即$a_i < a_{i+1}$)，将这些数加入mp和path中
+	- 其中mp表示当我们在B遇到某个数时，该数有没有已经处于一个标识可以达到的集合之中，用`map<int,int>`记录
+	- path表示该坐标有没有被走过
+- 考虑到时间复杂度，必须使用很离谱的优化：即将数组A的数组与下标都保存在一个map中
+```cpp
+void solve()
+{
+    int n;
+    cin >> n;
+    vint a(n);
+    for (auto &&i : a) {
+        cin >> i;
+    }
+    vint vs = a;
+    ranges::sort(vs, greater<int>{});
+    //抽象优化技巧之把v[i]和其对应的下标存入map中
+    map<int, vector<int>> v_index;
+    for (int j = 0; j < n; ++j) {
+        v_index[a[j]].push_back(j);
+    }
+    //为每个权重记录了下一次我们应该从 v_index[i] 向量的哪个位置开始查找
+    map<int, size_t> next_idx_ptr;
+    map<int, int> st;
+    vint path(n, 0);
+    int ans = 0;
+    for (auto &&i : vs) {
+        if (st[i] > 0) {
+            st[i]--;
+            continue;
+        }
+        //这个idx表示我们55行后面操作的下标
+        int idx = -1;
+        if (v_index.count(i)) {
+            // 取当前数的所有下标集合
+            vint &vi_idx = v_index[i];
+            // 取这个数下标集合中进行到多少个下标
+            size_t &now_idx = next_idx_ptr[i];
+            while (now_idx < vi_idx.size()) {
+                // f_inx 代表我们要找的第下标的实际值
+                // 该下标应该满足path[idx] != 0
+                int f_idx = vi_idx[now_idx];
+                // 当我们找到符合的下标的时候退出
+                if (path[f_idx] == 0) {
+                    idx = f_idx;
+                    now_idx++;
+                    break;
+                }
+                now_idx++;
+            }
+        }
+        // 为什么要做上面这一步？
+        // 我们需要排除出现找10时候出现[... 10 10 ...] 这样的情况
+        if (idx != -1) {
+            ans++;
+            path[idx] = 1;
+            for (int k = idx; k + 1 < n; ++k) {
+                if (a[k] >= a[k + 1] && path[k + 1] == 0) {
+                    path[k + 1] = 1;
+                    st[a[k + 1]]++;
+                    continue;
+                }
+                break;
+            }
+            for (int k = idx; k - 1 >= 0; --k) {
+                if (a[k] >= a[k - 1] && path[k - 1] == 0) {
+                    path[k - 1] = 1;
+                    st[a[k - 1]]++;
+                    continue;
+                }
+                break;
+            }
+        }
+    }
+    cout << ans << endl;
+    
+}
+```
+
+答案思路：
+ - 其实从上面我的思路中就可以优化两点
+	 1. 连续的相同数字不影响结果
+	 2. 我们实际上找的是极大值点的数目
+则非常简单的就可以出来
+```cpp
+void solve()
+{
+	int n;
+	cin >> n;
+	vint v;
+	v.emplace_back(-1e9);
+	for(int i = 0; i < n ; i++){
+		int t = 0;
+		cin >> t;
+		if(t != v.back())v.emplace_back(t);
+	}
+	v.emplace_back(-1e9);
+	int ans = 0;
+	for(int i = 1; i + 1 < v.size() ; i++){
+		if(v[i] < v[i + 1] && v[i] > v[i - 1]) ans++;
+	}
+	cout << ans << endl;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
