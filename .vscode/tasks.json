@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe 生成活动文件",
-            "command": "g++",
+            "command": "D:\\Msys64\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
@@ -14,7 +14,8 @@
                 //"${fileDirname}\\${fileBasenameNoExtension}.exe"
                 "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
                 //黑窗中文乱码改编码
-                "-fexec-charset=GBK"
+                "-fexec-charset=GBK", 
+                "-static"
             ],
             "options": {
                 "cwd": "${fileDirname}"

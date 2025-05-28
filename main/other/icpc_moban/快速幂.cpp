@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long fastpower(long long a, long long b)
+long long ksm(long long a, long long b)
 {
     long long ans = 1;
     while (b > 0) {
@@ -14,7 +14,24 @@ long long fastpower(long long a, long long b)
     return ans;
 }
 
+long long ksm(long long a, long long b, long long MOD)
+{
+    long long ans = 1;
+    a %= MOD;
+    while (b > 0) {
+        if (b & 1) ans = (ans * a) % MOD;
+        a = (a * a) % MOD;
+        b >>= 1;
+    }
+    return ans;
+}
+// 乘法逆元
+long long nksm(long long a, long long MOD)
+{
+    return ksm(a, MOD - 2, MOD);
+}
+
 int main()
 {
-    cout << fastpower(2, 8);
+    cout << nksm(2, 7);
 }

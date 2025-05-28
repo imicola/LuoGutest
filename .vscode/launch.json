@@ -38,11 +38,11 @@
             "program": "D:/Code film/C++/exefile/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "D:/apps/MinGW/mingw64/bin",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "D:\\apps\\MinGW\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "D:\\Msys64\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -69,7 +69,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "D:\\apps\\MinGW\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "D:/Msys64/mingw64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",

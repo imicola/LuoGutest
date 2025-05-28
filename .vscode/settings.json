@@ -10,9 +10,25 @@
 //         "editor.quickSuggestions": true
 //         },
 "C_Cpp.errorSquiggles": "enabled",
-"C_Cpp.default.compilerPath": "D:\\apps\\MinGW\\mingw64\\bin\\g++.exe",
+"C_Cpp.default.compilerPath": "D:/Msys64/mingw64/bin/g++.exe",
 "files.associations": {
     "iostream": "cpp",
     "random": "cpp"
+},
+"files.encoding": "utf8",
+"terminal.integrated.shellIntegration.enabled": true,
+"terminal.integrated.defaultProfile.windows": "Command Prompt",
+"terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+        "path": "cmd.exe",
+        "args": ["/K", "chcp 65001"] // 切换到 UTF-8 代码页
+    },
+    "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell"
+    },
+    "Git Bash": {
+        "source": "Git Bash"
+    }
 }
 }
