@@ -1,7 +1,6 @@
 #语法
 
 C++11 提供 `std::function` 这样一个函数包装式来封装函数
-
 - 基本语法：
 	- `function<返回值(传参)>`
 	- 示例： `function<int(int,int)> func`

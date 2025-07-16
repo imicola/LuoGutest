@@ -50,28 +50,28 @@
 	- 当 "10" 数量与 "01" 数量之和小于2时候，直接计数即可
 	- 否则看是否有字符串的数量大于 2 ，如果存在操作数就 -2，否则 -1
 ---
-[CR1005 d2 B](https://codeforces.com/problemset/problem/2064/B)
+### [CR1005 d2 B](https://codeforces.com/problemset/problem/2064/B)
 - 贪心 + 双指针
 	- 我们需要寻找数组中最长的且数字只出现一次的子序列
 	- 维护一个map用来保存数字出现几次
 	- 在map为1的数下查找最长的子序列
 	- 注意不要忘记当所有数字出现次数都大于2时候输出0
 ---
-[CR998 d3 D](https://codeforces.com/problemset/problem/2060/D)
+### [CR998 d3 D](https://codeforces.com/problemset/problem/2060/D)
 - 贪心
 	- 显然当数组已经排序时可以通过操作
 	- 对每一次操作，都会将$\{a_i,a_{i+1}\}$变为$\{0,a_{i+1} - a_i\}$或$\{a_i - a_{i+1},0\}$,显然后者是不可取的
 	- 因为构造出的第一个数是0，则我们若想一个非已经排序数字的开头开始按题目要求向后构造
 		- 从第一个构造到最后一个，倘若可以形成非递减序列，则最后数组形式一定为$\{0,0,0,\cdots,0,x\}$形式，则检查最后数组是否排序即可
 ---
-[CR997 d2 B](https://codeforces.com/problemset/problem/2056/B)
+### [CR997 d2 B](https://codeforces.com/problemset/problem/2056/B)
 - 图与排序
 	- 根据题目含义，我们可以知道，图中两个定点元素有边，则说明小的元素的下标值一定小于大的元素
 	- 则根据这一点，我们可以先确定一个排序$[\,n\,,\,n-1\,,\,\cdots \,\,2\,,\,1\,]$ 然后从第一个元素出发，如果发现该元素比其小的元素有边，说明这个元素下标应该比有边的元素大
 		- 整个排序过程可以使用类似快速排序的思想完成
 		- `lambda = [&]( int a , int b ){ return (mp[a][b] == 1 ? a < b : a > b)};`
 ---
-[ECR178 d2 D](https://codeforces.com/problemset/problem/2104/D)
+### [ECR178 d2 D](https://codeforces.com/problemset/problem/2104/D)
 - 这种题目属于典型的看了答案大彻大悟，不看答案一头雾水
 	- 我们理解题目限制1,即我们操作后的元素和不能大于原数组和
 	- 现在考虑一个理想数组的特性，一个大小为$n$的理想数组的和的最小状态应该是前$n$项质数组成的数组
