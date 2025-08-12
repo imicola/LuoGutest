@@ -14,14 +14,25 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    if (n < 3) {
+        cout << "No" << endl;
+        return;
+    }
+    if (s.substr(n - 3) == "tea") {
+        cout << "Yes" << endl;
+        return;
+    }
+    cout << "No" << endl;
 }
 signed main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    cout << setiosflags(ios::fixed) << setprecision(2);
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while (T--) {
         solve();
     }
