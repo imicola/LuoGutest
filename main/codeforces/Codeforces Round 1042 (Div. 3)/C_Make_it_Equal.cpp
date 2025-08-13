@@ -35,8 +35,8 @@ void solve()
         modk.insert(i.first);
     }
     for (auto &&i : modk) {
-        if(i == 0){
-            if(mps[i] != mpt[i]){
+        if (i == 0) {
+            if (mps[i] != mpt[i]) {
                 cout << "NO" << endl;
                 return;
             }
@@ -47,10 +47,11 @@ void solve()
                 return;
             }
         }
-        if (mps[i] + mps[(k - i) % k] != mpt[i] + mpt[(k - i) % k]){
+        if (mps[i] + mps[(k - i) % k] != mpt[i] + mpt[(k - i) % k]) {
             cout << "NO" << endl;
             return;
-        } }
+        }
+    }
     cout << "YES" << endl;
 }
 signed main()

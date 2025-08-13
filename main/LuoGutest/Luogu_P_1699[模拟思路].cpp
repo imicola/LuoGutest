@@ -26,10 +26,11 @@ int main()
             }
         }
     }
-    if(((index_B.first == index_L.first && index_R.first == index_B.first) && (index_R.second > min(index_B.second, index_L.second) &&
-        index_R.second < max(index_B.second, index_L.second))) ||
-        ((index_B.second == index_L.second && index_R.second == index_B.second ) && index_R.first > min(index_B.first, index_L.first) &&
-            index_R.first < max(index_B.first, index_L.first)))
+    if (((index_B.first == index_L.first && index_R.first == index_B.first) &&
+         (index_R.second > min(index_B.second, index_L.second) &&
+          index_R.second < max(index_B.second, index_L.second))) ||
+        ((index_B.second == index_L.second && index_R.second == index_B.second) &&
+         index_R.first > min(index_B.first, index_L.first) && index_R.first < max(index_B.first, index_L.first)))
         cout << abs(index_B.first - index_L.first) + abs(index_B.second - index_L.second) + 1;
     else
         cout << abs(index_B.first - index_L.first) + abs(index_B.second - index_L.second) - 1;
