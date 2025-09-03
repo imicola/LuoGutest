@@ -14,11 +14,29 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    
+    i64 n;
+    cin >> n;
+    string s;
+    cin >> s;
+    i64 l, r;
+    cin >> l >> r;
+    if (s[0] == s[n - 1]) {
+        cout << "Yes" << endl;
+        return;
+    }
+    else {
+        if (l == 1 || r == n) {
+            cout << "Yes" << endl;
+            return;
+        }
+        else {
+            cout << "No" << endl;
+        }
+    }
 }
 signed main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cout << setiosflags(ios::fixed) << setprecision(2);
     i64 T = 1;
     cin >> T;

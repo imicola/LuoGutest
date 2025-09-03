@@ -1,11 +1,11 @@
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
-// #define int LL
+#define int LL
 #define endl '\n'
+// #define size_t int
 #define all(v) v.begin(), v.end()
 using namespace std;
-using i64 = long long;
-// typedef long long LL;
+typedef long long LL;
 typedef vector<int> vint;
 typedef vector<vint> vvint;
 typedef vector<string> vstr;
@@ -14,13 +14,25 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    
+    int n, k;
+    cin >> n >> k;
+    vint a(n);
+    for (auto &&i : a) {
+        cin >> i;
+    }
+    for (auto &&i : a) {
+        int x = i % (k + 1);
+        i += x * k;
+        cout << i << " ";
+    }
+    cout << endl;
 }
+// +k^2
 signed main()
 {
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cout << setiosflags(ios::fixed) << setprecision(2);
-    i64 T = 1;
+    int T = 1;
     cin >> T;
     while (T--) {
         solve();
