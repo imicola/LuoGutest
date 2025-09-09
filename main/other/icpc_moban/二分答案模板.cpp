@@ -21,7 +21,7 @@ void solve()
             /* 检查函数 */
         };
         if (check()) {
-            ans = r;
+            ans = mid;
             r = mid - 1;
         }
         else {
