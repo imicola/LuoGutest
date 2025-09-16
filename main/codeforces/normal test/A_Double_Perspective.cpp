@@ -2,11 +2,10 @@
 #include <bits/stdc++.h>
 // #define int LL
 #define endl '\n'
-#define size_t int
 #define all(v) v.begin(), v.end()
 using namespace std;
-// typedef long long LL;
 using i64 = long long;
+// typedef long long LL;
 typedef vector<i64> vint;
 typedef vector<vint> vvint;
 typedef vector<string> vstr;
@@ -68,23 +67,37 @@ public:
         return sz[root];
     }
 };
+
 void solve()
 {
+    i64 n;
+    cin >> n;
+    // 我们选择连续的线段长度但是不选择一个可以覆盖头尾的串
+    // 如何统计?
     DSU ds;
-    ds.init(6e3);
-    ds.union_set(1, 2);
-    ds.union_set(3, 1);
-    cout << ds.dsufind(3);
+    ds.init(2 * n);
+    vint ans;
+    for (i64 i = 0; i < n; i++) {
+        i64 l, r;
+        cin >> l >> r;
+        if (ds.dsufind(l) == ds.dsufind(r)) continue;
+        ds.union_set(l, r);
+        ans.emplace_back(i + 1);
+    }
+    cout << ans.size() << endl;
+    for (auto &&i : ans) {
+        cout << i << " ";
+    }
+    cout << endl;
 }
-
 signed main()
 {
-    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    int T = 1;
-    // cin >> T;
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    cout << setiosflags(ios::fixed) << setprecision(2);
+    i64 T = 1;
+    cin >> T;
     while (T--) {
         solve();
     }
-
     return 0;
 }
