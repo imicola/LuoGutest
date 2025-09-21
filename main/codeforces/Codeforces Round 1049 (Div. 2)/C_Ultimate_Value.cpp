@@ -16,12 +16,10 @@ void solve()
     cin >> n;
     vint a(n);
     for (auto &&i : a) cin >> i;
-    // if (n & 1) a.emplace_back(0);
     i64 fa = 0;
     for (i64 i = 0; i < n; i++) {
         fa += ((i & 1) ? -a[i] : a[i]);
     }
-    // cout << fa << endl;
     // 我们交换条件是 要么不交换,要么交换一次
     // 交换一次需要最优情况
     // 计算同符号fa不发生变化Max1
@@ -43,40 +41,38 @@ void solve()
         if (fev == -1) fev = i;
         lev = i;
     }
-    //
     if (fev != -1 && lev != -1) {
         Max1 = max(Max1, lev - fev);
     }
 
     i64 Max2 = LLONG_MIN;
-    i64 Maxodd = LLONG_MAX; // <- error 之前写的是LLMIN 在奇偶处理最大最小值的时候搞反了
-    // 当i % 2 == 0 && j % 2 != 0时候,fa2 = fa + 2(a[j] - a[i]) + (j - i)
+    i64 Minodd = LLONG_MAX;
     // 2a[j] - 2a[i] + j - l
     for (i64 j = 0; j < n; j++) {
         // 奇数位置
-        // 说实话这里真容易迷糊吧,上面奇数位是构造最大的差,下面偶数时候是寻找最小的 a[i]*2 + i;
+        // 上面奇数位是构造最大的差,下面偶数时候是寻找最小的 a[i]*2 + i;
         // 下一个偶数位置同理
         if (j % 2 == 1) {
             i64 val_j = 2 * a[j] + j;
-            if (Maxodd != LLONG_MAX) Max2 = max(Max2, val_j - Maxodd);
+            if (Minodd != LLONG_MAX) Max2 = max(Max2, val_j - Minodd);
         }
         else {
             i64 val_j = 2 * a[j] + j;
-            if (val_j < Maxodd) Maxodd = val_j;
+            Minodd = min(Minodd, val_j);
         }
     }
     // 反之
     i64 Max3 = LLONG_MIN;
-    i64 Mineven = LLONG_MIN;
+    i64 Maxeven = LLONG_MIN;
     for (i64 j = 0; j < n; j++) {
         // 偶数
         if (j % 2 == 0) {
             i64 val_j = 2 * a[j] - j;
-            if (Mineven != LLONG_MIN) Max3 = max(Max3, Mineven - val_j);
+            if (Maxeven != LLONG_MIN) Max3 = max(Max3, Maxeven - val_j);
         }
         else {
             i64 val_j = 2 * a[j] - j;
-            if (val_j > Mineven) Mineven = val_j;
+            Maxeven = max(Maxeven, val_j);
         }
     }
 
