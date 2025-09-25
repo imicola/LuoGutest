@@ -14,24 +14,31 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    i64 n;
-    cin >> n;
-    vint v(n);
-    map<i64, i64> mp;
-    for (i64 i = 0; i < n; i++) {
-        cin >> v[i];
-        mp[v[i]]++;
+    i64 k, x;
+    cin >> k >> x;
+    i64 have = (1ll << k);
+    i64 sum = have * 2;
+    i64 b = sum - x;
+    i64 cnt = 0;
+    vint res;
+    while (x != have) {
+        if (x * 2 > sum) {
+            x -= b;
+            b *= 2;
+            res.emplace_back(2);
+        }
+        else if (x * 2 < sum) {
+            b -= x;
+            x *= 2;
+            res.emplace_back(1);
+        }
     }
-    vpii res(all(mp));
-    sort(all(res), [](pii a, pii b) { return a.second < b.second; });
-    i64 ans = 0;
-    i64 cnt = res.size();
-    for (auto &&[a, b] : res) {
-        i64 p = b * cnt;
-        cnt--;
-        ans = max(ans, p);
+    ranges::reverse(res);
+    cout << res.size() << endl;
+    for (auto &&i : res) {
+        cout << i << " ";
     }
-    cout << ans << endl;
+    cout << endl;
 }
 signed main()
 {

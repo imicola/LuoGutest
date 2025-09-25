@@ -14,29 +14,29 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    i64 n;
-    cin >> n;
-    vint v(n);
+    i64 n, m;
+    cin >> n >> m;
+    vint b(m);
     map<i64, i64> mp;
-    for (i64 i = 0; i < n; i++) {
-        cin >> v[i];
-        mp[v[i]]++;
+    bool ok = 0;
+    for (i64 i = 0; i < m; i++) {
+        cin >> b[i];
+        mp[b[i]]++;
+        if (mp[b[0]] != 1) {
+            ok = 1;
+        }
     }
-    vpii res(all(mp));
-    sort(all(res), [](pii a, pii b) { return a.second < b.second; });
-    i64 ans = 0;
-    i64 cnt = res.size();
-    for (auto &&[a, b] : res) {
-        i64 p = b * cnt;
-        cnt--;
-        ans = max(ans, p);
+    if (ok || b[m - 1] < b[0]) {
+        cout << 1 << endl;
+        return;
     }
-    cout << ans << endl;
+    i64 p = b[0];
+    cout << n - b[m - 1] + 1 << endl;
 }
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    cout << setiosflags(ios::fixed) << setprecision(2);
+    cout << setiosflags(ios::fixed)<< setprecision(2);
     i64 T = 1;
     cin >> T;
     while (T--) {
