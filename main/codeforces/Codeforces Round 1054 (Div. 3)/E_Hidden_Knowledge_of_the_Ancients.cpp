@@ -12,25 +12,47 @@ typedef vector<string> vstr;
 typedef pair<i64, i64> pii;
 typedef vector<pii> vpii;
 
-
-
-
 void solve()
 {
     i64 n, k, l, r;
     cin >> n >> k >> l >> r;
-    vint a(n + 1);
-    for (i64 i = 1; i <= n; i++) {
+    vint a(n);
+    for (i64 i = 0; i < n; i++) {
         cin >> a[i];
     }
-    if (l < k) l = k;
-    if (k > r) {
-        cout << 0 << endl;
-        return;
-    }
-    map<i64, i64> mp;
-    
+    // 我们统计最多为k and k - 1 的区间然后相减
+    // 做一次容斥差分
+    auto f = [&](i64 x, i64 len) -> i64 {
+        if (x < 0 || len <= 0) return 0;
+        map<i64, i64> freq;
+        i64 dis = 0;
+        i64 res = 0;
+        i64 L = 0;
+        for (i64 R = 0; R < n; R++) {
+            freq[a[R]]++;
+            if (freq[a[R]] == 1) {
+                dis++;
+            }
+            // 保证元素数小于k
+            while (dis > x) {
+                freq[a[L]]--;
+                if (freq[a[L]] == 0) dis--;
+                L++;
+            }
+            // 保证长度小于len
+            while (R - L + 1 > len) {
+                freq[a[L]]--;
+                if (freq[a[L]] == 0) dis--;
+                L++;
+            }
+            // 以R为右端点的合法区间数
+            res += R - L + 1;
+        }
+        return res;
+    };
 
+    i64 ans = f(k, r) - f(k, l - 1) - f(k - 1, r) + f(k - 1, l - 1);
+    cout << ans << endl;
 }
 signed main()
 {
