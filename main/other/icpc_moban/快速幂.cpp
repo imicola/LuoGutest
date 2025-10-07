@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
+using i64 = long long;
 
-long long ksm(long long a, long long b)
+i64 ksm(i64 a, i64 b)
 {
-    long long ans = 1;
+    i64 ans = 1;
     while (b > 0) {
         if (b & 1) {
             ans *= a;
@@ -14,9 +15,9 @@ long long ksm(long long a, long long b)
     return ans;
 }
 
-long long ksm(long long a, long long b, long long MOD)
+i64 ksm(i64 a, i64 b, i64 MOD)
 {
-    long long ans = 1;
+    i64 ans = 1;
     a %= MOD;
     while (b > 0) {
         if (b & 1) ans = (ans * a) % MOD;
