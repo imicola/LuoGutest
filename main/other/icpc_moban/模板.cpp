@@ -1,11 +1,9 @@
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
-// #define int LL
 #define endl '\n'
 #define all(v) v.begin(), v.end()
 using namespace std;
 using i64 = long long;
-// typedef long long LL;
 typedef vector<i64> vint;
 typedef vector<vint> vvint;
 typedef vector<string> vstr;
