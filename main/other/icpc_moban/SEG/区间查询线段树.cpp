@@ -20,9 +20,7 @@ struct Seg
     };
     i64 n;
     vector<Node> seg;
-    Seg(i64 n): n(n), seg(4 * n + 4, Node())
-    {
-    }
+    Seg(i64 n): n(n), seg(4 * n + 4, Node()) { }
     //
     Node merge(const Node &L, const Node &R)
     {
@@ -44,11 +42,23 @@ struct Seg
         build(idx << 1 | 1, mid + 1, r, v);
         seg[idx] = merge(seg[idx << 1], seg[idx << 1 | 1]);
     }
+    Node query(i64 idx, i64 l, i64 r, i64 ql, i64 qr)
+    {
+        if (ql <= l && r <= qr) return seg[idx];
+        i64 mid = (l + r) >> 1;
+        if (qr <= mid) {
+            return query(idx << 1, l, mid, ql, qr);
+        }
+        else if (ql > mid) {
+            return query(idx << 1 | 1, mid + 1, r, ql, qr);
+        }
+        else {
+            return merge(query(idx << 1, l, mid, ql, qr), query(idx << 1 | 1, mid + 1, r, ql, qr));
+        }
+    }
 };
 
-void solve()
-{
-}
+void solve() { }
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
