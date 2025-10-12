@@ -14,37 +14,34 @@ void solve()
 {
     i64 n;
     cin >> n;
-    vint v(n);
-    for (i64 i = 0; i < n; i++) {
+    vint v(n + 1);
+    for (i64 i = 1; i <= n; i++) {
         char c;
         cin >> c;
         v[i] = (c - '0');
     }
-    // dp[i]到第i个的所有总和
-    vint dp(n);
-    dp[0] = 1;
-    i64 cnt0 = (v[0] == 0);
-    i64 cnt1 = (v[0] == 1);
-    i64 cnt = 0, Max = -1;
-    i64 tot = 0;
-    for (i64 i = 1; i < n; i++) {
-        if (v[i] == 1) cnt1++;
-        if (v[i] == 0) cnt0++;
-        Max = max(cnt0, cnt1);
-        tot += Max;
-        if (v[i] == v[i - 1] && v[i] == 0) {
-            dp[i] = dp[i - 1] + 1 + cnt1 + tot;
-        }
-        if (v[i] == v[i - 1] && v[i] == 1) {
-            dp[i] = dp[i - 1] + 1 + cnt0 + tot;
-        }
-        if (v[i] != v[i - 1]) {
-            dp[i] = dp[i - 1] + 1 + tot + (v[i] == 0 ? cnt0 : cnt1);
-            cnt = 0;
-        }
-        // cout << dp[i] << endl;
+    vint pre(n + 1);
+    // max(a,b) = (a + b - abs(a - b))/2
+    /* 
+        ΣP(L,R,max(cnta,cntb)) = tot + Σ(cnt1 - cnt0)
+        a + b 为子串的长度，我们可以预统计这个子串长度
+        abs(a - b)我们可以拆位贡献
+        我们记录一个前缀和pre = cnt1 - cnt0
+        即pre(R,a) - pre(R,l - 1)
+    */
+    for (i64 i = 1; i <= n; i++) {
+        pre[i] = pre[i - 1] + (v[i] == 1 ? 1 : -1);
     }
-    cout << dp[n - 1] << endl;
+    i64 tot = 0;
+    for (i64 i = 1; i <= n; i++) {
+        tot += i * (n - i + 1);
+    }
+    i64 tot2 = 0;
+    sort(all(pre));
+    for (i64 i = 0; i <= n; i++) {
+        tot2 += (pre[i] * i) - (pre[i] * (n - i));
+    }
+    cout << (tot2 + tot) / 2 << endl;
 }
 signed main()
 {

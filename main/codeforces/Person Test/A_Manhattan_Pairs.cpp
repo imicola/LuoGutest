@@ -23,15 +23,17 @@ void solve()
         cin >> vp[i].x >> vp[i].y;
         vp[i].idx = i + 1;
     }
-    stable_sort(all(vp), [](auto a, auto b) -> bool { return a.x + a.y < b.x + b.y; });
+    sort(all(vp), [](auto a, auto b) -> bool { return a.x < b.x; });
+    sort(vp.begin(), vp.begin() + n / 2, [](auto a, auto b) -> bool { return a.y < b.y; });
+    sort(vp.begin() + n / 2, vp.end(), [](auto a, auto b) -> bool { return a.y < b.y; });
     i64 sum = 0;
-    i64 mid = n / 2 - 1;
-    for (i64 r = n - 1; r >= n / 2; r--) {
-        cout << vp[mid].idx << " " << vp[r].idx << endl;
-        sum += abs(vp[mid].x - vp[r].x) + abs(vp[mid].y - vp[r].y);
-        mid--;
+    for (i64 i = 0, r = n - 1; i < r; i++, r--) {
+        auto [a, b, c] = vp[i];
+        auto [a1, b1, c1] = vp[r];
+        cout << c << " " << c1 << endl;
+        sum += abs(a - a1) + abs(b - b1);
     }
-    cout << sum << endl;
+    // cout << sum << endl;
 }
 
 void solve2()
