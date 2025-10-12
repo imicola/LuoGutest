@@ -1,6 +1,6 @@
 //#pragma GCC optimize(3)
 #include <bits/stdc++.h>
-#define endl '\n'
+// #define endl '\n'
 #define all(v) v.begin(), v.end()
 using namespace std;
 using i64 = long long;
@@ -16,11 +16,11 @@ void solve()
     cin >> n;
     vint res(2 * n + 1, -1);
     vint cur(2 * n + 1, 0);
-    i64 cnt = 2;
+    i64 cnt = 0;
     vint ask(2 * n + 1);
     iota(all(ask), 0);
     for (i64 i = 2; i <= 2 * n; i++) {
-        cout << "? " << cnt << " ";
+        cout << "? " << i - cnt << " ";
         for (i64 j = 1; j <= i; j++) {
             if (res[j] == -1) {
                 cout << j << " ";
@@ -33,6 +33,7 @@ void solve()
         // cout << cur1 << endl;
         if (cur1 != 0) {
             res[i] = cur1;
+            cnt++;
             ask[i] = -1;
         }
     }
