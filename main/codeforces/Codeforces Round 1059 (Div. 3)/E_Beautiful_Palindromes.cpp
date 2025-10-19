@@ -15,55 +15,43 @@ void solve()
     i64 n, k;
     cin >> n >> k;
     vint v(n + 1);
-    vint res(n + 1);
     set<i64> st;
     for (i64 i = 1; i <= n; i++) {
         st.insert(i);
     }
     for (i64 i = 1; i <= n; i++) {
         cin >> v[i];
-        res[n - i + 1] = v[i];
         st.erase(v[i]);
     }
-    if (st.size() >= k) {
-        vint ans(all(st));
-        for (i64 i = 0; i < k; i++) {
-            cout << ans[i] << " ";
-        }
-        cout << endl;
-        return;
+    vint res(3);
+    if (st.empty()) {
+        res[0] = v[1];
+        res[1] = v[2];
+        res[2] = v[3];
     }
     else {
-        vint ans(all(st));
-        for (auto &&i : ans) {
-            cout << i << " ";
-        }
-        i64 len = ans.size();
-        i64 cnt = 1;
-        for (i64 i = len + 1; i <= k; i++) {
-            if (v[i] == cnt) {
-                cnt++;
-                if (cnt > n) {
-                    cnt = 1;
-                    cout << cnt << " ";
-                    continue;
-                }
-                cnt++;
-                cout << cnt << " ";
-            }
-            else {
-                cnt++;
-                if (cnt > n) {
-                    cnt = 1;
-                    cout << cnt << " ";
-                    continue;
-                }
-                cout << cnt << " ";
+        res[0] = *st.begin();
+        res[2] = v[n];
+        i64 ok = 0;
+        for (auto &&i : st) {
+            if (i != res[0] && i != res[2]) {
+                res[1] = i;
+                ok = 1;
             }
         }
+        for (i64 i = 1; i <= n && !ok; i++) {
+            if (v[i] != res[0] && v[i] != res[2]) {
+                res[1] = v[i];
+                break;
+            }
+        }
+    }
+    for (i64 i = 0; i < k; i++) {
+        cout << res[i % 3] << " ";
     }
     cout << endl;
 }
+
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);

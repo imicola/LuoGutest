@@ -10,19 +10,6 @@ typedef vector<string> vstr;
 typedef pair<i64, i64> pii;
 typedef vector<pii> vpii;
 
-i64 ksm(i64 a, i64 b)
-{
-    i64 ans = 1;
-    while (b > 0) {
-        if (b & 1) {
-            ans *= a;
-        }
-        a *= a;
-        b >>= 1;
-    }
-    return ans;
-}
-
 void solve()
 {
     i64 a, b;
