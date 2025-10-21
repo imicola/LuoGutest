@@ -12,28 +12,32 @@ typedef vector<pii> vpii;
 
 void solve()
 {
-    i64 n;
-    cin >> n;
-    vint v(n);
-    map<i64, i64> mp;
-    for (i64 i = 0; i < n; i++) {
-        cin >> v[i];
-        mp[v[i]]++;
+    i64 n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    i64 cnt = 0;
+    for (int i = n - 1; i >= 0; i--) {
+        if (s[i] == '1') {
+            i64 p = 1;
+            i64 ok = 1;
+            while (i - p >= 0 && p < k) {
+                if (s[i - p] == '1') ok = 0;
+                p++;
+            }
+            if (ok) cnt++;
+        }
     }
-    /* 
-    给定n个长度,求选1-n个中所有可能的最大结果
-    
-    */
+    cout << cnt << endl;
 }
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cout << setiosflags(ios::fixed) << setprecision(2);
-    int T = 1;
+    i64 T = 1;
     cin >> T;
     while (T--) {
         solve();
     }
-
     return 0;
 }

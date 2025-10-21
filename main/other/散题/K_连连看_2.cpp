@@ -64,8 +64,8 @@ void solve()
     vint px = {1, n};
     vint py = {1, m};
     for (auto &&i : px) {
-        // if (stx == i || edx == i) {
-        if(stx == i){
+        if (stx == i || edx == i) {
+            // if (stx == i) {
             if (abs(stx - edx) <= 1) {
                 cout << 2 << endl;
                 return;
@@ -73,8 +73,8 @@ void solve()
         }
     }
     for (auto &&i : py) {
-        // if (sty == i || edy == i) {
-        if(sty == i){
+        if (sty == i || edy == i) {
+            // if (sty == i) {
             if (abs(sty - edy) <= 1) {
                 cout << 2 << endl;
                 return;
@@ -82,7 +82,7 @@ void solve()
         }
     }
     // 考虑三个的情况
-    if(stx == 1 || sty == 1 || stx == n || sty == m){
+    if (stx == 1 || sty == 1 || stx == n || sty == m) {
         cout << 3 << endl;
         return;
     }
@@ -154,29 +154,17 @@ static int solve1_eval(i64 n, i64 m, i64 stx, i64 sty, i64 edx, i64 edy)
         return 2;
     }
     // 贴边
-    vint px = {1, n};
-    vint py = {1, m};
-    for (auto &&i : px) {
-        if (stx == i || edx == i) {
-            if (abs(stx - edx) <= 1) {
-                return 2;
-            }
-            // else {
-            //     // cout << 3 << endl;
-            //     return 3;
-            // }
-        }
+    // 贴边：同时考虑行/列
+    bool on_edge_x = (stx == 1 || stx == n || edx == 1 || edx == n);
+    bool on_edge_y = (sty == 1 || sty == m || edy == 1 || edy == m);
+    if (on_edge_x && abs(stx - edx) <= 1) {
+        return 2;
     }
-    for (auto &&i : py) {
-        if (sty == i || edy == i) {
-            if (abs(sty - edy) <= 1) {
-                return 2;
-            }
-            // else {
-            //     // cout << 3 << endl;
-            //     return 3;
-            // }
-        }
+    if (on_edge_y && abs(sty - edy) <= 1) {
+        return 2;
+    }
+    if (on_edge_x || on_edge_y) {
+        return 3;
     }
     // 考虑三个的情况
     if (stx == 1 || sty == 1 || stx == n || sty == m) {
@@ -233,7 +221,7 @@ static void stress_test(int rounds = 10000, int nMax = 10, int mMax = 10, unsign
         }
 
         int a = solve1_eval(n, m, stx, sty, edx, edy);
-        int b = solve2_eval(n, m, stx, sty, edx, edy);
+        int b = min(solve2_eval(n, m, stx, sty, edx, edy), solve1_eval(n, m, edx, edy, stx, sty));
         if (a != b) {
             cout << "Mismatch found at test #" << t << "\n";
             cout << "Input: n=" << n << ", m=" << m << ", st=(" << stx << "," << sty << "), ed=(" << edx << "," << edy
@@ -244,7 +232,7 @@ static void stress_test(int rounds = 10000, int nMax = 10, int mMax = 10, unsign
     }
     cout << "All " << rounds << " tests passed. Seed=" << seed << "\n";
 }
-// #define STRESS_TEST
+#define STRESS_TEST
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -258,8 +246,8 @@ signed main()
     i64 T = 1;
     cin >> T;
     while (T--) {
-        // cout << solve2() << endl;
-        solve();
+        cout << solve2() << endl;
+        // solve();
     }
     return 0;
 #endif
