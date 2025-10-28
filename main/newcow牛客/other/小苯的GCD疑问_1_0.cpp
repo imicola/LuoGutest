@@ -4,25 +4,27 @@
 #define all(v) v.begin(), v.end()
 using namespace std;
 using i64 = long long;
-using i128 = __int128;
-using vint = vector<i64>;
-using vvint = vector<vint>;
-using vstr = vector<string>;
-using pii = pair<i64, i64>;
-using vpii = vector<pii>;
-template <typename T>
-using vec = vector<T>;
-const constexpr i64 MOD = 998244353;
+typedef vector<i64> vint;
+typedef vector<vint> vvint;
+typedef vector<string> vstr;
+typedef pair<i64, i64> pii;
+typedef vector<pii> vpii;
 
-void solve() { 
-
+void solve()
+{
+    i64 l, r, k;
+    cin >> l >> r >> k;
+    /* 
+    最大化gcd(S)*(sum(s) - max(s))
+    */
+    i64 k1 = ((l + r) * (r - l + 1)) / 2;
+    cout << k1 - r << endl;
 }
-
 signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cout << setiosflags(ios::fixed) << setprecision(2);
-    int T = 1;
+    i64 T = 1;
     cin >> T;
     while (T--) {
         solve();
