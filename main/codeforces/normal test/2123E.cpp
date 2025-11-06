@@ -14,8 +14,34 @@ template <typename T>
 using vec = vector<T>;
 const constexpr i64 MOD = 998244353;
 
-void solve() { 
-    
+void solve()
+{
+    i64 n;
+    cin >> n;
+    vint v(n);
+    map<i64, i64> freq;
+    for (i64 i = 0; i < n; i++) {
+        cin >> v[i];
+        freq[v[i]]++;
+    }
+    vint diff(n + 2);
+    for (i64 i = 0; i <= n; i++) {
+        diff[freq[i]]++;
+        diff[n - i + 1]--;
+        if (!freq[i]) break;
+    }
+    vint ans(n + 2, 0);
+    for (i64 i = 0; i <= n; i++) {
+        ans[i] = diff[i];
+        if (i != 0) {
+            ans[i] += ans[i - 1];
+        }
+    }
+    for (i64 i = 0; i <= n; i++) {
+        cout << ans[i] << " ";
+    }
+
+    cout << endl;
 }
 
 signed main()
