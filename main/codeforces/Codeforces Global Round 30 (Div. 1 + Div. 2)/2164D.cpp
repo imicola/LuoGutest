@@ -1,112 +1,76 @@
 // #pragma GCC optimize(2)
-
 #include <bits/stdc++.h>
-
 using namespace std;
-
 #define int long long
-
 #define endl '\n'
-
 #define all(x) (x).begin(), (x).end()
 
 constexpr int MOD = 1e9 + 7;
-
 // -9.2e18 ~ 9.2e18
 
 void solve()
 {
-    int n, kmax;
+    int n, k;
+    cin >> n >> k;
+    string s1, s2;
+    cin >> s1 >> s2;
+    int idx = n - 1;
+    int maxk = 0;
+    vector<int> vis(n);
+    for (int i = n - 1; i >= 0; i--) {
+        // 遍历s2
+        auto cur = s2[i];
+        while (idx > i) {
+            idx--;
+        }
+        while (idx >= 0 and s1[idx] != cur) {
+            idx--;
+        }
+        if (s1[idx] != cur or idx == -1) {
+            return void(cout << -1 << endl);
+        }
+        // cout << idx << ' ' << s1[idx] << ' ' << i << ' ' << cur << endl;
+        maxk = max(maxk, i - idx);
 
-    cin >> n >> kmax;
+        vis[idx] = max(vis[idx], i);
+    }
 
-    string s, t;
+    if (maxk > k) {
+        return void(cout << -1 << endl);
+    }
 
-    cin >> s >> t;
-
-    vector<vector<int>> pos(26);
-
+    cout << maxk << endl;
     for (int i = 0; i < n; i++) {
-        pos[s[i] - 'a'].push_back(i);
+        // cout << vis[i] << ' ';
     }
-
-    auto check = [&](int k, vector<int> &pp) -> bool {
-        pp = vector<int>(n, -1);
-        int prev = 0;
-
-        for (int i = 0; i < n; i++) {
-            int c = t[i] - 'a';
-            auto &v = pos[c];
-
-            if (v.empty()) {
-                return 0;
+    for (int _ = 0; _ < maxk; _++) {
+        vector<char> tmp(n);
+        for (int i = n - 1; i >= 0; i--) {
+            if (vis[i]) {
+                tmp[i] = s1[i];
             }
-
-            int need = max(prev, i - k);
-            auto it = lower_bound(v.begin(), v.end(), need);
-
-            if (it == v.end() or *it > i) {
-                return 0;
-            }
-
-            pp[i] = *it;
-            prev = pp[i];
-        }
-
-        return 1;
-    };
-
-    int l = 0, r = n;
-    int ans = -1;
-    vector<int> vv;
-    while (l <= r) {
-        int mid = (l + r) >> 1;
-
-        if (check(mid, vv)) {
-            r = (ans = mid) - 1;
-        }
-        else {
-            l = mid + 1;
-        }
-    }
-    if (ans == -1 or ans > kmax) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << ans << endl;
-    if (ans == 0) {
-        return;
-    }
-    vector<int> anss;
-    check(ans, anss);
-    string cur = s;
-
-    for (int tmp = 1; tmp <= ans; tmp++) {
-        string nxt = cur;
-
-        for (int i = 1; i < n; i++) {
-            if (i - anss[i] >= tmp) {
-                nxt[i] = cur[i - 1];
+            if (i - 1 >= 0 and vis[i - 1] >= i) {
+                tmp[i] = s1[i - 1];
+                vis[i] = vis[i - 1];
             }
             else {
-                nxt[i] = cur[i];
+                tmp[i] = s1[i];
             }
         }
-        cout << nxt << endl;
-        cur.swap(nxt);
+        for (int i = 0; i < n; i++) {
+            cout << tmp[i];
+            s1[i] = tmp[i];
+        }
+        cout << endl;
     }
 }
 
 signed main()
 {
     cin.tie(0)->ios::sync_with_stdio(0);
-
     cout << setiosflags(ios::fixed) << setprecision(2);
-
     int TT = 1;
-
     cin >> TT;
-
     while (TT--) {
         solve();
         // cout << endl;
