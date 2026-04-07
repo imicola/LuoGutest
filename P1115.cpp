@@ -14,19 +14,20 @@ template <typename T>
 using vec = vector<T>;
 const constexpr i64 MOD = 998244353;
 
-
-void solve() { 
+void solve()
+{
     i64 n;
     cin >> n;
-    string s;
-    cin >> s;
-    char c = s.back();
-    i64 cnt = 0;
-    for (auto &&i : s)
-    {
-        if(i != c)cnt++;
+    vint v(n);
+    for (auto &&i : v) {
+        cin >> i;
     }
-    cout << cnt << endl;
+    i64 res = v[0], ans = LLONG_MIN;
+    for (i64 i = 1; i < n; i++) {
+        res = max(v[i], res + v[i]);
+        ans = max(res, ans);
+    }
+    cout << ans << endl;
 }
 
 signed main()
@@ -34,7 +35,7 @@ signed main()
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cout << setiosflags(ios::fixed) << setprecision(2);
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while (T--) {
         solve();
     }
