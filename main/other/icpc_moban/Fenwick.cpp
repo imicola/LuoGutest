@@ -20,7 +20,7 @@ struct Fenwick
     Fenwick(i64 n): n(n),bit(n + 1,0){}
     void add(i64 i,i64 v = 1){for(;i <= n; i += i&-i)bit[i] += v;}
     i64 sum(i64 i){i64 r = 0; for(;i > 0;i -= i&-i)r += bit[i];return r;}
-    i64 sum(i64 l,i64 r){ if(r<l) return 0; return sum(r) - sum(l + 1);}
+    i64 sum(i64 l,i64 r){ if(r<l) return 0; return sum(r) - sum(l - 1);}
 };
 
 
